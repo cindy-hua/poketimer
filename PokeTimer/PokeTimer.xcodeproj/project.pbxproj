@@ -16,6 +16,7 @@
 		1E66EE2D2D6CEA6600C90339 /* PokemonListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E66EE2C2D6CEA6600C90339 /* PokemonListView.swift */; };
 		1E66EE2F2D6CF25000C90339 /* SessionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E66EE2E2D6CF25000C90339 /* SessionsView.swift */; };
 		1E66EE312D6CF2E200C90339 /* PokemonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E66EE302D6CF2E200C90339 /* PokemonDetailView.swift */; };
+		1E66EE332D6D07EE00C90339 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E66EE322D6D07EE00C90339 /* PersistenceManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		1E66EE2C2D6CEA6600C90339 /* PokemonListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListView.swift; sourceTree = "<group>"; };
 		1E66EE2E2D6CF25000C90339 /* SessionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsView.swift; sourceTree = "<group>"; };
 		1E66EE302D6CF2E200C90339 /* PokemonDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailView.swift; sourceTree = "<group>"; };
+		1E66EE322D6D07EE00C90339 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 				1E66EE302D6CF2E200C90339 /* PokemonDetailView.swift */,
 				1E66EE2A2D6CDB4000C90339 /* Pokemon.swift */,
 				1E66EE282D6CD40200C90339 /* Session.swift */,
+				1E66EE322D6D07EE00C90339 /* PersistenceManager.swift */,
 				1E66EE1E2D6CC64B00C90339 /* Assets.xcassets */,
 				1E66EE202D6CC64B00C90339 /* Preview Content */,
 			);
@@ -155,6 +158,7 @@
 				1E66EE2D2D6CEA6600C90339 /* PokemonListView.swift in Sources */,
 				1E66EE2F2D6CF25000C90339 /* SessionsView.swift in Sources */,
 				1E66EE1D2D6CC64600C90339 /* ContentView.swift in Sources */,
+				1E66EE332D6D07EE00C90339 /* PersistenceManager.swift in Sources */,
 				1E66EE2B2D6CDB4000C90339 /* Pokemon.swift in Sources */,
 				1E66EE1B2D6CC64600C90339 /* PokeTimerApp.swift in Sources */,
 				1E66EE312D6CF2E200C90339 /* PokemonDetailView.swift in Sources */,

@@ -24,6 +24,18 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 40) {
+                // Picker to choose a Pokémon.
+                Picker("Select Pokémon", selection: Binding(
+                    get: { manager.currentPokemon ?? manager.pokemons.first! },
+                    set: { manager.currentPokemon = $0 }
+                )) {
+                    ForEach(manager.pokemons) { pokemon in
+                        Text(pokemon.name)
+                            .tag(pokemon)
+                    }
+                }
+                .pickerStyle(MenuPickerStyle())
+                
                 // Show the current active Pokémon's name.
                 if let currentPokemon = manager.currentPokemon {
                     Text("Current Pokémon: \(currentPokemon.name)")
@@ -90,7 +102,7 @@ struct ContentView: View {
                     }
                     
                     NavigationLink(destination: PokemonListView()) {
-                        Text("Change Pokémon")
+                        Text("View Pokemon")
                             .underline()
                             .foregroundColor(.blue)
                     }
@@ -124,6 +136,7 @@ struct ContentView: View {
                 let session = Session(duration: duration, startTime: startTime, endTime: endTime)
                 // Log the session to the active Pokémon.
                 manager.currentPokemon?.addSession(session)
+                PersistenceManager.shared.save(manager: manager)
                 showSessionSavedAlert = true
             }
         }

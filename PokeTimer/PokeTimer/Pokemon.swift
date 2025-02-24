@@ -11,7 +11,7 @@ import SwiftUI
 
 // MARK: - Pokemon Class
 /// A class representing a Pokémon that logs focus sessions, tracks XP (in minutes), and computes its level.
-class Pokemon: ObservableObject, Identifiable, Codable {
+class Pokemon: ObservableObject, Identifiable, Codable, Equatable, Hashable {
     var id = UUID()
     var name: String
     @Published var xp: Int         // Total XP (in minutes)
@@ -63,13 +63,27 @@ class Pokemon: ObservableObject, Identifiable, Codable {
         try container.encode(level, forKey: .level)
         try container.encode(sessions, forKey: .sessions)
     }
+    
+    // MARK: - Equatable & Hashable
+    static func == (lhs: Pokemon, rhs: Pokemon) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }
 
 // MARK: - Pokemon Manager
 /// Manages a list of Pokémon and tracks the active one.
-class PokemonManager: ObservableObject {
+class PokemonManager: ObservableObject, Codable {
     @Published var pokemons: [Pokemon]
     @Published var currentPokemon: Pokemon?
+    
+    // Define coding keys for the properties you want to encode/decode.
+    enum CodingKeys: String, CodingKey {
+        case pokemons, currentPokemon
+    }
     
     init() {
         let defaultPokemon = Pokemon(name: "Starter")
@@ -77,9 +91,27 @@ class PokemonManager: ObservableObject {
         self.currentPokemon = defaultPokemon
     }
     
+    // MARK: - Codable Conformance
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        // Decode the array of Pokémon.
+        self.pokemons = try container.decode([Pokemon].self, forKey: .pokemons)
+        // Decode the current Pokémon if available.
+        self.currentPokemon = try container.decodeIfPresent(Pokemon.self, forKey: .currentPokemon)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        // Encode the array of Pokémon.
+        try container.encode(pokemons, forKey: .pokemons)
+        // Encode the current Pokémon.
+        try container.encode(currentPokemon, forKey: .currentPokemon)
+    }
+    
+    // Additional manager functions...
     func addPokemon(_ pokemon: Pokemon) {
         pokemons.append(pokemon)
-        // If there's no active Pokemon, set the new one as active.
         if currentPokemon == nil {
             currentPokemon = pokemon
         }

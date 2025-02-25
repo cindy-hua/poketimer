@@ -9,11 +9,10 @@ import SwiftUI
 
 struct TimerView: View {
     @EnvironmentObject var manager: PokemonManager
-    let duration: Int  // in seconds.
+    @StateObject var viewModel: TimerViewModel
     
     // Timer-related states.
-    @State private var remainingSeconds: Int = 0
-    @State private var timer: Timer? = nil
+
     @State private var showSessionSavedAlert = false
     
     @Environment(\.dismiss) var dismiss
@@ -21,22 +20,31 @@ struct TimerView: View {
     // Record start time when the view is created.
     private let startTime = Date()
     
-    // Initialize the remainingSeconds with the duration.
     init(duration: Int) {
-        self.duration = duration
-        _remainingSeconds = State(initialValue: duration)
+        _viewModel = StateObject(wrappedValue: TimerViewModel(duration: duration))
     }
     
     var body: some View {
         VStack(spacing: 40) {
             // Countdown Timer Display.
-            Text(timeString(from: remainingSeconds))
+            Text(viewModel.timeString(from: viewModel.remainingSeconds))
                 .font(.system(size: 50, weight: .bold, design: .monospaced))
-                .animation(.easeInOut, value: remainingSeconds)
+                .animation(.easeInOut, value: viewModel.remainingSeconds)
             
             // Stop Button.
             Button(action: {
-                stopTimer()
+                viewModel.stopTimer { session in
+                    let sessionWithPokemon = Session(
+                        duration: session.duration,
+                        startTime: session.startTime,
+                        endTime: session.endTime,
+                        completed: session.completed,
+                        pokemonID: manager.currentPokemon?.id ?? UUID()
+                    )
+                    manager.currentPokemon?.addSession(sessionWithPokemon)
+                    PersistenceManager.shared.save(manager: manager)
+                    showSessionSavedAlert = true
+                }
                 dismiss()
             }) {
                 Text("Stop")
@@ -59,54 +67,22 @@ struct TimerView: View {
             )
         }
         .onAppear {
-            startTimer()
-        }
-    }
-
-    // MARK: - Timer Functions
-    func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { t in
-            if remainingSeconds > 0 {
-                remainingSeconds -= 1
-            } else {
-                t.invalidate()
-                let endTime = Date()
-                let session = Session(
-                    duration: duration,
-                    startTime: startTime,
-                    endTime: endTime,
-                    completed: true,
-                    pokemonID: manager.currentPokemon?.id ?? UUID() 
+            viewModel.startTimer { session in
+                let sessionWithPokemon = Session(
+                    duration: session.duration,
+                    startTime: session.startTime,
+                    endTime: session.endTime,
+                    completed: session.completed,
+                    pokemonID: manager.currentPokemon?.id ?? UUID()
                 )
-                // Log the session to the active Pokémon.
-                manager.currentPokemon?.addSession(session)
+                manager.currentPokemon?.addSession(sessionWithPokemon)
                 PersistenceManager.shared.save(manager: manager)
                 showSessionSavedAlert = true
             }
         }
     }
-    
-    func stopTimer() {
-        timer?.invalidate()
-        timer = nil
-        let endTime = Date()
-        let session = Session(
-            duration: duration,
-            startTime: startTime,
-            endTime: endTime,
-            completed: false,
-            pokemonID: manager.currentPokemon?.id ?? UUID()
-        )
-        // Log the session to the active Pokémon.
-        manager.currentPokemon?.addSession(session)
-        PersistenceManager.shared.save(manager: manager)
-    }
-    
-    func timeString(from seconds: Int) -> String {
-        let minutes = seconds / 60
-        let secs = seconds % 60
-        return String(format: "%02d:%02d", minutes, secs)
-    }
+
+
 }
 
 #Preview {

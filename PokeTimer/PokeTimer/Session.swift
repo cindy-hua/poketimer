@@ -13,4 +13,6 @@ struct Session: Identifiable, Codable {
     let duration: Int       // Duration in seconds.
     let startTime: Date
     let endTime: Date
+    let completed: Bool
+    let pokemonID: UUID     
 }

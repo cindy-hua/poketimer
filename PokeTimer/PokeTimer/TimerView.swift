@@ -89,6 +89,17 @@ struct TimerView: View {
     func stopTimer() {
         timer?.invalidate()
         timer = nil
+        let endTime = Date()
+        let session = Session(
+            duration: duration,
+            startTime: startTime,
+            endTime: endTime,
+            completed: false,
+            pokemonID: manager.currentPokemon?.id ?? UUID()
+        )
+        // Log the session to the active Pokémon.
+        manager.currentPokemon?.addSession(session)
+        PersistenceManager.shared.save(manager: manager)
     }
     
     func timeString(from seconds: Int) -> String {

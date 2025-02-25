@@ -14,17 +14,23 @@ struct SessionsView: View {
     
     var body: some View {
         List {
+            // Create a section for each Pokémon
             ForEach(manager.pokemons) { pokemon in
-                ForEach(pokemon.sessions) { session in
-                    VStack(alignment: .leading) {
-                        Text("Duration: \(session.duration / 60) minutes")
-                            .font(.headline)
-                        Text("Started: \(formattedDate(session.startTime))")
-                            .font(.subheadline)
-                        Text("Ended: \(formattedDate(session.endTime))")
-                            .font(.subheadline)
+                Section(header: Text(pokemon.name).font(.headline)) {
+                    ForEach(pokemon.sessions) { session in
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Duration: \(session.duration / 60) minutes")
+                                .font(.subheadline)
+                            Text("Started: \(formattedDate(session.startTime))")
+                                .font(.subheadline)
+                            Text("Ended: \(formattedDate(session.endTime))")
+                                .font(.subheadline)
+                            Text("Status: \(session.completed ? "Completed" : "Incomplete")")
+                                .font(.subheadline)
+                                .foregroundColor(session.completed ? .green : .red)
+                        }
+                        .padding(.vertical, 5)
                     }
-                    .padding(.vertical, 5)
                 }
             }
         }

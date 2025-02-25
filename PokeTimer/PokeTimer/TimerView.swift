@@ -71,7 +71,13 @@ struct TimerView: View {
             } else {
                 t.invalidate()
                 let endTime = Date()
-                let session = Session(duration: duration, startTime: startTime, endTime: endTime)
+                let session = Session(
+                    duration: duration,
+                    startTime: startTime,
+                    endTime: endTime,
+                    completed: true,
+                    pokemonID: manager.currentPokemon?.id ?? UUID() 
+                )
                 // Log the session to the active Pokémon.
                 manager.currentPokemon?.addSession(session)
                 PersistenceManager.shared.save(manager: manager)

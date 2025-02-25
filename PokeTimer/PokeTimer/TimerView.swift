@@ -11,14 +11,9 @@ struct TimerView: View {
     @EnvironmentObject var manager: PokemonManager
     @StateObject var viewModel: TimerViewModel
     
-    // Timer-related states.
-
     @State private var showSessionSavedAlert = false
     
     @Environment(\.dismiss) var dismiss
-    
-    // Record start time when the view is created.
-    private let startTime = Date()
     
     init(duration: Int) {
         _viewModel = StateObject(wrappedValue: TimerViewModel(duration: duration))

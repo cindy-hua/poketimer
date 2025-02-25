@@ -8,6 +8,7 @@
 import Foundation
 
 class TimerViewModel: ObservableObject {
+    // Timer-related states.
     @Published var remainingSeconds: Int
     @Published var isRunning = false
     

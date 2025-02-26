@@ -12,8 +12,6 @@ struct ContentView: View {
     @EnvironmentObject var manager: PokemonManager
     @StateObject private var viewModel = ContentViewModel()
     
-    
-    
     var body: some View {
         NavigationView {
             VStack(spacing: 40) {
@@ -51,8 +49,8 @@ struct ContentView: View {
                 }
                 
                 // Time selection picker.
-                Picker("Focus Duration", selection: $selectedDuration) {
-                    ForEach(durationOptions, id: \.self) { minutes in
+                Picker("Focus Duration", selection: $viewModel.selectedDuration) {
+                    ForEach(viewModel.durationOptions, id: \.self) { minutes in
                         Text("\(minutes) minutes").tag(minutes)
                     }
                 }
@@ -60,7 +58,7 @@ struct ContentView: View {
                 .frame(height: 100)
                 
                 // Navigation Link to the TimerView.
-                NavigationLink(destination: TimerView(duration: selectedDuration * 60)) {
+                NavigationLink(destination: TimerView(duration: viewModel.selectedDuration * 60)) {
                     Text("Start")
                         .font(.title)
                         .frame(minWidth: 0, maxWidth: .infinity)

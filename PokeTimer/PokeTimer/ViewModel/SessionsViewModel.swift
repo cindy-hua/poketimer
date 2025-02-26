@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SessionViewModel: ObservableObject {
+class SessionsViewModel: ObservableObject {
     @Published var sessionsByPokemon: [(pokemonName: String, sessions: [Session])]
     
     init(manager: PokemonManager) {

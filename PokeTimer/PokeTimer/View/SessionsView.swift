@@ -11,6 +11,11 @@ import SwiftUI
 /// A view that displays a list of saved focus sessions from our Pokémon.
 struct SessionsView: View {
     @EnvironmentObject var manager: PokemonManager
+    @StateObject private var viewModel: SessionsViewModel
+    
+    init() {
+        _viewModel = StateObject(wrappedValue: SessionsViewModel(manager: PokemonManager()))
+    }
     
     var body: some View {
         List {
@@ -21,9 +26,9 @@ struct SessionsView: View {
                         VStack(alignment: .leading, spacing: 4) {
                             Text("Duration: \(session.duration / 60) minutes")
                                 .font(.subheadline)
-                            Text("Started: \(formattedDate(session.startTime))")
+                            Text("Started: \(viewModel.formattedDate(session.startTime))")
                                 .font(.subheadline)
-                            Text("Ended: \(formattedDate(session.endTime))")
+                            Text("Ended: \(viewModel.formattedDate(session.endTime))")
                                 .font(.subheadline)
                             Text("Status: \(session.completed ? "Completed" : "Incomplete")")
                                 .font(.subheadline)
@@ -35,14 +40,6 @@ struct SessionsView: View {
             }
         }
         .navigationTitle("Sessions")
-    }
-    
-    /// Helper function to format dates.
-    func formattedDate(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .short
-        return formatter.string(from: date)
     }
 }
 

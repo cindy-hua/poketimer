@@ -16,13 +16,16 @@ class TimerViewModel: ObservableObject {
     private var startTime: Date?
     let duration: Int
     
-    init(duration: Int) {
+    private let manager: PokemonManager
+    
+    init(duration: Int, manager: PokemonManager) {
         self.duration = duration
         self.remainingSeconds = duration
+        self.manager = manager
     }
     
-    /// Starts the timer with a specified duration (in seconds).
-    func startTimer(completion: @escaping (Session) -> Void) {
+    /// Starts the timer.
+    func startTimer() {
         startTime = Date()
         isRunning = true
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] t in
@@ -32,34 +35,35 @@ class TimerViewModel: ObservableObject {
             } else {
                 t.invalidate()
                 self.isRunning = false
-                let endTime = Date()
-                let session = Session(
-                    duration: self.duration,
-                    startTime: self.startTime ?? Date(),
-                    endTime: endTime,
-                    completed: true,
-                    pokemonID: UUID()
-                )
-                completion(session)
+                self.saveSession(completed: true)
             }
         }
     }
     
-    /// Stops the current timer.
-    func stopTimer(completion: @escaping (Session) -> Void) {
+    /// Stops the timer early and saves an incomplete session.
+    func stopTimer() {
         timer?.invalidate()
         timer = nil
         isRunning = false
+        saveSession(completed: false)
+    }
+
+    /// Saves the session, associating it with the current Pokémon.
+    private func saveSession(completed: Bool) {
         let endTime = Date()
-        let elapsedTime = Int(endTime.timeIntervalSince(startTime ?? endTime))
+        let elapsedTime = completed ? duration : Int(endTime.timeIntervalSince(startTime ?? endTime))
+        
         let session = Session(
             duration: elapsedTime,
             startTime: startTime ?? endTime,
             endTime: endTime,
-            completed: false,
-            pokemonID: UUID()
+            completed: completed,
+            pokemonID: manager.currentPokemon?.id ?? UUID()
         )
-        completion(session)
+
+        // Add session to the current Pokémon and persist the data.
+        manager.currentPokemon?.addSession(session)
+        PersistenceManager.shared.save(manager: manager)
     }
     
     /// Converts seconds into a MM:SS format.

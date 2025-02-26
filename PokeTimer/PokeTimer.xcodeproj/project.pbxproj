@@ -22,6 +22,7 @@
 		1E81C4BD2D6E3E9400B73C2E /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E81C4BC2D6E3E9400B73C2E /* TimerViewModel.swift */; };
 		1E81C4C22D6F13C000B73C2E /* SessionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E81C4C12D6F13BF00B73C2E /* SessionsViewModel.swift */; };
 		1E81C4C42D6F1AE800B73C2E /* PokemonListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E81C4C32D6F1AE800B73C2E /* PokemonListViewModel.swift */; };
+		1E81C4C62D6F846B00B73C2E /* PokemonDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E81C4C52D6F846B00B73C2E /* PokemonDetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		1E81C4BC2D6E3E9400B73C2E /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
 		1E81C4C12D6F13BF00B73C2E /* SessionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsViewModel.swift; sourceTree = "<group>"; };
 		1E81C4C32D6F1AE800B73C2E /* PokemonListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListViewModel.swift; sourceTree = "<group>"; };
+		1E81C4C52D6F846B00B73C2E /* PokemonDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				1E81C4BC2D6E3E9400B73C2E /* TimerViewModel.swift */,
 				1E81C4C12D6F13BF00B73C2E /* SessionsViewModel.swift */,
 				1E81C4C32D6F1AE800B73C2E /* PokemonListViewModel.swift */,
+				1E81C4C52D6F846B00B73C2E /* PokemonDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 				1E66EE2B2D6CDB4000C90339 /* Pokemon.swift in Sources */,
 				1E66EE1B2D6CC64600C90339 /* PokeTimerApp.swift in Sources */,
 				1E81C4BD2D6E3E9400B73C2E /* TimerViewModel.swift in Sources */,
+				1E81C4C62D6F846B00B73C2E /* PokemonDetailViewModel.swift in Sources */,
 				1E66EE312D6CF2E200C90339 /* PokemonDetailView.swift in Sources */,
 				1E66EE292D6CD40200C90339 /* Session.swift in Sources */,
 			);

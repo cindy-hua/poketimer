@@ -8,15 +8,13 @@
 import SwiftUI
 
 struct TimerView: View {
-    @EnvironmentObject var manager: PokemonManager
     @StateObject var viewModel: TimerViewModel
-    
     @State private var showSessionSavedAlert = false
     
     @Environment(\.dismiss) var dismiss
     
-    init(duration: Int) {
-        _viewModel = StateObject(wrappedValue: TimerViewModel(duration: duration))
+    init(duration: Int, manager: PokemonManager) {
+        _viewModel = StateObject(wrappedValue: TimerViewModel(duration: duration, manager: manager))
     }
     
     var body: some View {
@@ -28,18 +26,7 @@ struct TimerView: View {
             
             // Stop Button.
             Button(action: {
-                viewModel.stopTimer { session in
-                    let sessionWithPokemon = Session(
-                        duration: session.duration,
-                        startTime: session.startTime,
-                        endTime: session.endTime,
-                        completed: session.completed,
-                        pokemonID: manager.currentPokemon?.id ?? UUID()
-                    )
-                    manager.currentPokemon?.addSession(sessionWithPokemon)
-                    PersistenceManager.shared.save(manager: manager)
-                    showSessionSavedAlert = true
-                }
+                viewModel.stopTimer()
                 dismiss()
             }) {
                 Text("Stop")
@@ -62,18 +49,7 @@ struct TimerView: View {
             )
         }
         .onAppear {
-            viewModel.startTimer { session in
-                let sessionWithPokemon = Session(
-                    duration: session.duration,
-                    startTime: session.startTime,
-                    endTime: session.endTime,
-                    completed: session.completed,
-                    pokemonID: manager.currentPokemon?.id ?? UUID()
-                )
-                manager.currentPokemon?.addSession(sessionWithPokemon)
-                PersistenceManager.shared.save(manager: manager)
-                showSessionSavedAlert = true
-            }
+            viewModel.startTimer()
         }
     }
 
@@ -81,5 +57,6 @@ struct TimerView: View {
 }
 
 #Preview {
-    TimerView(duration: 5 * 60).environmentObject(PokemonManager())
+    let manager = PokemonManager()
+    return TimerView(duration: 5 * 60, manager: manager).environmentObject(manager)
 }

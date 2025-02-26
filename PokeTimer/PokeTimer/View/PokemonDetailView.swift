@@ -10,8 +10,12 @@ import SwiftUI
 // MARK: - PokemonDetailView
 /// A view to display details and activities for a specific Pokémon.
 struct PokemonDetailView: View {
-    @ObservedObject var pokemon: Pokemon
-    
+    @StateObject private var viewModel: PokemonDetailViewModel
+
+    init(pokemon: Pokemon) {
+        _viewModel = StateObject(wrappedValue: PokemonDetailViewModel(pokemon: pokemon))
+    }
+
     var body: some View {
         VStack {
             // Basic Pokémon info.
@@ -21,40 +25,36 @@ struct PokemonDetailView: View {
                     .frame(width: 80, height: 80)
                     .foregroundColor(.yellow)
                 VStack(alignment: .leading) {
-                    Text(pokemon.name)
+                    Text(viewModel.pokemonName)
                         .font(.largeTitle)
-                    Text("XP: \(pokemon.xp)")
-                    Text("Level: \(pokemon.level)")
+                    Text("XP: \(viewModel.xp)")
+                    Text("Level: \(viewModel.level)")
                 }
             }
             .padding()
             
             // List of sessions (activities).
             List {
-                ForEach(pokemon.sessions) { session in
+                ForEach(viewModel.sessions) { session in
                     VStack(alignment: .leading) {
                         Text("Duration: \(session.duration / 60) minutes")
                             .font(.headline)
-                        Text("Started: \(formattedDate(session.startTime))")
+                        Text("Started: \(viewModel.formattedDate(session.startTime))")
                             .font(.subheadline)
-                        Text("Ended: \(formattedDate(session.endTime))")
+                        Text("Ended: \(viewModel.formattedDate(session.endTime))")
                             .font(.subheadline)
                     }
                     .padding(.vertical, 5)
                 }
             }
         }
-        .navigationTitle("\(pokemon.name)'s Activities")
-    }
-    
-    /// Formats a date into a readable string.
-    func formattedDate(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .short
-        return formatter.string(from: date)
+        .navigationTitle("\(viewModel.pokemonName)'s Activities")
+        .onAppear {
+            viewModel.refreshData() // Ensure latest data is shown
+        }
     }
 }
+
 
 #Preview {
     let pokemon = Pokemon(name: "starter")

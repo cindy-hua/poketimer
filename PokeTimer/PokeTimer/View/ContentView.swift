@@ -58,7 +58,7 @@ struct ContentView: View {
                 .frame(height: 100)
                 
                 // Navigation Link to the TimerView.
-                NavigationLink(destination: TimerView(duration: viewModel.selectedDuration * 60)) {
+                NavigationLink(destination: TimerView(duration: viewModel.selectedDuration * 60, manager: manager)) {
                     Text("Start")
                         .font(.title)
                         .frame(minWidth: 0, maxWidth: .infinity)
@@ -71,7 +71,7 @@ struct ContentView: View {
                 
                 // Navigation links for additional views.
                 HStack(spacing: 20) {
-                    NavigationLink(destination: SessionsView()) {
+                    NavigationLink(destination: SessionsView(manager: manager)) {
                         Text("View Sessions")
                             .underline()
                             .foregroundColor(.blue)

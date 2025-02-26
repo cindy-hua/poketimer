@@ -10,19 +10,17 @@ import SwiftUI
 // MARK: - SessionsView
 /// A view that displays a list of saved focus sessions from our Pokémon.
 struct SessionsView: View {
-    @EnvironmentObject var manager: PokemonManager
     @StateObject private var viewModel: SessionsViewModel
-    
-    init() {
-        _viewModel = StateObject(wrappedValue: SessionsViewModel(manager: PokemonManager()))
+
+    init(manager: PokemonManager) {
+        _viewModel = StateObject(wrappedValue: SessionsViewModel(manager: manager))
     }
-    
+
     var body: some View {
         List {
-            // Create a section for each Pokémon
-            ForEach(viewModel.sessionsByPokemon, id: \.pokemonName) { pokemon in
-                Section(header: Text(pokemon.name).font(.headline)) {
-                    ForEach(pokemon.sessions) { session in
+            ForEach(viewModel.sessionsByPokemon, id: \.pokemonName) { pokemonData in
+                Section(header: Text(pokemonData.pokemonName).font(.headline)) {
+                    ForEach(pokemonData.sessions) { session in
                         VStack(alignment: .leading, spacing: 4) {
                             Text("Duration: \(session.duration / 60) minutes")
                                 .font(.subheadline)
@@ -40,11 +38,14 @@ struct SessionsView: View {
             }
         }
         .navigationTitle("Sessions")
+        .onAppear {
+            viewModel.loadSessions()
+        }
     }
 }
 
 
 #Preview {
     let manager = PokemonManager()
-    return SessionsView().environmentObject(manager)
+    return SessionsView(manager: manager).environmentObject(manager)
 }

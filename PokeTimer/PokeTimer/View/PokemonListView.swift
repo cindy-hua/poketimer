@@ -11,10 +11,15 @@ import SwiftUI
 /// A view that displays a list of Pokémon and allows you to add new ones or set an active Pokémon.
 struct PokemonListView: View {
     @EnvironmentObject var manager: PokemonManager
+    @StateObject private var viewModel: PokemonListViewModel
+    
+    init() {
+        _viewModel = StateObject(wrappedValue: PokemonListViewModel(manager: PokemonManager()))
+    }
     
     var body: some View {
         List {
-            ForEach(manager.pokemons) { pokemon in
+            ForEach(viewModel.pokemons) { pokemon in
                 NavigationLink(destination: PokemonDetailView(pokemon: pokemon)) {
                     HStack {
                         // Placeholder image.
@@ -32,8 +37,7 @@ struct PokemonListView: View {
                 }
                 .contextMenu {
                     Button(action: {
-                        // Set this Pokémon as the active one.
-                        manager.selectPokemon(pokemon)
+                        viewModel.selectPokemon(pokemon)
                     }) {
                         Text("Set as Active")
                         Image(systemName: "star")
@@ -45,9 +49,7 @@ struct PokemonListView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
-                    // Create a new Pokémon (for demo purposes, auto-named).
-                    let newPokemon = Pokemon(name: "New Pokémon \(manager.pokemons.count + 1)")
-                    manager.addPokemon(newPokemon)
+                    viewModel.addPokemon()
                 }) {
                     Image(systemName: "plus")
                 }

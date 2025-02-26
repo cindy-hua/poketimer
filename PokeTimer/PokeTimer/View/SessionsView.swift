@@ -20,7 +20,7 @@ struct SessionsView: View {
     var body: some View {
         List {
             // Create a section for each Pokémon
-            ForEach(manager.pokemons) { pokemon in
+            ForEach(viewModel.sessionsByPokemon, id: \.pokemonName) { pokemon in
                 Section(header: Text(pokemon.name).font(.headline)) {
                     ForEach(pokemon.sessions) { session in
                         VStack(alignment: .leading, spacing: 4) {

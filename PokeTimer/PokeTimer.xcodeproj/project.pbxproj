@@ -21,6 +21,7 @@
 		1E81C4B82D6E048700B73C2E /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E81C4B72D6E048700B73C2E /* TimerView.swift */; };
 		1E81C4BD2D6E3E9400B73C2E /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E81C4BC2D6E3E9400B73C2E /* TimerViewModel.swift */; };
 		1E81C4C22D6F13C000B73C2E /* SessionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E81C4C12D6F13BF00B73C2E /* SessionsViewModel.swift */; };
+		1E81C4C42D6F1AE800B73C2E /* PokemonListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E81C4C32D6F1AE800B73C2E /* PokemonListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		1E81C4B72D6E048700B73C2E /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		1E81C4BC2D6E3E9400B73C2E /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
 		1E81C4C12D6F13BF00B73C2E /* SessionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsViewModel.swift; sourceTree = "<group>"; };
+		1E81C4C32D6F1AE800B73C2E /* PokemonListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				1E81C4B52D6DCE6800B73C2E /* ContentViewModel.swift */,
 				1E81C4BC2D6E3E9400B73C2E /* TimerViewModel.swift */,
 				1E81C4C12D6F13BF00B73C2E /* SessionsViewModel.swift */,
+				1E81C4C32D6F1AE800B73C2E /* PokemonListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 				1E66EE2D2D6CEA6600C90339 /* PokemonListView.swift in Sources */,
 				1E66EE2F2D6CF25000C90339 /* SessionsView.swift in Sources */,
 				1E66EE1D2D6CC64600C90339 /* ContentView.swift in Sources */,
+				1E81C4C42D6F1AE800B73C2E /* PokemonListViewModel.swift in Sources */,
 				1E66EE332D6D07EE00C90339 /* PersistenceManager.swift in Sources */,
 				1E81C4B62D6DCE6800B73C2E /* ContentViewModel.swift in Sources */,
 				1E66EE2B2D6CDB4000C90339 /* Pokemon.swift in Sources */,

@@ -10,12 +10,9 @@ import SwiftUI
 // MARK: - ContentView (Focus Session View)
 struct ContentView: View {
     @EnvironmentObject var manager: PokemonManager
+    @StateObject private var viewModel = ContentViewModel()
     
-    // Timer-related states.
-    @State private var selectedDuration = 5 // in minutes.
     
-    // Duration options from 5 to 120 minutes (in steps of 5).
-    let durationOptions = Array(stride(from: 5, through: 120, by: 5))
     
     var body: some View {
         NavigationView {

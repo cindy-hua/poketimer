@@ -13,7 +13,7 @@ struct ContentView: View {
     @StateObject private var viewModel = ContentViewModel()
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: 40) {
                 // Picker to choose a Pokémon.
                 Picker("Select Pokémon", selection: Binding(
@@ -76,7 +76,7 @@ struct ContentView: View {
                             .underline()
                             .foregroundColor(.blue)
                     }
-                    NavigationLink(destination: PokemonListView()) {
+                    NavigationLink(destination: PokemonListView(manager: manager)) {
                         Text("View Pokémon")
                             .underline()
                             .foregroundColor(.blue)

@@ -51,6 +51,9 @@ struct TimerView: View {
         .onAppear {
             viewModel.startTimer()
         }
+        .onChange(of: viewModel.isSessionCompleted) {
+            showSessionSavedAlert = viewModel.isSessionCompleted
+        }
     }
 
 

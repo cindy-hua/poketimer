@@ -11,6 +11,7 @@ class TimerViewModel: ObservableObject {
     // Timer-related states.
     @Published var remainingSeconds: Int
     @Published var isRunning = false
+    @Published var isSessionCompleted = false
     
     private var timer: Timer?
     private var startTime: Date?
@@ -35,6 +36,7 @@ class TimerViewModel: ObservableObject {
             } else {
                 t.invalidate()
                 self.isRunning = false
+                self.isSessionCompleted = true
                 self.saveSession(completed: true)
             }
         }

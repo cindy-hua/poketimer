@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E1A2B782D79A91600E3549B /* PokemonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1A2B772D79A91600E3549B /* PokemonManager.swift */; };
 		1E66EE1B2D6CC64600C90339 /* PokeTimerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E66EE1A2D6CC64600C90339 /* PokeTimerApp.swift */; };
 		1E66EE1D2D6CC64600C90339 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E66EE1C2D6CC64600C90339 /* ContentView.swift */; };
 		1E66EE1F2D6CC64B00C90339 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E66EE1E2D6CC64B00C90339 /* Assets.xcassets */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E1A2B772D79A91600E3549B /* PokemonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonManager.swift; sourceTree = "<group>"; };
 		1E66EE172D6CC64600C90339 /* PokeTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokeTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E66EE1A2D6CC64600C90339 /* PokeTimerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeTimerApp.swift; sourceTree = "<group>"; };
 		1E66EE1C2D6CC64600C90339 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -56,6 +58,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E1A2B762D79A8DA00E3549B /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				1E66EE2A2D6CDB4000C90339 /* Pokemon.swift */,
+				1E66EE282D6CD40200C90339 /* Session.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
 		1E66EE0E2D6CC64600C90339 = {
 			isa = PBXGroup;
 			children = (
@@ -76,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				1E66EE1A2D6CC64600C90339 /* PokeTimerApp.swift */,
+				1E1A2B762D79A8DA00E3549B /* Entity */,
 				1E81C4BB2D6E3E2000B73C2E /* Model */,
 				1E81C4BE2D6F121200B73C2E /* ViewModel */,
 				1E81C4BF2D6F123800B73C2E /* View */,
@@ -97,8 +109,7 @@
 		1E81C4BB2D6E3E2000B73C2E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1E66EE2A2D6CDB4000C90339 /* Pokemon.swift */,
-				1E66EE282D6CD40200C90339 /* Session.swift */,
+				1E1A2B772D79A91600E3549B /* PokemonManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -212,6 +223,7 @@
 				1E66EE1D2D6CC64600C90339 /* ContentView.swift in Sources */,
 				1E81C4C42D6F1AE800B73C2E /* PokemonListViewModel.swift in Sources */,
 				1E66EE332D6D07EE00C90339 /* PersistenceManager.swift in Sources */,
+				1E1A2B782D79A91600E3549B /* PokemonManager.swift in Sources */,
 				1E81C4B62D6DCE6800B73C2E /* ContentViewModel.swift in Sources */,
 				1E66EE2B2D6CDB4000C90339 /* Pokemon.swift in Sources */,
 				1E66EE1B2D6CC64600C90339 /* PokeTimerApp.swift in Sources */,

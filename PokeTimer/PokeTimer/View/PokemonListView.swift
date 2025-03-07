@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - PokemonListView
 /// A view that displays a list of Pokémon and allows you to add new ones or set an active Pokémon.
 struct PokemonListView: View {
-//    @EnvironmentObject var manager: PokemonManager
+    @EnvironmentObject var manager: PokemonManager
     @StateObject private var viewModel: PokemonListViewModel
     
     init(manager: PokemonManager) {
@@ -19,7 +19,7 @@ struct PokemonListView: View {
     
     var body: some View {
         List {
-            ForEach(viewModel.pokemons) { pokemon in
+            ForEach(manager.pokemons) { pokemon in
                 NavigationLink(destination: PokemonDetailView(pokemon: pokemon)) {
                     HStack {
                         // Placeholder image.
@@ -54,6 +54,9 @@ struct PokemonListView: View {
                     Image(systemName: "plus")
                 }
             }
+        }
+        .onAppear {
+            viewModel.updateData()
         }
     }
 }

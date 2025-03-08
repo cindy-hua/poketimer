@@ -76,7 +76,7 @@ struct ContentView: View {
                             .underline()
                             .foregroundColor(.blue)
                     }
-                    NavigationLink(destination: PokemonListView(manager: manager)) {
+                    NavigationLink(destination: PokemonListView(manager: manager).environmentObject(manager)) {
                         Text("View Pokémon")
                             .underline()
                             .foregroundColor(.blue)
@@ -90,5 +90,6 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView().environmentObject(PokemonManager())
+    let manager = PokemonManager()
+    return ContentView().environmentObject(manager)
 }

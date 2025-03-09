@@ -63,9 +63,19 @@ class TimerViewModel: ObservableObject {
             pokemonID: manager.currentPokemon?.id ?? UUID()
         )
 
-        // Add session to the current Pokémon and persist the data.
+        print("⚡️ [DEBUG] Saving session for Pokémon: \(manager.currentPokemon?.name ?? "Unknown")")
+        print("⚡️ [DEBUG] Session Duration: \(elapsedTime) seconds")
+        print("⚡️ [DEBUG] Total Sessions Before Save: \(manager.currentPokemon?.sessions.count ?? 0)")
+
         manager.currentPokemon?.addSession(session)
         PersistenceManager.shared.save(manager: manager)
+        
+        DispatchQueue.main.async {
+            self.manager.pokemons = self.manager.pokemons.map { $0 }
+        }
+
+        print("✅ [DEBUG] Total Sessions After Save: \(manager.currentPokemon?.sessions.count ?? 0)")
+        
     }
     
     /// Converts seconds into a MM:SS format.

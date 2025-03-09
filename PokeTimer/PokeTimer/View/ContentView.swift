@@ -76,7 +76,7 @@ struct ContentView: View {
                             .underline()
                             .foregroundColor(.blue)
                     }
-                    NavigationLink(destination: PokemonListView(manager: manager).environmentObject(manager)) {
+                    NavigationLink(destination: PokemonListView(manager:manager).environmentObject(manager)) {
                         Text("View Pokémon")
                             .underline()
                             .foregroundColor(.blue)
@@ -85,6 +85,9 @@ struct ContentView: View {
             }
             .padding()
             .navigationTitle("Focus Session")
+            .onAppear {
+                print("🎯 [DEBUG] Manager in ContentView: \(Unmanaged.passUnretained(manager).toOpaque())")
+            }
         }
     }
 }

@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 class PersistenceManager {
     static let shared = PersistenceManager()
     
@@ -19,6 +17,7 @@ class PersistenceManager {
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         // Create a file URL for our data.
         fileURL = documentsDirectory.appendingPathComponent("pokemonManager.json")
+        print("📂 [DEBUG] JSON File Path: \(fileURL.path)")
     }
     
     /// Saves the provided PokemonManager instance to disk.
@@ -45,6 +44,15 @@ class PersistenceManager {
         } catch {
             print("Error loading PokemonManager: \(error)")
             return nil
+        }
+    }
+    
+    func resetManager() {
+        do {
+            try FileManager.default.removeItem(at: fileURL)
+            print("🗑 [DEBUG] JSON file deleted. Restart the app to start fresh.")
+        } catch {
+            print("❌ [DEBUG] Error deleting JSON file: \(error)")
         }
     }
 }

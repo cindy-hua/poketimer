@@ -37,6 +37,7 @@ class Pokemon: ObservableObject, Identifiable, Codable, Equatable, Hashable {
         // Convert session duration (seconds) to minutes.
         xp += session.duration / 60
         recalcLevel()
+        objectWillChange.send()
     }
     
     /// Recalculates the level based on XP.

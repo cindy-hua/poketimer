@@ -22,6 +22,7 @@ class PokemonManager: ObservableObject, Codable {
         let defaultPokemon = Pokemon(name: "Starter")
         self.pokemons = [defaultPokemon]
         self.currentPokemon = defaultPokemon
+        print("🧩 [DEBUG] New PokemonManager Created at \(Unmanaged.passUnretained(self).toOpaque())")
     }
     
     // MARK: - Codable Conformance
@@ -42,7 +43,6 @@ class PokemonManager: ObservableObject, Codable {
         try container.encode(currentPokemon, forKey: .currentPokemon)
     }
     
-    // Additional manager functions...
     func addPokemon(_ pokemon: Pokemon) {
         pokemons.append(pokemon)
         if currentPokemon == nil {
@@ -52,5 +52,10 @@ class PokemonManager: ObservableObject, Codable {
     
     func selectPokemon(_ pokemon: Pokemon) {
         currentPokemon = pokemon
+    }
+    
+    func addSessionToCurrentPokemon(_ session: Session) {
+        currentPokemon?.addSession(session)  
+        objectWillChange.send()
     }
 }

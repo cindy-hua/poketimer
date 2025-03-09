@@ -32,6 +32,8 @@ struct PokemonListView: View {
                                 .font(.headline)
                             Text("XP: \(pokemon.xp)  Level: \(pokemon.level)")
                                 .font(.subheadline)
+                            Text("Sessions: \(pokemon.sessions.count)")
+                                .font(.subheadline)
                         }
                     }
                 }
@@ -57,6 +59,10 @@ struct PokemonListView: View {
         }
         .onAppear {
             viewModel.updateData()
+            print("🐉 [DEBUG] PokemonListView appeared, updating UI")
+        }
+        .onChange(of: manager.pokemons) { _ in
+            print("🔄 [DEBUG] manager.pokemons changed! UI should refresh.")
         }
     }
 }

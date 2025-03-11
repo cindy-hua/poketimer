@@ -12,7 +12,7 @@ import SwiftUI
 // MARK: - Pokemon Class
 /// A struct representing a Pokémon that tracks XP (in minutes), and computes its level.
 struct Pokemon: Identifiable, Codable, Equatable, Hashable {
-    var id = UUID()
+    var id: UUID
     var name: String
     var xp: Int         // Total XP (in minutes)
     var level: Int
@@ -42,13 +42,13 @@ struct Pokemon: Identifiable, Codable, Equatable, Hashable {
         return updated
     }
     
-//    // MARK: - Equatable & Hashable
-//    static func == (lhs: Pokemon, rhs: Pokemon) -> Bool {
-//        return lhs.id == rhs.id
-//    }
-//    
-//    func hash(into hasher: inout Hasher) {
-//        hasher.combine(id)
-//    }
+    // MARK: - Equatable & Hashable
+    static func == (lhs: Pokemon, rhs: Pokemon) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }
 

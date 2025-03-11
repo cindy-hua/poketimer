@@ -9,18 +9,33 @@ import SwiftUI
 
 @main
 struct PokeTimerApp: App {
-    @StateObject var manager: PokemonManager = {
-        let shouldReset = false
-        if shouldReset {
-            PersistenceManager.shared.resetManager() 
-        }
-        return PersistenceManager.shared.loadManager() ?? PokemonManager()
-    }()
-    
+    @State var pokemonManager: PokemonManager
+    @State var sessionManager: SessionManager
+
+    init() {
+//        PersistenceManager.shared.resetAllData()
+
+        // Load fresh instances after reset
+        pokemonManager = PersistenceManager.shared.loadPokemonManager()
+        sessionManager = PersistenceManager.shared.loadSessionManager()
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(manager)
+                .environment(pokemonManager)
+                .environment(sessionManager)
+                .onChange(of: pokemonManager.pokemons) { oldValue, newValue in
+                    if oldValue != newValue {
+                        PersistenceManager.shared.savePokemonManager(pokemonManager)
+                    }
+                }
+
+                .onChange(of: sessionManager.sessions) { oldValue, newValue in
+                    if oldValue != newValue {
+                        PersistenceManager.shared.saveSessionManager(sessionManager)
+                    }
+                }
         }
     }
 }

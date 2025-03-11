@@ -9,26 +9,40 @@ import SwiftUI
 
 // MARK: - ContentView (Focus Session View)
 struct ContentView: View {
-    @EnvironmentObject var manager: PokemonManager
-    @StateObject private var viewModel = ContentViewModel()
+//    @EnvironmentObject var manager: PokemonManager
+//    @StateObject private var viewModel = ContentViewModel()
+    @Environment(PokemonManager.self) var pokemonManager
+    @Environment(SessionManager.self) var sessionManager
+    @State private var viewModel: ContentViewModel
+    
+    init() {
+        _viewModel = State(initialValue: ContentViewModel(
+            pokemonManager: PokemonManager(),
+            sessionManager: SessionManager()  
+        ))
+    }
     
     var body: some View {
         NavigationStack {
             VStack(spacing: 40) {
                 // Picker to choose a Pokémon.
-                Picker("Select Pokémon", selection: Binding(
-                    get: { manager.currentPokemon ?? manager.pokemons.first! },
-                    set: { manager.currentPokemon = $0 }
-                )) {
-                    ForEach(manager.pokemons) { pokemon in
-                        Text(pokemon.name)
-                            .tag(pokemon)
+                if pokemonManager.pokemons.isEmpty {
+                    Text("No Pokémon available. Please add a Pokémon!")
+                        .foregroundColor(.red)
+                } else {
+                    Picker("Select Pokémon", selection: Binding(
+                        get: { pokemonManager.currentPokemonID ?? pokemonManager.pokemons.first?.id ?? UUID() },
+                        set: { pokemonManager.currentPokemonID = $0 }
+                    )) {
+                        ForEach(pokemonManager.pokemons) { pokemon in
+                            Text(pokemon.name).tag(pokemon.id)
+                        }
                     }
+                    .pickerStyle(MenuPickerStyle())
                 }
-                .pickerStyle(MenuPickerStyle())
                 
-                // Show the current active Pokémon's name.
-                if let currentPokemon = manager.currentPokemon {
+                // Show Current Active Pokémon's Name
+                if let currentPokemon = pokemonManager.getCurrentPokemon() {
                     Text("Current Pokémon: \(currentPokemon.name)")
                         .font(.headline)
                 }
@@ -40,7 +54,7 @@ struct ContentView: View {
                     .foregroundColor(.yellow)
                 
                 // Display XP & Level from the active Pokémon.
-                if let currentPokemon = manager.currentPokemon {
+                if let currentPokemon = pokemonManager.getCurrentPokemon() {
                     HStack(spacing: 20) {
                         Text("XP: \(currentPokemon.xp)")
                         Text("Level: \(currentPokemon.level)")
@@ -58,7 +72,9 @@ struct ContentView: View {
                 .frame(height: 100)
                 
                 // Navigation Link to the TimerView.
-                NavigationLink(destination: TimerView(duration: viewModel.selectedDuration * 60, manager: manager)) {
+                NavigationLink(destination: TimerView(duration: viewModel.selectedDuration * 60)
+                    .environment(pokemonManager)
+                    .environment(sessionManager)) {
                     Text("Start")
                         .font(.title)
                         .frame(minWidth: 0, maxWidth: .infinity)
@@ -68,15 +84,19 @@ struct ContentView: View {
                         .cornerRadius(10)
                 }
                 .padding(.horizontal)
-                
-                // Navigation links for additional views.
+//                
+//                // Navigation links for additional views.
                 HStack(spacing: 20) {
-                    NavigationLink(destination: SessionsView(manager: manager)) {
-                        Text("View Sessions")
-                            .underline()
-                            .foregroundColor(.blue)
-                    }
-                    NavigationLink(destination: PokemonListView(manager:manager).environmentObject(manager)) {
+//                    NavigationLink(destination: SessionsView()
+//                        .environment(pokemonManager)
+//                        .environment(sessionManager)) {
+//                        Text("View Sessions")
+//                            .underline()
+//                            .foregroundColor(.blue)
+//                    }
+                    
+                    NavigationLink(destination: PokemonListView()
+                        .environment(pokemonManager)) {
                         Text("View Pokémon")
                             .underline()
                             .foregroundColor(.blue)
@@ -86,13 +106,19 @@ struct ContentView: View {
             .padding()
             .navigationTitle("Focus Session")
             .onAppear {
-                print("🎯 [DEBUG] Manager in ContentView: \(Unmanaged.passUnretained(manager).toOpaque())")
+                if viewModel.pokemonManager !== pokemonManager || viewModel.sessionManager !== sessionManager {
+                    viewModel = ContentViewModel(pokemonManager: pokemonManager, sessionManager: sessionManager)
+                }
+                print("🎯 [DEBUG] PokemonManager in ContentView: \(Unmanaged.passUnretained(pokemonManager).toOpaque())")
             }
         }
     }
 }
 
 #Preview {
-    let manager = PokemonManager()
-    return ContentView().environmentObject(manager)
+    let pokemonManager = PokemonManager()
+    let sessionManager = SessionManager()
+    return ContentView()
+        .environment(pokemonManager)
+        .environment(sessionManager)
 }

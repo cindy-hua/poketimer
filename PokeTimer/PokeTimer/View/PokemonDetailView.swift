@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct PokemonDetailView: View {
+    var pokemon: Pokemon = Pokemon(name: "starter")
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
-#Preview {
-    PokemonDetailView()
-}
+//#Preview {
+//    let pokemon = Pokemon(name: "starter")
+//    return PokemonDetailView(pokemon: pokemon)
+//}

@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct TimerView: View {
-    @StateObject var viewModel: TimerViewModel
+    @Environment(PokemonManager.self) var pokemonManager
+    @Environment(SessionManager.self) var sessionManager
+    @State var viewModel: TimerViewModel
     @State private var showSessionSavedAlert = false
-    
     @Environment(\.dismiss) var dismiss
     
-    init(duration: Int, manager: PokemonManager) {
-        _viewModel = StateObject(wrappedValue: TimerViewModel(duration: duration, manager: manager))
+    init(duration: Int) {
+        _viewModel = State(initialValue: TimerViewModel(duration: duration))
     }
     
     var body: some View {
@@ -26,7 +27,7 @@ struct TimerView: View {
             
             // Stop Button.
             Button(action: {
-                viewModel.stopTimer()
+                viewModel.stopTimer(pokemonManager: pokemonManager, sessionManager: sessionManager)
                 dismiss()
             }) {
                 Text("Stop")
@@ -49,10 +50,18 @@ struct TimerView: View {
             )
         }
         .onAppear {
+            if viewModel.remainingSeconds != viewModel.duration {
+                viewModel.remainingSeconds = viewModel.duration // Reset timer
+            }
             viewModel.startTimer()
         }
         .onChange(of: viewModel.isSessionCompleted) {
-            showSessionSavedAlert = viewModel.isSessionCompleted
+            print("🔄 [DEBUG] isSessionCompleted changed: \(viewModel.isSessionCompleted)")
+            if viewModel.isSessionCompleted {
+                print("⚡️ [DEBUG] Triggering saveSession()")
+                viewModel.saveSession(pokemonManager: pokemonManager, sessionManager: sessionManager, completed: true)
+                showSessionSavedAlert = true
+            }
         }
     }
 
@@ -60,6 +69,9 @@ struct TimerView: View {
 }
 
 #Preview {
-    let manager = PokemonManager()
-    return TimerView(duration: 5 * 60, manager: manager).environmentObject(manager)
+    let pokemonManager = PokemonManager()
+    let sessionManager = SessionManager()
+    return TimerView(duration: 5 * 60)
+        .environment(pokemonManager)
+        .environment(sessionManager)
 }

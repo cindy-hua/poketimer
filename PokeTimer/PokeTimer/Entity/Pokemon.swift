@@ -12,20 +12,23 @@ import SwiftUI
 // MARK: - Pokemon Class
 /// A struct representing a Pokémon that tracks XP (in minutes), and computes its level.
 struct Pokemon: Identifiable, Codable, Equatable, Hashable {
-    var id: UUID
+    let id: UUID
     var name: String
     var xp: Int         // Total XP (in minutes)
-    var level: Int
     
     // Coding keys for Codable conformance.
     enum CodingKeys: CodingKey {
-        case id, name, xp, level
+        case id, name, xp
     }
     
-    init(name: String, xp: Int = 0) {
+    init(id: UUID = UUID(), name: String, xp: Int = 0) {
+        self.id = id
         self.name = name
         self.xp = xp
-        self.level = Pokemon.calculateLevel(for: xp)
+    }
+    
+    var level: Int {
+        return Pokemon.calculateLevel(for: xp)
     }
     
     /// Recalculates the level based on XP.
@@ -36,10 +39,7 @@ struct Pokemon: Identifiable, Codable, Equatable, Hashable {
     
     /// Returns a new Pokemon instance with updated XP and level.
     func gainingXP(_ minutes: Int) -> Pokemon {
-        var updated = self
-        updated.xp += minutes
-        updated.level = Pokemon.calculateLevel(for: updated.xp)
-        return updated
+        return Pokemon(id: self.id, name: self.name, xp: self.xp + minutes)
     }
     
     // MARK: - Equatable & Hashable

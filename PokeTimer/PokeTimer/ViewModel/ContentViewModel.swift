@@ -7,10 +7,22 @@
 
 import Foundation
 
-class ContentViewModel: ObservableObject {
-    // Timer-related states.
-    @Published var selectedDuration: Int = 1
+@Observable
+class ContentViewModel {
+    var pokemonManager: PokemonManager
+    var sessionManager: SessionManager
     
-    // Duration options from 5 to 120 minutes (in steps of 5).
+    var selectedDuration: Int = 1
     let durationOptions = Array(stride(from: 1, through: 20, by: 1))
+
+    init(pokemonManager: PokemonManager, sessionManager: SessionManager) {
+        self.pokemonManager = pokemonManager
+        self.sessionManager = sessionManager
+    }
+
+    /// Saves all data when necessary
+    func saveData() {
+        PersistenceManager.shared.savePokemonManager(pokemonManager)
+        PersistenceManager.shared.saveSessionManager(sessionManager)
+    }
 }

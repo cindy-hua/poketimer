@@ -8,7 +8,7 @@
 import Foundation
 
 // A simple model for a focus session.
-struct Session: Identifiable, Codable {
+struct Session: Identifiable, Codable, Equatable {
     var id = UUID()
     let duration: Int       // Duration in seconds.
     let startTime: Date

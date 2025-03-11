@@ -7,28 +7,31 @@
 
 import Foundation
 
-class TimerViewModel: ObservableObject {
+@Observable
+class TimerViewModel {
     // Timer-related states.
-    @Published var remainingSeconds: Int
-    @Published var isRunning = false
-    @Published var isSessionCompleted = false
+    var remainingSeconds: Int
+    var isRunning = false
+    var isSessionCompleted = false
     
     private var timer: Timer?
     private var startTime: Date?
     let duration: Int
     
-    private let manager: PokemonManager
-    
-    init(duration: Int, manager: PokemonManager) {
+    init(duration: Int) {
         self.duration = duration
         self.remainingSeconds = duration
-        self.manager = manager
     }
     
     /// Starts the timer.
     func startTimer() {
+        guard !isRunning else { return }
+        remainingSeconds = duration
         startTime = Date()
         isRunning = true
+        
+        print("⏳ [DEBUG] Timer started for \(duration) seconds")
+        
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] t in
             guard let self = self else { return }
             if self.remainingSeconds > 0 {
@@ -37,45 +40,47 @@ class TimerViewModel: ObservableObject {
                 t.invalidate()
                 self.isRunning = false
                 self.isSessionCompleted = true
-                self.saveSession(completed: true)
+                print("✅ [DEBUG] Timer completed, isSessionCompleted = \(self.isSessionCompleted)")
             }
         }
     }
     
     /// Stops the timer early and saves an incomplete session.
-    func stopTimer() {
+    func stopTimer(pokemonManager: PokemonManager, sessionManager: SessionManager) {
         timer?.invalidate()
         timer = nil
         isRunning = false
-        saveSession(completed: false)
+        isSessionCompleted = false
+
+        print("🛑 [DEBUG] Timer stopped manually")
+        saveSession(pokemonManager: pokemonManager, sessionManager: sessionManager, completed: false)
     }
 
+
     /// Saves the session, associating it with the current Pokémon.
-    private func saveSession(completed: Bool) {
+    func saveSession(pokemonManager: PokemonManager, sessionManager: SessionManager, completed: Bool) {
+        print("💾 [DEBUG] saveSession() called, completed = \(completed)")
+        guard let currentPokemonID = pokemonManager.currentPokemonID else {
+            print("❌ [DEBUG] No current Pokémon selected, cannot save session!")
+            return
+        }
+
         let endTime = Date()
         let elapsedTime = completed ? duration : Int(endTime.timeIntervalSince(startTime ?? endTime))
-        
+
         let session = Session(
+            id: UUID(),
             duration: elapsedTime,
             startTime: startTime ?? endTime,
             endTime: endTime,
             completed: completed,
-            pokemonID: manager.currentPokemon?.id ?? UUID()
+            pokemonID: currentPokemonID
         )
 
-        print("⚡️ [DEBUG] Saving session for Pokémon: \(manager.currentPokemon?.name ?? "Unknown")")
-        print("⚡️ [DEBUG] Session Duration: \(elapsedTime) seconds")
-        print("⚡️ [DEBUG] Total Sessions Before Save: \(manager.currentPokemon?.sessions.count ?? 0)")
+        sessionManager.addSession(session) // ✅ SessionManager handles sessions
+        pokemonManager.processCompletedSession(session) // ✅ Let PokemonManager process XP
 
-        manager.currentPokemon?.addSession(session)
-        PersistenceManager.shared.save(manager: manager)
-        
-        DispatchQueue.main.async {
-            self.manager.pokemons = self.manager.pokemons.map { $0 }
-        }
-
-        print("✅ [DEBUG] Total Sessions After Save: \(manager.currentPokemon?.sessions.count ?? 0)")
-        
+        print("✅ [DEBUG] Saved session for Pokémon ID: \(currentPokemonID), Duration: \(elapsedTime) seconds")
     }
     
     /// Converts seconds into a MM:SS format.

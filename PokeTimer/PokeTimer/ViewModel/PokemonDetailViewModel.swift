@@ -2,39 +2,52 @@
 //  PokemonDetailViewModel.swift
 //  PokeTimer
 //
-//  Created by HUA Cindy on 26/02/2025.
+//  Created by HUA Cindy on 11/03/2025.
 //
 
 import Foundation
 
-class PokemonDetailViewModel: ObservableObject {
-    @Published var pokemonName: String
-    @Published var xp: Int
-    @Published var level: Int
-    @Published var sessions: [Session]
+@Observable
+class PokemonDetailViewModel {
+    private let pokemonManager: PokemonManager
+    private let sessionManager: SessionManager
+    private let pokemonID: UUID
 
-    private var pokemon: Pokemon
-
-    init(pokemon: Pokemon) {
-        self.pokemon = pokemon
-        self.pokemonName = pokemon.name
-        self.xp = pokemon.xp
-        self.level = pokemon.level
-        self.sessions = pokemon.sessions
+    init(pokemonManager: PokemonManager, sessionManager: SessionManager, pokemonID: UUID) {
+        self.pokemonManager = pokemonManager
+        self.sessionManager = sessionManager
+        self.pokemonID = pokemonID
+    }
+    
+    /// Computed property to get the Pokémon dynamically from `PokemonManager`
+    var pokemon: Pokemon? {
+        pokemonManager.pokemons.first(where: { $0.id == pokemonID })
     }
 
-    /// Reloads Pokémon details (e.g., after XP changes).
-    func refreshData() {
-        self.pokemonName = pokemon.name
-        self.xp = pokemon.xp
-        self.level = pokemon.level
-        self.sessions = pokemon.sessions
+    /// Computed property for Pokémon name
+    var pokemonName: String {
+        pokemon?.name ?? "Unknown"
     }
 
-    /// Formats a given date into a readable string.
+    /// Computed property for XP
+    var xp: Int {
+        pokemon?.xp ?? 0
+    }
+
+    /// Computed property for level
+    var level: Int {
+        pokemon?.level ?? 1
+    }
+
+    /// Fetch sessions related to this Pokémon
+    var sessions: [Session] {
+        sessionManager.getSessions(for: pokemonID)
+    }
+
+    /// Formats a date for display
     func formattedDate(_ date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateStyle = .short
+        formatter.dateStyle = .medium
         formatter.timeStyle = .short
         return formatter.string(from: date)
     }

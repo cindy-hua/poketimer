@@ -77,8 +77,8 @@ class TimerViewModel {
             pokemonID: currentPokemonID
         )
 
-        sessionManager.addSession(session) // ✅ SessionManager handles sessions
-        pokemonManager.processCompletedSession(session) // ✅ Let PokemonManager process XP
+        sessionManager.addSession(session)
+        pokemonManager.processCompletedSession(session)
 
         print("✅ [DEBUG] Saved session for Pokémon ID: \(currentPokemonID), Duration: \(elapsedTime) seconds")
     }

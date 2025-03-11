@@ -49,13 +49,20 @@ class PokemonManager: Codable, Equatable {
             currentPokemonID = pokemon.id
             print("✨ [DEBUG] Auto-selected new Pokémon: \(pokemon.name)")
         }
+        savePokemonData()
     }
 
     /// Selects a Pokémon by its ID.
     func selectPokemon(by id: UUID) {
         if pokemons.contains(where: { $0.id == id }) {
             currentPokemonID = id
+            savePokemonData()
         }
+    }
+    
+    /// Saves the Pokémon list and current selection to disk.
+    private func savePokemonData() {
+        PersistenceManager.shared.savePokemonManager(self)
     }
 
     /// Returns the currently selected Pokémon.
@@ -66,8 +73,13 @@ class PokemonManager: Codable, Equatable {
     /// Updates XP of the current Pokémon.
     func processCompletedSession(_ session: Session) {
         guard let index = pokemons.firstIndex(where: { $0.id == session.pokemonID }) else { return }
+        
         let xpGained = session.duration / 60
         pokemons[index] = pokemons[index].gainingXP(xpGained)
+
+        print("⚡️ [DEBUG] XP Updated: \(pokemons[index].xp) for \(pokemons[index].name)")
+
+        savePokemonData()
     }
     
     static func == (lhs: PokemonManager, rhs: PokemonManager) -> Bool {

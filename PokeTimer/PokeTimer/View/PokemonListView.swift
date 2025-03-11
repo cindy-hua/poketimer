@@ -13,10 +13,6 @@ struct PokemonListView: View {
     @Environment(PokemonManager.self) var pokemonManager
     @State private var viewModel: PokemonListViewModel?
     
-//    init() {
-//        _viewModel = State(initialValue: PokemonListViewModel(pokemonManager: PokemonManager()))
-//    }
-    
     var body: some View {
 //        List {
 //            ForEach(pokemonManager.pokemons, id: \.id) { pokemon in
@@ -64,7 +60,7 @@ struct PokemonListView: View {
             }
             print("🐉 [DEBUG] PokemonListView appeared, updating UI")
         }
-        .onChange(of: pokemonManager.pokemons) { _ in
+        .onChange(of: pokemonManager.pokemons) {
             print("🔄 [DEBUG] manager.pokemons changed! UI should refresh.")
         }
     }

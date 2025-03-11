@@ -15,12 +15,6 @@ class PokemonListViewModel {
         self.pokemonManager = pokemonManager
     }
     
-    /// Selects a Pokémon as the active one.
-//    func selectPokemon(_ pokemon: Pokemon) {
-//        manager.selectPokemon(pokemon)
-//        updateData()
-//    }
-    
     /// Adds a new Pokémon to the list.
     func addPokemon() {
         let newPokemon = Pokemon(name: "New Pokémon \(pokemonManager.pokemons.count + 1)")

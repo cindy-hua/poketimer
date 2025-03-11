@@ -9,8 +9,6 @@ import SwiftUI
 
 // MARK: - ContentView (Focus Session View)
 struct ContentView: View {
-//    @EnvironmentObject var manager: PokemonManager
-//    @StateObject private var viewModel = ContentViewModel()
     @Environment(PokemonManager.self) var pokemonManager
     @Environment(SessionManager.self) var sessionManager
     @State private var viewModel: ContentViewModel

@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - Persistence Manager
 /// Handles saving and loading of PokemonManager and SessionManager separately.
-class PersistenceManager {
+class PersistenceManager: PersistenceService {
     static let shared = PersistenceManager()
 
     private let pokemonFileURL: URL

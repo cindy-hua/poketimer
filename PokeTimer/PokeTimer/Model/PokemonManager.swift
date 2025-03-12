@@ -39,7 +39,7 @@ class PokemonManager: Codable, Equatable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(pokemons, forKey: .pokemons)
-        try container.encode(currentPokemonID, forKey: .currentPokemonID)
+        try container.encodeIfPresent(currentPokemonID, forKey: .currentPokemonID)
     }
     
 /// Adds a new Pokémon to the list.

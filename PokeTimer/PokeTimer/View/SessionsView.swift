@@ -21,12 +21,13 @@ struct SessionsView: View {
                     ForEach(viewModel.sessionsByPokemon, id: \.pokemonName) { pokemonData in
                         Section(header: Text(pokemonData.pokemonName).font(.headline)) {
                             ForEach(pokemonData.sessions) { session in
+                                let formattedDurationString = TimeFormatterUtil.formattedDuration(session.duration)
                                 VStack(alignment: .leading, spacing: 4) {
-                                    Text("Duration: \(session.duration / 60) minutes")
+                                    Text("Duration: \(formattedDurationString) minutes")
                                         .font(.subheadline)
-                                    Text("Started: \(viewModel.formattedDate(session.startTime))")
+                                    Text("Started: \(DateFormatterUtil.formattedDate(session.startTime))")
                                         .font(.subheadline)
-                                    Text("Ended: \(viewModel.formattedDate(session.endTime))")
+                                    Text("Ended: \(DateFormatterUtil.formattedDate(session.endTime))")
                                         .font(.subheadline)
                                     Text("Status: \(session.completed ? "Completed" : "Incomplete")")
                                         .font(.subheadline)

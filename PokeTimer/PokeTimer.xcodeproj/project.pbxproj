@@ -26,6 +26,7 @@
 		1E779F8A2D804CF200AB5A01 /* PokemonDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E779F892D804CF200AB5A01 /* PokemonDetailViewModel.swift */; };
 		1E81C4B62D6DCE6800B73C2E /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E81C4B52D6DCE6800B73C2E /* ContentViewModel.swift */; };
 		1EC166362D819541001AE4DB /* DateFormatterUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC166352D819541001AE4DB /* DateFormatterUtil.swift */; };
+		1EC166392D81978B001AE4DB /* TimeFormatterUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC166382D81978B001AE4DB /* TimeFormatterUtil.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		1E779F892D804CF200AB5A01 /* PokemonDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailViewModel.swift; sourceTree = "<group>"; };
 		1E81C4B52D6DCE6800B73C2E /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		1EC166352D819541001AE4DB /* DateFormatterUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterUtil.swift; sourceTree = "<group>"; };
+		1EC166382D81978B001AE4DB /* TimeFormatterUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFormatterUtil.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,10 +138,10 @@
 			isa = PBXGroup;
 			children = (
 				1E6BA30B2D80886900CD3583 /* ContentView.swift */,
+				1E6BA30A2D80886900CD3583 /* TimerView.swift */,
 				1E6BA3082D80886800CD3583 /* PokemonDetailView.swift */,
 				1E6BA30C2D80886900CD3583 /* PokemonListView.swift */,
 				1E6BA3092D80886800CD3583 /* SessionsView.swift */,
-				1E6BA30A2D80886900CD3583 /* TimerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -156,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				1EC166352D819541001AE4DB /* DateFormatterUtil.swift */,
+				1EC166382D81978B001AE4DB /* TimeFormatterUtil.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 				1E70A9B12D7F789C00908E0C /* PokemonListViewModel.swift in Sources */,
 				1E779F8A2D804CF200AB5A01 /* PokemonDetailViewModel.swift in Sources */,
 				1E5E96672D7EF79C00CA0BEB /* SessionManager.swift in Sources */,
+				1EC166392D81978B001AE4DB /* TimeFormatterUtil.swift in Sources */,
 				1E6BA3112D80886900CD3583 /* PokemonListView.swift in Sources */,
 				1E66EE292D6CD40200C90339 /* Session.swift in Sources */,
 			);

@@ -74,7 +74,7 @@ class PokemonManager: Codable, Equatable {
     func processCompletedSession(_ session: Session) {
         guard let index = pokemons.firstIndex(where: { $0.id == session.pokemonID }) else { return }
         
-        let xpGained = session.duration / 60
+        let xpGained = session.durationInMinutes
         pokemons[index] = pokemons[index].gainingXP(xpGained)
 
         print("⚡️ [DEBUG] XP Updated: \(pokemons[index].xp) for \(pokemons[index].name)")

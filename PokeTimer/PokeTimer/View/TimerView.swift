@@ -21,7 +21,7 @@ struct TimerView: View {
     var body: some View {
         VStack(spacing: 40) {
             // Countdown Timer Display.
-            Text(viewModel.timeString(from: viewModel.remainingSeconds))
+            Text(TimeFormatterUtil.timeString(from: viewModel.remainingSeconds))
                 .font(.system(size: 50, weight: .bold, design: .monospaced))
                 .animation(.easeInOut, value: viewModel.remainingSeconds)
             

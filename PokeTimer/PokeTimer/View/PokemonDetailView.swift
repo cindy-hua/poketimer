@@ -35,12 +35,13 @@ struct PokemonDetailView: View {
 
                 // List of sessions (activities)
                 List(viewModel.sessions) { session in
+                    let formattedDurationString = TimeFormatterUtil.formattedDuration(session.duration)
                     VStack(alignment: .leading) {
-                        Text("Duration: \(session.duration / 60) minutes")
+                        Text("Duration: \(formattedDurationString) minutes")
                             .font(.headline)
-                        Text("Started: \(viewModel.formattedDate(session.startTime))")
+                        Text("Started: \(DateFormatterUtil.formattedDate(session.startTime))")
                             .font(.subheadline)
-                        Text("Ended: \(viewModel.formattedDate(session.endTime))")
+                        Text("Ended: \(DateFormatterUtil.formattedDate(session.endTime))")
                             .font(.subheadline)
                     }
                     .padding(.vertical, 5)

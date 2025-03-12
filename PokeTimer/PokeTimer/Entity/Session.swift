@@ -14,5 +14,9 @@ struct Session: Identifiable, Codable, Equatable {
     let startTime: Date
     let endTime: Date
     let completed: Bool
-    let pokemonID: UUID     
+    let pokemonID: UUID
+    
+    var durationInMinutes: Int {
+        return duration / 60
+    }
 }

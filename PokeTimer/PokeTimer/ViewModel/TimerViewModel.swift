@@ -82,11 +82,4 @@ class TimerViewModel {
 
         print("✅ [DEBUG] Saved session for Pokémon ID: \(currentPokemonID), Duration: \(elapsedTime) seconds")
     }
-    
-    /// Converts seconds into a MM:SS format.
-    func timeString(from seconds: Int) -> String {
-        let minutes = seconds / 60
-        let secs = seconds % 60
-        return String(format: "%02d:%02d", minutes, secs)
-    }
 }

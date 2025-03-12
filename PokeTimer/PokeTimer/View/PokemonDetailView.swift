@@ -61,7 +61,6 @@ struct PokemonDetailView: View {
             }
         }
     }
-        
 }
 
 

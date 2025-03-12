@@ -23,12 +23,4 @@ class SessionsViewModel: ObservableObject {
             return (pokemonName: pokemon.name, sessions: sessions)
         }
     }
-    
-    /// Helper function to format dates.
-    func formattedDate(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .short
-        return formatter.string(from: date)
-    }
 }

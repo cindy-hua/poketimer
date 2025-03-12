@@ -43,12 +43,4 @@ class PokemonDetailViewModel {
     var sessions: [Session] {
         sessionManager.getSessions(for: pokemonID)
     }
-
-    /// Formats a date for display
-    func formattedDate(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .short
-        return formatter.string(from: date)
-    }
 }

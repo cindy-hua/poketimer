@@ -70,9 +70,11 @@ struct ContentView: View {
                 .frame(height: 100)
                 
                 // Navigation Link to the TimerView.
-                NavigationLink(destination: TimerView(duration: TimeFormatterUtil.minutesToSeconds(viewModel.selectedDuration))
-                    .environment(pokemonManager)
-                    .environment(sessionManager)) {
+                NavigationLink(destination: TimerView(
+                    duration: TimeFormatterUtil.minutesToSeconds(viewModel.selectedDuration),
+                    pokemonManager: pokemonManager,
+                    sessionManager: sessionManager
+                )) {
                     Text("Start")
                         .font(.title)
                         .frame(minWidth: 0, maxWidth: .infinity)

@@ -14,8 +14,8 @@ struct TimerView: View {
     @State private var showSessionSavedAlert = false
     @Environment(\.dismiss) var dismiss
     
-    init(duration: Int) {
-        _viewModel = State(initialValue: TimerViewModel(duration: duration))
+    init(duration: Int, pokemonManager: PokemonManager, sessionManager: SessionManager) {
+        _viewModel = State(initialValue: TimerViewModel(duration: duration, pokemonManager: pokemonManager, sessionManager: sessionManager))
     }
     
     var body: some View {
@@ -27,7 +27,7 @@ struct TimerView: View {
             
             // Stop Button.
             Button(action: {
-                viewModel.stopTimer(pokemonManager: pokemonManager, sessionManager: sessionManager)
+                viewModel.stopTimer()
                 dismiss()
             }) {
                 Text("Stop")
@@ -59,7 +59,7 @@ struct TimerView: View {
             print("🔄 [DEBUG] isSessionCompleted changed: \(viewModel.isSessionCompleted)")
             if viewModel.isSessionCompleted {
                 print("⚡️ [DEBUG] Triggering saveSession()")
-                viewModel.saveSession(pokemonManager: pokemonManager, sessionManager: sessionManager, completed: true)
+                viewModel.saveSession(completed: true)
                 showSessionSavedAlert = true
             }
         }
@@ -69,7 +69,7 @@ struct TimerView: View {
 #Preview {
     let pokemonManager = PokemonManager()
     let sessionManager = SessionManager()
-    return TimerView(duration: 5 * 60)
+    return TimerView(duration: 5 * 60, pokemonManager: pokemonManager, sessionManager: sessionManager)
         .environment(pokemonManager)
         .environment(sessionManager)
 }

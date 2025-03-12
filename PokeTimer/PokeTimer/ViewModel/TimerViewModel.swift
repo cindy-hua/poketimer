@@ -18,9 +18,14 @@ class TimerViewModel {
     private var startTime: Date?
     let duration: Int
     
-    init(duration: Int) {
+    private let pokemonManager: PokemonManager
+    private let sessionManager: SessionManager
+    
+    init(duration: Int, pokemonManager: PokemonManager, sessionManager: SessionManager) {
         self.duration = duration
         self.remainingSeconds = duration
+        self.pokemonManager = pokemonManager
+        self.sessionManager = sessionManager
     }
     
     /// Starts the timer.
@@ -46,19 +51,19 @@ class TimerViewModel {
     }
     
     /// Stops the timer early and saves an incomplete session.
-    func stopTimer(pokemonManager: PokemonManager, sessionManager: SessionManager) {
+    func stopTimer() {
         timer?.invalidate()
         timer = nil
         isRunning = false
         isSessionCompleted = false
 
         print("🛑 [DEBUG] Timer stopped manually")
-        saveSession(pokemonManager: pokemonManager, sessionManager: sessionManager, completed: false)
+        saveSession(completed: false)
     }
 
 
     /// Saves the session, associating it with the current Pokémon.
-    func saveSession(pokemonManager: PokemonManager, sessionManager: SessionManager, completed: Bool) {
+    func saveSession(completed: Bool) {
         print("💾 [DEBUG] saveSession() called, completed = \(completed)")
         guard let currentPokemonID = pokemonManager.currentPokemonID else {
             print("❌ [DEBUG] No current Pokémon selected, cannot save session!")

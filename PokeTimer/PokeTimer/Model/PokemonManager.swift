@@ -13,10 +13,12 @@ import Foundation
 class PokemonManager: Codable, Equatable {
     var pokemons: [Pokemon]
     var currentPokemonID: UUID?
+    private let persistenceManager: PersistenceManager
 
-    init(pokemons: [Pokemon] = [], currentPokemonID: UUID? = nil) {
+    init(pokemons: [Pokemon] = [], currentPokemonID: UUID? = nil, persistenceManager: PersistenceManager = .shared) {
         self.pokemons = pokemons
         self.currentPokemonID = currentPokemonID
+        self.persistenceManager = persistenceManager
         
         // Automatically select first Pokémon if none is set
         if self.currentPokemonID == nil, let firstPokemon = pokemons.first {
@@ -34,6 +36,7 @@ class PokemonManager: Codable, Equatable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         pokemons = try container.decode([Pokemon].self, forKey: .pokemons)
         currentPokemonID = try container.decodeIfPresent(UUID.self, forKey: .currentPokemonID)
+        self.persistenceManager = .shared
     }
 
     func encode(to encoder: Encoder) throws {
@@ -62,7 +65,7 @@ class PokemonManager: Codable, Equatable {
     
     /// Saves the Pokémon list and current selection to disk.
     private func savePokemonData() {
-        PersistenceManager.shared.savePokemonManager(self)
+        persistenceManager.savePokemonManager(self)
     }
 
     /// Returns the currently selected Pokémon.

@@ -13,10 +13,11 @@ struct ContentView: View {
     @Environment(SessionManager.self) var sessionManager
     @State private var viewModel: ContentViewModel
     
-    init() {
+    init(pokemonManager: PokemonManager, sessionManager: SessionManager, persistenceManager: PersistenceManager = .shared) {
         _viewModel = State(initialValue: ContentViewModel(
-            pokemonManager: PokemonManager(),
-            sessionManager: SessionManager()  
+            pokemonManager: pokemonManager,
+            sessionManager: sessionManager,
+            persistenceManager: persistenceManager
         ))
     }
     
@@ -118,7 +119,8 @@ struct ContentView: View {
 #Preview {
     let pokemonManager = PokemonManager()
     let sessionManager = SessionManager()
-    return ContentView()
+    let persistenceManager: PersistenceManager = .shared
+    return ContentView(pokemonManager: pokemonManager, sessionManager: sessionManager, persistenceManager: persistenceManager)
         .environment(pokemonManager)
         .environment(sessionManager)
 }

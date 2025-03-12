@@ -11,18 +11,20 @@ import Foundation
 class ContentViewModel {
     var pokemonManager: PokemonManager
     var sessionManager: SessionManager
+    private let persistenceManager: PersistenceManager
     
     var selectedDuration: Int = 1
     let durationOptions = Array(stride(from: 1, through: 20, by: 1))
 
-    init(pokemonManager: PokemonManager, sessionManager: SessionManager) {
+    init(pokemonManager: PokemonManager, sessionManager: SessionManager, persistenceManager: PersistenceManager = .shared) {
         self.pokemonManager = pokemonManager
         self.sessionManager = sessionManager
+        self.persistenceManager = persistenceManager
     }
 
     /// Saves all data when necessary
     func saveData() {
-        PersistenceManager.shared.savePokemonManager(pokemonManager)
-        PersistenceManager.shared.saveSessionManager(sessionManager)
+        persistenceManager.savePokemonManager(pokemonManager)
+        persistenceManager.saveSessionManager(sessionManager)
     }
 }

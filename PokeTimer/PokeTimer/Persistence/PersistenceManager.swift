@@ -9,13 +9,13 @@ import Foundation
 
 // MARK: - Persistence Manager
 /// Handles saving and loading of PokemonManager and SessionManager separately.
-class PersistenceManager: PersistenceService {
+class PersistenceManager {
     static let shared = PersistenceManager()
 
     private let pokemonFileURL: URL
     private let sessionFileURL: URL
 
-    private init() {
+    init() {
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         pokemonFileURL = documentsDirectory.appendingPathComponent("pokemonManager.json")
         sessionFileURL = documentsDirectory.appendingPathComponent("sessionManager.json")

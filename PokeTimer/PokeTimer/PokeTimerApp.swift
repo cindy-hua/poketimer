@@ -14,15 +14,16 @@ struct PokeTimerApp: App {
 
     init() {
 //        PersistenceManager.shared.resetAllData()
+        let persistenceManager = PersistenceManager()
 
         // Load fresh instances after reset
-        pokemonManager = PersistenceManager.shared.loadPokemonManager()
-        sessionManager = PersistenceManager.shared.loadSessionManager()
+        pokemonManager = persistenceManager.loadPokemonManager()
+        sessionManager = persistenceManager.loadSessionManager()
     }
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(pokemonManager: pokemonManager, sessionManager: sessionManager)
                 .environment(pokemonManager)
                 .environment(sessionManager)
                 .onChange(of: pokemonManager.pokemons) { oldValue, newValue in

@@ -27,7 +27,6 @@
 		1E81C4B62D6DCE6800B73C2E /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E81C4B52D6DCE6800B73C2E /* ContentViewModel.swift */; };
 		1EC166362D819541001AE4DB /* DateFormatterUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC166352D819541001AE4DB /* DateFormatterUtil.swift */; };
 		1EC166392D81978B001AE4DB /* TimeFormatterUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC166382D81978B001AE4DB /* TimeFormatterUtil.swift */; };
-		1EC1663B2D81CBA3001AE4DB /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC1663A2D81CBA3001AE4DB /* PersistenceService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,7 +51,6 @@
 		1E81C4B52D6DCE6800B73C2E /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		1EC166352D819541001AE4DB /* DateFormatterUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterUtil.swift; sourceTree = "<group>"; };
 		1EC166382D81978B001AE4DB /* TimeFormatterUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFormatterUtil.swift; sourceTree = "<group>"; };
-		1EC1663A2D81CBA3001AE4DB /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,7 +150,6 @@
 			isa = PBXGroup;
 			children = (
 				1E66EE322D6D07EE00C90339 /* PersistenceManager.swift */,
-				1EC1663A2D81CBA3001AE4DB /* PersistenceService.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -247,7 +244,6 @@
 				1EC166362D819541001AE4DB /* DateFormatterUtil.swift in Sources */,
 				1E6BA30F2D80886900CD3583 /* TimerView.swift in Sources */,
 				1E66EE1B2D6CC64600C90339 /* PokeTimerApp.swift in Sources */,
-				1EC1663B2D81CBA3001AE4DB /* PersistenceService.swift in Sources */,
 				1E6BA30E2D80886900CD3583 /* SessionsView.swift in Sources */,
 				1E70A9B12D7F789C00908E0C /* PokemonListViewModel.swift in Sources */,
 				1E779F8A2D804CF200AB5A01 /* PokemonDetailViewModel.swift in Sources */,

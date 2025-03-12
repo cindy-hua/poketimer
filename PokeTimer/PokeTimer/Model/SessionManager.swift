@@ -12,10 +12,16 @@ import Foundation
 @Observable
 class SessionManager {
     private(set) var sessions: [Session] = []
+    private let persistenceManager: PersistenceManager
+    
+    init(persistenceManager: PersistenceManager = .shared) {
+        self.persistenceManager = persistenceManager
+    }
 
     /// Adds a new session for a Pokémon.
     func addSession(_ session: Session) {
             sessions.append(session)
+            persistenceManager.saveSessionManager(self)
         }
 
     /// Retrieves all sessions for a given Pokémon.

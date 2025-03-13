@@ -67,11 +67,12 @@ struct TimerView: View {
 }
 
 #Preview {
-    let pokemonManager = PokemonManager()
-    let sessionManager = SessionManager()
-//    let themeManager = ThemeManager()
-    return TimerView(duration: 5 * 60, pokemonManager: pokemonManager, sessionManager: sessionManager)
-        .environment(pokemonManager)
-        .environment(sessionManager)
-//        .environment(themeManager)
+    TimerView(
+        duration: 1500, // 25 min
+        pokemonManager: PreviewData.pokemonManager,
+        sessionManager: PreviewData.sessionManager
+    )
+    .environment(PreviewData.pokemonManager)
+    .environment(PreviewData.sessionManager)
 }
+

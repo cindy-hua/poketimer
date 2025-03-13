@@ -56,6 +56,6 @@ struct PokemonListView: View {
 }
 
 #Preview {
-    let pokemonManager = PokemonManager()
-    return PokemonListView().environment(pokemonManager)
+    PokemonListView()
+        .environment(PreviewData.pokemonManager)
 }

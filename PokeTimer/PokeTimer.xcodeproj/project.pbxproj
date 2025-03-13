@@ -30,6 +30,7 @@
 		1EC1663D2D82E62A001AE4DB /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC1663C2D82E62A001AE4DB /* ThemeManager.swift */; };
 		1EC1663F2D82E6C1001AE4DB /* AnimationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC1663E2D82E6C1001AE4DB /* AnimationUtil.swift */; };
 		1EC166412D82E7B9001AE4DB /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC166402D82E7B9001AE4DB /* ColorTheme.swift */; };
+		1EC166442D8311F2001AE4DB /* PreviewProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC166432D8311F2001AE4DB /* PreviewProviders.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		1EC1663C2D82E62A001AE4DB /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		1EC1663E2D82E6C1001AE4DB /* AnimationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationUtil.swift; sourceTree = "<group>"; };
 		1EC166402D82E7B9001AE4DB /* ColorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
+		1EC166432D8311F2001AE4DB /* PreviewProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProviders.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 				1EC166352D819541001AE4DB /* DateFormatterUtil.swift */,
 				1EC166382D81978B001AE4DB /* TimeFormatterUtil.swift */,
 				1EC1663E2D82E6C1001AE4DB /* AnimationUtil.swift */,
+				1EC166432D8311F2001AE4DB /* PreviewProviders.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				1E5E96692D7F2F7000CA0BEB /* TimerViewModel.swift in Sources */,
 				1E66EE332D6D07EE00C90339 /* PersistenceManager.swift in Sources */,
 				1E6BA3102D80886900CD3583 /* ContentView.swift in Sources */,
+				1EC166442D8311F2001AE4DB /* PreviewProviders.swift in Sources */,
 				1E1A2B782D79A91600E3549B /* PokemonManager.swift in Sources */,
 				1EC1663F2D82E6C1001AE4DB /* AnimationUtil.swift in Sources */,
 				1E6BA3132D80890F00CD3583 /* SessionsViewModel.swift in Sources */,

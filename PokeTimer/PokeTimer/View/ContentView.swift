@@ -123,12 +123,13 @@ struct ContentView: View {
 }
 
 #Preview {
-    let pokemonManager = PokemonManager()
-    let sessionManager = SessionManager()
-    let themeManager = ThemeManager()
-    let persistenceManager: PersistenceManager = .shared
-    return ContentView(pokemonManager: pokemonManager, sessionManager: sessionManager, persistenceManager: persistenceManager)
-        .environment(pokemonManager)
-        .environment(sessionManager)
-        .environment(themeManager)
+    ContentView(
+        pokemonManager: PreviewData.pokemonManager,
+        sessionManager: PreviewData.sessionManager,
+        persistenceManager: .shared
+    )
+    .environment(PreviewData.pokemonManager)
+    .environment(PreviewData.sessionManager)
+    .environment(PreviewData.themeManager)
 }
+

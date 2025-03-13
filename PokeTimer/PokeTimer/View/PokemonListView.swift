@@ -10,12 +10,13 @@ import SwiftUI
 // MARK: - PokemonListView
 /// A view that displays a list of Pokémon and allows you to add new ones or set an active Pokémon.
 struct PokemonListView: View {
-    @EnvironmentObject var manager: PokemonManager
+    @Environment(PokemonManager.self) var pokemonManager
+    @State private var viewModel: PokemonListViewModel?
     
     var body: some View {
         List {
-            ForEach(manager.pokemons) { pokemon in
-                NavigationLink(destination: PokemonDetailView(pokemon: pokemon)) {
+            ForEach(pokemonManager.pokemons, id: \.id) { pokemon in
+                NavigationLink(destination: PokemonDetailView(pokemonID: pokemon.id)) {
                     HStack {
                         // Placeholder image.
                         Image(systemName: "bolt.fill")
@@ -30,33 +31,31 @@ struct PokemonListView: View {
                         }
                     }
                 }
-                .contextMenu {
-                    Button(action: {
-                        // Set this Pokémon as the active one.
-                        manager.selectPokemon(pokemon)
-                    }) {
-                        Text("Set as Active")
-                        Image(systemName: "star")
-                    }
-                }
             }
         }
         .navigationTitle("Pokémon List")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
-                    // Create a new Pokémon (for demo purposes, auto-named).
-                    let newPokemon = Pokemon(name: "New Pokémon \(manager.pokemons.count + 1)")
-                    manager.addPokemon(newPokemon)
+                    viewModel?.addPokemon()
                 }) {
                     Image(systemName: "plus")
                 }
             }
         }
+        .onAppear {
+            if viewModel == nil { // ✅ Only initialize once
+                viewModel = PokemonListViewModel(pokemonManager: pokemonManager)
+            }
+            print("🐉 [DEBUG] PokemonListView appeared, updating UI")
+        }
+        .onChange(of: pokemonManager.pokemons) {
+            print("🔄 [DEBUG] manager.pokemons changed! UI should refresh.")
+        }
     }
 }
 
 #Preview {
-    let manager = PokemonManager()
-    return PokemonListView().environmentObject(manager)
+    let pokemonManager = PokemonManager()
+    return PokemonListView().environment(pokemonManager)
 }

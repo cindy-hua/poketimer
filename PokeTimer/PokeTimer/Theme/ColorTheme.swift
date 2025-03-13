@@ -20,7 +20,7 @@ protocol ColorTheme {
 struct ClassicTheme: ColorTheme {
     let primary = Color(hex: "#FF4F4F")
     let secondary = Color(hex: "#FFD700")
-    let background = Color(hex: "#F8F8F8")
+    let background = Color(hex: "#FFF5BF")
     let accent = Color(hex: "#007BFF")
 }
 
@@ -50,15 +50,23 @@ struct WaterTheme: ColorTheme {
 // Extend Color to support hex values
 extension Color {
     init(hex: String) {
-        let scanner = Scanner(string: hex)
-        scanner.currentIndex = hex.startIndex
-        var rgbValue: UInt64 = 0
-        scanner.scanHexInt64(&rgbValue)
+        var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
+        hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
 
-        let red = Double((rgbValue >> 16) & 0xFF) / 255.0
-        let green = Double((rgbValue >> 8) & 0xFF) / 255.0
-        let blue = Double(rgbValue & 0xFF) / 255.0
+        var rgb: UInt64 = 0
+        Scanner(string: hexSanitized).scanHexInt64(&rgb)
 
-        self.init(red: red, green: green, blue: blue)
+        let red = Double((rgb >> 16) & 0xFF) / 255.0
+        let green = Double((rgb >> 8) & 0xFF) / 255.0
+        let blue = Double(rgb & 0xFF) / 255.0
+        let alpha: Double
+
+        if hexSanitized.count == 8 { // Supports #RRGGBBAA
+            alpha = Double((rgb >> 24) & 0xFF) / 255.0
+        } else {
+            alpha = 1.0 // Default to full opacity if no alpha is provided
+        }
+
+        self.init(red: red, green: green, blue: blue, opacity: alpha)
     }
 }

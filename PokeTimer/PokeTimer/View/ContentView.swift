@@ -11,6 +11,8 @@ import SwiftUI
 struct ContentView: View {
     @Environment(PokemonManager.self) var pokemonManager
     @Environment(SessionManager.self) var sessionManager
+    @Environment(\.themeManager) var themeManager
+    
     @State private var viewModel: ContentViewModel
     
     init(pokemonManager: PokemonManager, sessionManager: SessionManager, persistenceManager: PersistenceManager = .shared) {
@@ -24,6 +26,10 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 40) {
+                // Apply theme colors
+                themeManager.currentTheme.background
+                    .edgesIgnoringSafeArea(.all)
+                
                 // Picker to choose a Pokémon.
                 if pokemonManager.pokemons.isEmpty {
                     Text("No Pokémon available. Please add a Pokémon!")
@@ -119,8 +125,10 @@ struct ContentView: View {
 #Preview {
     let pokemonManager = PokemonManager()
     let sessionManager = SessionManager()
+    let themeManager = ThemeManager()
     let persistenceManager: PersistenceManager = .shared
     return ContentView(pokemonManager: pokemonManager, sessionManager: sessionManager, persistenceManager: persistenceManager)
         .environment(pokemonManager)
         .environment(sessionManager)
+        .environment(themeManager)
 }

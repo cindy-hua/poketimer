@@ -16,17 +16,28 @@ struct PokemonInfoView: View {
     @Binding var navigateToTimerView: Bool
 
     @State private var offsetX: CGFloat = 0
-    @State private var scaleEffect: CGFloat = 1.0 // For animation effect
-    @State private var isHolding: Bool = false // Track long press state
+    @State private var scaleEffect: CGFloat = 1.0
+    @State private var isHolding: Bool = false
+    @State private var glowOpacity: Double = 0.0
+    @State private var animateGlow: Bool = false 
+    @State private var hapticTimer: Timer?
 
     var body: some View {
         ZStack {
-            PokeballView()
-                .rotationEffect(.degrees(rotationAngle))
-                .offset(x: offsetX, y: 0)
-                .scaleEffect(scaleEffect)
-                .gesture(detectSwipeGesture())
-                .gesture(detectLongPressGesture())
+            ZStack {
+                PokeballView()
+                    .rotationEffect(.degrees(rotationAngle))
+
+                // Glowing Overlay
+                Circle()
+                    .stroke(Color.blue.opacity(glowOpacity), lineWidth: 15)
+                    .frame(width: 180, height: 180)
+                    .blur(radius: 10)
+                    .opacity(animateGlow ? 1.0 : 0.5)
+                    .animation(.easeInOut(duration: 0.8).repeatForever(autoreverses: true), value: animateGlow)
+            }
+            .scaleEffect(scaleEffect) // Unified scaling effect
+            .animation(.easeInOut(duration: 0.8).repeatForever(autoreverses: true), value: animateGlow)
 
             VStack {
                 Image(systemName: "bolt.fill")
@@ -46,39 +57,53 @@ struct PokemonInfoView: View {
                 .font(.headline)
             }
         }
+        .gesture(detectSwipeGesture())
+        .simultaneousGesture(detectHoldAndReleaseGesture())
     }
 
-    // MARK: - ⏳ Long Press to Navigate to `TimerView`
-    private func detectLongPressGesture() -> some Gesture {
-        LongPressGesture(minimumDuration: 1.5) // Hold for 1.5 seconds
-            .onChanged { _ in
-                guard activeGesture == .none else { return }
-                activeGesture = .holding // Lock all other gestures
-
-                isHolding = true
-
-                // 🔥 Start animation effect
-                withAnimation(.easeInOut(duration: 0.3).repeatForever(autoreverses: true)) {
-                    scaleEffect = 1.2 // Pokéball pulses
+    // MARK: - Start Timer When Released
+    private func detectHoldAndReleaseGesture() -> some Gesture {
+        LongPressGesture(minimumDuration: 1.5)
+            .onChanged { isPressing in
+                if isPressing {
+                    print("🟡 [DEBUG] Press started, waiting for 1.5s...")
                 }
-
-                // 🎯 Haptic feedback (Taptic Engine)
-                let generator = UIImpactFeedbackGenerator(style: .medium)
-                generator.impactOccurred()
             }
             .onEnded { _ in
-                // Trigger Navigation
+                print("🟠 [DEBUG] Long press detected! Starting glow & haptic.")
+
+                // ✅ Start Glow & Haptic Feedback
                 DispatchQueue.main.async {
-                    navigateToTimerView = true
+                    isHolding = true
+                    glowOpacity = 1.0
+                    animateGlow = true
+
+                    // Unified Pulsing Effect for Scale
+                    withAnimation(.easeInOut(duration: 0.8).repeatForever(autoreverses: true)) {
+                        scaleEffect = 1.2
+                    }
+
+                    startHapticFeedback() // Start haptic after long press completes
+                }
+            }
+            .sequenced(before: DragGesture(minimumDistance: 0)) // Detect finger lift
+            .onEnded { _ in
+                print("🟢 [DEBUG] Press released! Stopping glow and starting timer.")
+
+                // Stop Glow & Haptic When Released
+                DispatchQueue.main.async {
+                    stopHapticFeedback()
+                    withAnimation {
+                        scaleEffect = 1.0
+                        glowOpacity = 0.0
+                        animateGlow = false
+                    }
+                    isHolding = false
                 }
 
-                // Stop animation & reset
-                withAnimation { scaleEffect = 1.0 }
-                isHolding = false
-
-                // Reset gesture lock after navigation
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    activeGesture = .none
+                //  Navigate to Timer only after release
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    navigateToTimerView = true
                 }
             }
     }
@@ -108,7 +133,32 @@ struct PokemonInfoView: View {
                 }
             }
     }
+
+    // MARK: - Start & Stop Haptic Feedback
+    private func startHapticFeedback() {
+        print("📳 [DEBUG] Haptic feedback started!")
+
+        // ✅ Prevent multiple haptic timers running
+        stopHapticFeedback()
+
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+
+        // ✅ Haptic feedback loop
+        hapticTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true) { _ in
+            generator.impactOccurred()
+            print("📳 [DEBUG] Haptic feedback ongoing...")
+        }
+    }
+
+    private func stopHapticFeedback() {
+        print("📳 [DEBUG] Stopping haptic feedback")
+        hapticTimer?.invalidate()
+        hapticTimer = nil
+    }
 }
+
+
 
 //#Preview {
 //    PokemonInfoView()

@@ -88,4 +88,32 @@ class PokemonManager: Codable, Equatable {
     static func == (lhs: PokemonManager, rhs: PokemonManager) -> Bool {
         return lhs.pokemons == rhs.pokemons && lhs.currentPokemonID == rhs.currentPokemonID
     }
+    
+    /// Selects the next Pokémon in the list.
+    func selectNextPokemon() {
+        guard !pokemons.isEmpty else { return }
+        
+        if let currentID = currentPokemonID,
+           let currentIndex = pokemons.firstIndex(where: { $0.id == currentID }),
+           currentIndex < pokemons.count - 1 {
+            currentPokemonID = pokemons[currentIndex + 1].id
+        } else {
+            currentPokemonID = pokemons.first?.id // Loop back to first Pokémon
+        }
+        savePokemonData()
+    }
+
+    /// Selects the previous Pokémon in the list.
+    func selectPreviousPokemon() {
+        guard !pokemons.isEmpty else { return }
+        
+        if let currentID = currentPokemonID,
+           let currentIndex = pokemons.firstIndex(where: { $0.id == currentID }),
+           currentIndex > 0 {
+            currentPokemonID = pokemons[currentIndex - 1].id
+        } else {
+            currentPokemonID = pokemons.last?.id // Loop back to last Pokémon
+        }
+        savePokemonData()
+    }
 }

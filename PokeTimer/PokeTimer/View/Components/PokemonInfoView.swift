@@ -40,9 +40,9 @@ struct PokemonInfoView: View {
             .animation(.easeInOut(duration: 0.8).repeatForever(autoreverses: true), value: animateGlow)
 
             VStack {
-                Image(systemName: "bolt.fill")
+                Image("pikachu")
                     .resizable()
-                    .frame(width: 80, height: 80)
+                    .frame(width: 280, height: 280)
                     .foregroundColor(.yellow)
 
                 Text(pokemonManager.getCurrentPokemon()?.name ?? "Unknown")

@@ -23,7 +23,7 @@ class PokemonManager: Codable, Equatable {
         // Automatically select first Pokémon if none is set
         if self.currentPokemonID == nil, let firstPokemon = pokemons.first {
             self.currentPokemonID = firstPokemon.id
-            print("🐉 [DEBUG] Auto-selected first Pokémon: \(firstPokemon.name)")
+            print("🐉 [DEBUG] Auto-selected first Pokémon: \(firstPokemon.species)")
         }
     }
 
@@ -50,7 +50,7 @@ class PokemonManager: Codable, Equatable {
         pokemons.append(pokemon)
         if currentPokemonID == nil {
             currentPokemonID = pokemon.id
-            print("✨ [DEBUG] Auto-selected new Pokémon: \(pokemon.name)")
+            print("✨ [DEBUG] Auto-selected new Pokémon: \(pokemon.species)")
         }
         savePokemonData()
     }
@@ -80,7 +80,7 @@ class PokemonManager: Codable, Equatable {
         let xpGained = session.durationInMinutes
         pokemons[index] = pokemons[index].gainingXP(xpGained)
 
-        print("⚡️ [DEBUG] XP Updated: \(pokemons[index].xp) for \(pokemons[index].name)")
+        print("⚡️ [DEBUG] XP Updated: \(pokemons[index].xp) for \(pokemons[index].species)")
 
         savePokemonData()
     }

@@ -25,7 +25,7 @@ struct PokemonDetailView: View {
                         .frame(width: 80, height: 80)
                         .foregroundColor(.yellow)
                     VStack(alignment: .leading) {
-                        Text(pokemon.name)
+                        Text(String(describing: pokemon.species))
                             .font(.largeTitle)
                         Text("XP: \(pokemon.xp)")
                         Text("Level: \(pokemon.level)")
@@ -51,7 +51,7 @@ struct PokemonDetailView: View {
                     .font(.headline)
             }
         }
-        .navigationTitle(viewModel?.pokemonName ?? "Pokémon Details")
+        .navigationTitle(viewModel?.pokemonSpecies.displayName ?? "Pokémon Details")
         .onAppear {
             if viewModel == nil {
                 viewModel = PokemonDetailViewModel(

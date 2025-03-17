@@ -34,9 +34,6 @@ struct PokeballView: View {
     }
 }
 
-
-
-
 #Preview {
     PokeballView().environment(PreviewData.pokemonManager)
 }

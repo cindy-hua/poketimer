@@ -24,9 +24,9 @@ class PokemonDetailViewModel {
         pokemonManager.pokemons.first(where: { $0.id == pokemonID })
     }
 
-    /// Computed property for Pokémon name
-    var pokemonName: String {
-        pokemon?.name ?? "Unknown"
+    /// Computed property for Pokémon species
+    var pokemonSpecies: PokemonSpecies {
+        pokemon?.species ?? .unknown
     }
 
     /// Computed property for XP

@@ -15,23 +15,23 @@ struct PokemonListView: View {
     
     var body: some View {
         List {
-            ForEach(pokemonManager.pokemons, id: \.id) { pokemon in
-                NavigationLink(destination: PokemonDetailView(pokemonID: pokemon.id)) {
-                    HStack {
-                        // Placeholder image.
-                        Image(systemName: "bolt.fill")
-                            .resizable()
-                            .frame(width: 40, height: 40)
-                            .foregroundColor(.yellow)
-                        VStack(alignment: .leading) {
-                            Text(pokemon.name)
-                                .font(.headline)
-                            Text("XP: \(pokemon.xp)  Level: \(pokemon.level)")
-                                .font(.subheadline)
-                        }
-                    }
-                }
-            }
+//            ForEach(pokemonManager.pokemons, id: \.id) { pokemon in
+//                NavigationLink(destination: PokemonDetailView(pokemonID: pokemon.id)) {
+//                    HStack {
+//                        // Placeholder image.
+//                        Image(systemName: "bolt.fill")
+//                            .resizable()
+//                            .frame(width: 40, height: 40)
+//                            .foregroundColor(.yellow)
+//                        VStack(alignment: .leading) {
+//                            Text(pokemon.name)
+//                                .font(.headline)
+//                            Text("XP: \(pokemon.xp)  Level: \(pokemon.level)")
+//                                .font(.subheadline)
+//                        }
+//                    }
+//                }
+//            }
         }
         .navigationTitle("Pokémon List")
         .toolbar {

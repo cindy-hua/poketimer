@@ -17,8 +17,8 @@ class PokemonListViewModel {
     
     /// Adds a new Pokémon to the list.
     func addPokemon() {
-        let newPokemon = Pokemon(name: "New Pokémon \(pokemonManager.pokemons.count + 1)")
+        let newPokemon = Pokemon(species: .pikachu)
         pokemonManager.addPokemon(newPokemon)
-        print("➕ [DEBUG] Added Pokémon: \(newPokemon.name)")
+        print("➕ [DEBUG] Added Pokémon: \(newPokemon.species)")
     }
 }

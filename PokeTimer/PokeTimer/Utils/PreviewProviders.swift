@@ -13,9 +13,9 @@ struct PreviewData {
     // Pokémon Manager with sample Pokémon
     static let pokemonManager: PokemonManager = {
         let manager = PokemonManager()
-        let pikachu = Pokemon(id: UUID(), name: "Pikachu", xp: 120)
-        let charmander = Pokemon(id: UUID(), name: "Charmander", xp: 200)
-        let bulbasaur = Pokemon(id: UUID(), name: "Bulbasaur", xp: 50)
+        let pikachu = Pokemon(id: UUID(), species: .pikachu, xp: 120)
+        let charmander = Pokemon(id: UUID(), species: .charmander, xp: 200)
+        let bulbasaur = Pokemon(id: UUID(), species: .bulbasaur, xp: 50)
 
         manager.pokemons = [pikachu, charmander, bulbasaur]
         manager.currentPokemonID = pikachu.id // Set Pikachu as default

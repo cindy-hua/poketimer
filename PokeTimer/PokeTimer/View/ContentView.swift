@@ -31,9 +31,8 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack {
-            ZStack {
-                themeManager.currentTheme.background
-                    .edgesIgnoringSafeArea(.all)
+            ZStack {                
+                GlassBackgroundOverlay()
 
                 VStack(spacing: 40) {
                     PokemonInfoView(

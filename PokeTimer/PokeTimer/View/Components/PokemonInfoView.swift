@@ -160,7 +160,19 @@ struct PokemonInfoView: View {
 
 
 
-//#Preview {
-//    PokemonInfoView()
-//        .environment(PreviewData.pokemonManager)
-//}
+#Preview {
+    // Create mock bindings
+    @State var selectedDuration: Int = 60
+    @State var activeGesture: GestureType = .none
+    @State var rotationAngle: Double = 0.0
+    @State var navigateToTimerView: Bool = false
+
+    return PokemonInfoView(
+        selectedDuration: $selectedDuration,
+        activeGesture: $activeGesture,
+        rotationAngle: $rotationAngle,
+        navigateToTimerView: $navigateToTimerView
+    )
+    .environment(PreviewData.pokemonManager)
+    .environment(PreviewData.sessionManager)
+}

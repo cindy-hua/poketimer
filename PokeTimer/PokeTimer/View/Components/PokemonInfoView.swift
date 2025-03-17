@@ -23,9 +23,9 @@ struct PokemonInfoView: View {
     @State private var hapticTimer: Timer?
 
     var body: some View {
-        ZStack {
+        VStack {
             ZStack {
-                PokeballView()
+                PokeballView(size: 250)
                     .rotationEffect(.degrees(rotationAngle))
 
                 // Glowing Overlay
@@ -40,12 +40,8 @@ struct PokemonInfoView: View {
             .animation(.easeInOut(duration: 0.8).repeatForever(autoreverses: true), value: animateGlow)
 
             VStack {
-                Image("pikachu")
-                    .resizable()
-                    .frame(width: 280, height: 280)
-                    .foregroundColor(.yellow)
 
-                Text(pokemonManager.getCurrentPokemon()?.name ?? "Unknown")
+                Text(pokemonManager.getCurrentPokemon()?.species.displayName ?? "Unknown")
                     .font(.title2)
                     .bold()
                     .foregroundColor(.black)

@@ -12,7 +12,7 @@ struct ContentView: View {
     @Environment(SessionManager.self) var sessionManager
     @Environment(\.themeManager) var themeManager
 
-    @StateObject private var gestureController = GestureController() // Shared Gesture State
+    @StateObject private var gestureController = GestureController()
 
     @State private var viewModel: ContentViewModel
 
@@ -25,13 +25,12 @@ struct ContentView: View {
     }
     
     @State private var rotationAngle: Double = 0
-    @State private var lastAngle: Double = 0
-    @State private var accumulatedRotation: Double = 0 // Tracks full rotation
+    @State private var accumulatedRotation: Double = 0
     @State private var navigateToTimerView: Bool = false
 
     var body: some View {
         NavigationStack {
-            ZStack {                
+            ZStack {
                 GlassBackgroundOverlay()
 
                 VStack(spacing: 40) {
@@ -39,7 +38,7 @@ struct ContentView: View {
                         selectedDuration: $viewModel.selectedDuration,
                         activeGesture: $gestureController.activeGesture,
                         rotationAngle: $rotationAngle,
-                        navigateToTimerView: $navigateToTimerView 
+                        navigateToTimerView: $navigateToTimerView
                     )
                     
                     Text("\(viewModel.selectedDuration) min")
@@ -51,7 +50,15 @@ struct ContentView: View {
                     NavigationButtonsView()
                 }
             }
-            .gesture(detectCircularGesture())
+            .gesture(
+                CircularGesture(
+                    rotationAngle: $rotationAngle,
+                    accumulatedRotation: $accumulatedRotation,
+                    selectedDuration: $viewModel.selectedDuration,
+                    activeGesture: $gestureController.activeGesture,
+                    gestureController: gestureController
+                ).detect()
+            )
             .navigationDestination(isPresented: $navigateToTimerView) {
                 TimerView(
                     duration: TimeFormatterUtil.minutesToSeconds(viewModel.selectedDuration),
@@ -62,48 +69,8 @@ struct ContentView: View {
         }
         .navigationTitle("Focus Session")
     }
-    
-    // MARK: - Improved Circular Gesture for Timer Adjustment
-    private func detectCircularGesture() -> some Gesture {
-        DragGesture(minimumDistance: 10)
-            .onChanged { value in
-                guard gestureController.activeGesture == .none || gestureController.activeGesture == .rotating else { return }
-                gestureController.activeGesture = .rotating
-
-                let center = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2)
-                let touchPoint = value.location
-                let deltaX = touchPoint.x - center.x
-                let deltaY = touchPoint.y - center.y
-                let newAngle = atan2(deltaY, deltaX) * (180 / .pi)
-
-                let angleDiff = newAngle - lastAngle
-
-                if abs(angleDiff) > 1 { // Reduced sensitivity
-                    accumulatedRotation += angleDiff // Track total rotation
-                    rotationAngle += angleDiff
-
-                    // Every 45° rotation adjusts the timer
-                    if abs(accumulatedRotation) > 45 {
-                        if accumulatedRotation > 0 {
-                            viewModel.selectedDuration += 1 // Clockwise
-                        } else {
-                            viewModel.selectedDuration = max(1, viewModel.selectedDuration - 1) // Counterclockwise, prevent <1
-                        }
-                        accumulatedRotation = 0 // Reset after update
-                    }
-                }
-
-                lastAngle = newAngle
-            }
-            .onEnded { _ in
-                withAnimation(.easeOut(duration: 0.3)) { rotationAngle = 0 } // Reset smoothly
-                accumulatedRotation = 0 // Reset accumulated rotation
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    gestureController.activeGesture = .none // Unlock gestures
-                }
-            }
-    }
 }
+
 
 #Preview {
     ContentView(

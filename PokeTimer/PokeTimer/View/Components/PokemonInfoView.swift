@@ -25,8 +25,8 @@ struct PokemonInfoView: View {
     var body: some View {
         VStack {
             ZStack {
-                PokeballView(size: 250)
-                    .rotationEffect(.degrees(rotationAngle))
+                PokeballView(size: 250, rotationAngle: $rotationAngle)
+                    
 
                 // Glowing Overlay
                 Circle()
@@ -53,81 +53,25 @@ struct PokemonInfoView: View {
                 .font(.headline)
             }
         }
-        .gesture(detectSwipeGesture())
-        .simultaneousGesture(detectHoldAndReleaseGesture())
-    }
-
-    // MARK: - Start Timer When Released
-    private func detectHoldAndReleaseGesture() -> some Gesture {
-        LongPressGesture(minimumDuration: 1.5)
-            .onChanged { isPressing in
-                if isPressing {
-                    print("🟡 [DEBUG] Press started, waiting for 1.5s...")
-                }
-            }
-            .onEnded { _ in
-                print("🟠 [DEBUG] Long press detected! Starting glow & haptic.")
-
-                // ✅ Start Glow & Haptic Feedback
-                DispatchQueue.main.async {
-                    isHolding = true
-                    glowOpacity = 1.0
-                    animateGlow = true
-
-                    // Unified Pulsing Effect for Scale
-                    withAnimation(.easeInOut(duration: 0.8).repeatForever(autoreverses: true)) {
-                        scaleEffect = 1.2
-                    }
-
-                    startHapticFeedback() // Start haptic after long press completes
-                }
-            }
-            .sequenced(before: DragGesture(minimumDistance: 0)) // Detect finger lift
-            .onEnded { _ in
-                print("🟢 [DEBUG] Press released! Stopping glow and starting timer.")
-
-                // Stop Glow & Haptic When Released
-                DispatchQueue.main.async {
-                    stopHapticFeedback()
-                    withAnimation {
-                        scaleEffect = 1.0
-                        glowOpacity = 0.0
-                        animateGlow = false
-                    }
-                    isHolding = false
-                }
-
-                //  Navigate to Timer only after release
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    navigateToTimerView = true
-                }
-            }
-    }
-
-    // MARK: - Swipe Left/Right (Switch Pokémon)
-    private func detectSwipeGesture() -> some Gesture {
-        DragGesture(minimumDistance: 20)
-            .onChanged { _ in
-                guard activeGesture == .none else { return }
-                activeGesture = .swipingPokemon
-            }
-            .onEnded { gesture in
-                if activeGesture == .swipingPokemon {
-                    withAnimation(.easeInOut(duration: 0.3)) {
-                        if gesture.translation.width < -50 {
-                            pokemonManager.selectNextPokemon()
-                            offsetX = -100
-                        } else if gesture.translation.width > 50 {
-                            pokemonManager.selectPreviousPokemon()
-                            offsetX = 100
-                        }
-                        offsetX = 0
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        activeGesture = .none
-                    }
-                }
-            }
+        .gesture(
+            SwipeGesture(
+                offsetX: $offsetX,
+                activeGesture: $activeGesture,
+                pokemonManager: pokemonManager
+            ).detect()
+        )
+        .simultaneousGesture(
+            HoldAndReleaseGesture(
+                isHolding: $isHolding,
+                glowOpacity: $glowOpacity,
+                animateGlow: $animateGlow,
+                scaleEffect: $scaleEffect,
+                navigateToTimerView: $navigateToTimerView
+            ).detect(
+                startHaptic: startHapticFeedback,
+                stopHaptic: stopHapticFeedback
+            )
+        )
     }
 
     // MARK: - Start & Stop Haptic Feedback

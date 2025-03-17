@@ -13,4 +13,5 @@ enum GestureType {
 
 class GestureController: ObservableObject {
     @Published var activeGesture: GestureType = .none
+    @Published var lastAngle: Double? = nil
 }

@@ -11,10 +11,12 @@ struct PokeballView: View {
     @Environment(PokemonManager.self) var pokemonManager
     var size: CGFloat = 250 // Customizable size
     @State private var glowOpacity: Double = 0.6
+    @Binding var rotationAngle: Double
 
     var body: some View {
         ZStack {
             BottomPokeballView(size: size)
+                .rotationEffect(.degrees(rotationAngle))
 
             // Pokémon (Inside Pokéball)
             Image(pokemonManager.getCurrentPokemon()?.species.imageName ?? "pikachu")
@@ -26,6 +28,7 @@ struct PokeballView: View {
                 .blur(radius: 1.1)
 
             TopPokeballView(size: size)
+                .rotationEffect(.degrees(rotationAngle))
 
         }
         .frame(width: size, height: size)
@@ -35,5 +38,5 @@ struct PokeballView: View {
 }
 
 #Preview {
-    PokeballView().environment(PreviewData.pokemonManager)
+    PokeballView(rotationAngle: .constant(0)).environment(PreviewData.pokemonManager)
 }

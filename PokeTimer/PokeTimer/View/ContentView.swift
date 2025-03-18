@@ -38,6 +38,7 @@ struct ContentView: View {
                         selectedDuration: $viewModel.selectedDuration,
                         activeGesture: $gestureController.activeGesture,
                         rotationAngle: $rotationAngle,
+                        accumulatedRotation: $accumulatedRotation,
                         navigateToTimerView: $navigateToTimerView
                     )
                     
@@ -50,15 +51,6 @@ struct ContentView: View {
                     NavigationButtonsView()
                 }
             }
-            .gesture(
-                CircularGesture(
-                    rotationAngle: $rotationAngle,
-                    accumulatedRotation: $accumulatedRotation,
-                    selectedDuration: $viewModel.selectedDuration,
-                    activeGesture: $gestureController.activeGesture,
-                    gestureController: gestureController
-                ).detect()
-            )
             .navigationDestination(isPresented: $navigateToTimerView) {
                 TimerView(
                     duration: TimeFormatterUtil.minutesToSeconds(viewModel.selectedDuration),

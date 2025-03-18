@@ -15,25 +15,48 @@ struct CircularGesture {
     @Binding var activeGesture: GestureType
     var gestureController: GestureController
 
+    @State private var gestureStartPoint: CGPoint = .zero
+    @State private var rotationCenter: CGPoint = .zero
+    @State private var isInsidePokeball: Bool = false
+
+    /// Set this dynamically based on the Pokéball's size
+    private let pokeballRadius: CGFloat = 125 // Half of the Pokéball size
+
     func detect() -> some Gesture {
-        DragGesture(minimumDistance: 10)
+        DragGesture(minimumDistance: 5)
             .onChanged { value in
                 guard activeGesture == .none || activeGesture == .rotating else { return }
                 activeGesture = .rotating
 
-                let center = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2)
+                if gestureStartPoint == .zero {
+                    gestureStartPoint = value.startLocation
+
+                    // Determine if the gesture starts inside the Pokéball
+                    let screenCenter = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2)
+                    let distanceToCenter = hypot(gestureStartPoint.x - screenCenter.x, gestureStartPoint.y - screenCenter.y)
+                    isInsidePokeball = distanceToCenter <= pokeballRadius
+
+                    // Set rotation center dynamically
+                    rotationCenter = isInsidePokeball ? screenCenter : gestureStartPoint
+                }
+
                 let touchPoint = value.location
-                let deltaX = touchPoint.x - center.x
-                let deltaY = touchPoint.y - center.y
+                let deltaX = touchPoint.x - rotationCenter.x
+                let deltaY = touchPoint.y - rotationCenter.y
                 let newAngle = atan2(deltaY, deltaX) * (180 / .pi)
 
-                let angleDiff = newAngle - (gestureController.lastAngle ?? 0)
+                let angleDiff = newAngle - (gestureController.lastAngle ?? newAngle)
 
-                if abs(angleDiff) > 1 {
-                    accumulatedRotation += angleDiff
-                    rotationAngle += angleDiff
+                // Adjust sensitivity: smaller motions inside the Pokéball, larger outside
+                let sensitivityMultiplier: Double = isInsidePokeball ? 1.5 : 1.2
+                let adjustedAngleDiff = angleDiff * sensitivityMultiplier
 
-                    if abs(accumulatedRotation) > 45 {
+                if abs(adjustedAngleDiff) > 1 {
+                    accumulatedRotation += adjustedAngleDiff
+                    rotationAngle += adjustedAngleDiff
+
+                    // Change duration when enough rotation is accumulated
+                    if abs(accumulatedRotation) > 30 {
                         if accumulatedRotation > 0 {
                             selectedDuration += 1
                         } else {
@@ -51,9 +74,11 @@ struct CircularGesture {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     activeGesture = .none
                 }
+                gestureStartPoint = .zero // Reset for the next gesture
             }
     }
 }
+
 
 // MARK: - Hold and Release Gesture (For Starting Timer)
 struct HoldAndReleaseGesture {

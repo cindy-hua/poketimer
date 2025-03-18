@@ -13,6 +13,7 @@ struct PokemonInfoView: View {
     @Binding var selectedDuration: Int
     @Binding var activeGesture: GestureType
     @Binding var rotationAngle: Double
+    @Binding var accumulatedRotation: Double
     @Binding var navigateToTimerView: Bool
 
     @State private var offsetX: CGFloat = 0
@@ -21,13 +22,22 @@ struct PokemonInfoView: View {
     @State private var glowOpacity: Double = 0.0
     @State private var animateGlow: Bool = false 
     @State private var hapticTimer: Timer?
+    @StateObject private var gestureController = GestureController()
 
     var body: some View {
         VStack {
             ZStack {
                 PokeballView(size: 250, rotationAngle: $rotationAngle)
+                    .gesture(
+                        CircularGesture(
+                            rotationAngle: $rotationAngle,
+                            accumulatedRotation: $accumulatedRotation,
+                            selectedDuration: $selectedDuration,
+                            activeGesture: $activeGesture,
+                            gestureController: gestureController
+                        ).detect()
+                    )
                     
-
                 // Glowing Overlay
                 Circle()
                     .stroke(Color.blue.opacity(glowOpacity), lineWidth: 15)
@@ -106,11 +116,13 @@ struct PokemonInfoView: View {
     @State var activeGesture: GestureType = .none
     @State var rotationAngle: Double = 0.0
     @State var navigateToTimerView: Bool = false
+    @State var accumulatedRotation: Double = 0.0
 
     return PokemonInfoView(
         selectedDuration: $selectedDuration,
         activeGesture: $activeGesture,
         rotationAngle: $rotationAngle,
+        accumulatedRotation: $accumulatedRotation,
         navigateToTimerView: $navigateToTimerView
     )
     .environment(PreviewData.pokemonManager)

@@ -34,6 +34,8 @@ struct ContentView: View {
                 GlassBackgroundOverlay()
 
                 VStack(spacing: 40) {
+                    NavigationButtonsView()
+                    
                     PokemonInfoView(
                         selectedDuration: $viewModel.selectedDuration,
                         activeGesture: $gestureController.activeGesture,
@@ -47,8 +49,6 @@ struct ContentView: View {
                         .bold()
                         .padding(.top, 10)
                         .foregroundColor(.black)
-                    
-                    NavigationButtonsView()
                 }
             }
             .navigationDestination(isPresented: $navigateToTimerView) {

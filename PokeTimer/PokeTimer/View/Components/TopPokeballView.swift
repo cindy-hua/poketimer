@@ -12,7 +12,7 @@ struct TopPokeballView: View {
     @State private var glowOpacity: Double = 0.6
     
     var body: some View {
-        // **Glass-Like Band Instead of Black**
+        // **Glass-Like Band**
         Rectangle()
             .fill(Color.white.opacity(0.1)) // Base translucency
             .background(.ultraThinMaterial)

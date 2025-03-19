@@ -42,3 +42,7 @@ struct BottomPokeballView: View {
             .blur(radius: 3)
     }
 }
+
+#Preview {
+    return BottomPokeballView(size: 200)
+}

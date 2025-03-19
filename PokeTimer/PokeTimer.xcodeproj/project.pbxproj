@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E19B3452D89BFA000F8AB58 /* GlassButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E19B3442D89BFA000F8AB58 /* GlassButtonView.swift */; };
 		1E1A2B782D79A91600E3549B /* PokemonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1A2B772D79A91600E3549B /* PokemonManager.swift */; };
 		1E5E96672D7EF79C00CA0BEB /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5E96662D7EF79C00CA0BEB /* SessionManager.swift */; };
 		1E5E96692D7F2F7000CA0BEB /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5E96682D7F2F7000CA0BEB /* TimerViewModel.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E19B3442D89BFA000F8AB58 /* GlassButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassButtonView.swift; sourceTree = "<group>"; };
 		1E1A2B772D79A91600E3549B /* PokemonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonManager.swift; sourceTree = "<group>"; };
 		1E5E96662D7EF79C00CA0BEB /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		1E5E96682D7F2F7000CA0BEB /* TimerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				1EC166492D832448001AE4DB /* PokemonInfoView.swift */,
 				1EC1664D2D8324AB001AE4DB /* NavigationButtonsView.swift */,
 				1E8792D22D88607C00A0216F /* BackgroundView.swift */,
+				1E19B3442D89BFA000F8AB58 /* GlassButtonView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				1EC1664A2D832448001AE4DB /* PokemonInfoView.swift in Sources */,
 				1E5E96692D7F2F7000CA0BEB /* TimerViewModel.swift in Sources */,
 				1E66EE332D6D07EE00C90339 /* PersistenceManager.swift in Sources */,
+				1E19B3452D89BFA000F8AB58 /* GlassButtonView.swift in Sources */,
 				1E6BA3102D80886900CD3583 /* ContentView.swift in Sources */,
 				1EC166442D8311F2001AE4DB /* PreviewProviders.swift in Sources */,
 				1E1A2B782D79A91600E3549B /* PokemonManager.swift in Sources */,

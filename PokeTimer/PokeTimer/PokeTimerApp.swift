@@ -14,7 +14,7 @@ struct PokeTimerApp: App {
     @State var themeManager = ThemeManager()
 
     init() {
-        PersistenceManager.shared.resetAllData()
+//        PersistenceManager.shared.resetAllData()
         let persistenceManager = PersistenceManager()
 
         // Load fresh instances after reset

@@ -12,24 +12,19 @@ struct NavigationButtonsView: View {
     @Environment(SessionManager.self) var sessionManager
 
     var body: some View {
-        VStack(spacing: 20) {
-            HStack(spacing: 20) {
-                NavigationLink(destination: SessionsView()
-                    .environment(pokemonManager)
-                    .environment(sessionManager)) {
-                        Text("View Sessions")
-                            .underline()
-                            .foregroundColor(.blue)
-                    }
-
-                NavigationLink(destination: PokemonListView()
-                    .environment(pokemonManager)) {
-                        Text("View Pokémon")
-                            .underline()
-                            .foregroundColor(.blue)
-                    }
+        HStack(spacing: 40) {    
+            NavigationLink(destination: SessionsView()
+                .environment(pokemonManager)
+                .environment(sessionManager)) {
+                    GlassButtonView(imageName: "calendar_icon"){}
+            }
+            
+            NavigationLink(destination: PokemonListView()
+                .environment(pokemonManager)) {
+                    GlassButtonView(imageName: "pokemon_icon"){}
             }
         }
+        .padding(.top, 10)
     }
 }
 

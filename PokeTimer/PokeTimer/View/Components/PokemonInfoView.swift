@@ -49,19 +49,7 @@ struct PokemonInfoView: View {
             .scaleEffect(scaleEffect) // Unified scaling effect
             .animation(.easeInOut(duration: 0.8).repeatForever(autoreverses: true), value: animateGlow)
 
-            VStack {
-
-                Text(pokemonManager.getCurrentPokemon()?.species.displayName ?? "Unknown")
-                    .font(.title2)
-                    .bold()
-                    .foregroundColor(.black)
-
-                HStack {
-                    Text("XP: \(pokemonManager.getCurrentPokemon()?.xp ?? 0)")
-                    Text("Level: \(pokemonManager.getCurrentPokemon()?.level ?? 1)")
-                }
-                .font(.headline)
-            }
+            PokemonCardView().padding(30)
         }
         .gesture(
             SwipeGesture(

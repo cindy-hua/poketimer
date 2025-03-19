@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1E19B3452D89BFA000F8AB58 /* GlassButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E19B3442D89BFA000F8AB58 /* GlassButtonView.swift */; };
+		1E19B3472D8AF50400F8AB58 /* PokemonCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E19B3462D8AF50400F8AB58 /* PokemonCardView.swift */; };
+		1E19B3492D8B060800F8AB58 /* TimerTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E19B3482D8B060800F8AB58 /* TimerTextView.swift */; };
 		1E1A2B782D79A91600E3549B /* PokemonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1A2B772D79A91600E3549B /* PokemonManager.swift */; };
 		1E5E96672D7EF79C00CA0BEB /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5E96662D7EF79C00CA0BEB /* SessionManager.swift */; };
 		1E5E96692D7F2F7000CA0BEB /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5E96682D7F2F7000CA0BEB /* TimerViewModel.swift */; };
@@ -44,6 +46,8 @@
 
 /* Begin PBXFileReference section */
 		1E19B3442D89BFA000F8AB58 /* GlassButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassButtonView.swift; sourceTree = "<group>"; };
+		1E19B3462D8AF50400F8AB58 /* PokemonCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonCardView.swift; sourceTree = "<group>"; };
+		1E19B3482D8B060800F8AB58 /* TimerTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTextView.swift; sourceTree = "<group>"; };
 		1E1A2B772D79A91600E3549B /* PokemonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonManager.swift; sourceTree = "<group>"; };
 		1E5E96662D7EF79C00CA0BEB /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		1E5E96682D7F2F7000CA0BEB /* TimerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
@@ -211,9 +215,11 @@
 				1E8792D02D885D1300A0216F /* TopPokeballView.swift */,
 				1EC166502D832ED6001AE4DB /* PokeballView.swift */,
 				1EC166492D832448001AE4DB /* PokemonInfoView.swift */,
+				1E19B3462D8AF50400F8AB58 /* PokemonCardView.swift */,
 				1EC1664D2D8324AB001AE4DB /* NavigationButtonsView.swift */,
 				1E8792D22D88607C00A0216F /* BackgroundView.swift */,
 				1E19B3442D89BFA000F8AB58 /* GlassButtonView.swift */,
+				1E19B3482D8B060800F8AB58 /* TimerTextView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -297,6 +303,7 @@
 				1EC166442D8311F2001AE4DB /* PreviewProviders.swift in Sources */,
 				1E1A2B782D79A91600E3549B /* PokemonManager.swift in Sources */,
 				1E8792CD2D884CB900A0216F /* PokemonSpecies.swift in Sources */,
+				1E19B3492D8B060800F8AB58 /* TimerTextView.swift in Sources */,
 				1EC1663F2D82E6C1001AE4DB /* AnimationUtil.swift in Sources */,
 				1EC1664E2D8324AB001AE4DB /* NavigationButtonsView.swift in Sources */,
 				1E8792CF2D885CE900A0216F /* BottomPokeballView.swift in Sources */,
@@ -318,6 +325,7 @@
 				1EC166532D845B8D001AE4DB /* GestureController.swift in Sources */,
 				1E6BA3112D80886900CD3583 /* PokemonListView.swift in Sources */,
 				1E66EE292D6CD40200C90339 /* Session.swift in Sources */,
+				1E19B3472D8AF50400F8AB58 /* PokemonCardView.swift in Sources */,
 				1E8792D12D885D1300A0216F /* TopPokeballView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

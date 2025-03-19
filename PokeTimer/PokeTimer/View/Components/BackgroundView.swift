@@ -11,8 +11,8 @@ struct SoftPokemonCenterBackground: View {
     var body: some View {
         LinearGradient(
             gradient: Gradient(colors: [
-                Color(red: 1.0, green: 0.85, blue: 0.9),  // Soft pink
-                Color(red: 0.85, green: 0.95, blue: 1.0)  // Light blue
+                Color.yellow.opacity(0.8),
+                Color.purple.opacity(0.6)
             ]),
             startPoint: .topLeading,
             endPoint: .bottomTrailing
@@ -27,11 +27,9 @@ struct GlassBackgroundOverlay: View {
             SoftPokemonCenterBackground()  // Base gradient
 
             RoundedRectangle(cornerRadius: 25)
-                .fill(Color.white.opacity(0.2))
-                .background(.ultraThinMaterial)
-                .frame(width: 350, height: 400)
-                .blur(radius: 20)
-                .offset(y: -50)
+                .fill(Color.white.opacity(0.05))
+                .background(.ultraThinMaterial).opacity(0.1)
+                .edgesIgnoringSafeArea(.all)
         }
     }
 }

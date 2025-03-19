@@ -25,7 +25,7 @@ struct PokeballView: View {
                 .frame(width: size * 1.3, height: size * 1.3)
                 .clipShape(Circle())
                 .opacity(0.95)
-                .blur(radius: 1.1)
+//                .blur(radius: 1.0)
 
             TopPokeballView(size: size)
                 .rotationEffect(.degrees(rotationAngle))

@@ -8,40 +8,39 @@
 import SwiftUI
 
 struct TimerTextView: View {
+    @Binding var viewModel: ContentViewModel
+    @State private var animationAmount = 1.0 // Soft glow effect
+
     var body: some View {
-        Text("\(viewModel.selectedDuration) min")
-            .font(.system(size: 34, weight: .bold, design: .rounded)) // ✅ Slightly more dynamic font
+        Text(TimeFormatterUtil.timeString(from: viewModel.selectedDuration))
+            .font(.system(size: 60, weight: .medium, design: .monospaced))
             .foregroundStyle(
-                LinearGradient( // ✅ Gold & Purple Pokémon Themed Gradient
-                    gradient: Gradient(colors: [Color.yellow.opacity(0.9), Color.purple.opacity(0.8)]),
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color.orange.opacity(0.8),
+                        Color.purple.opacity(0.8)
+                    ]),
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 )
             )
-            .shadow(color: Color.yellow.opacity(0.5), radius: 4, x: 0, y: 2) // ✅ Soft Glow
-            .padding(.top, 10)
-            .padding(.horizontal, 20)
-            .background(
-                Capsule()
-                    .fill(Color.white.opacity(0.15)) // ✅ Subtle glass effect
-                    .background(.ultraThinMaterial)
-                    .blur(radius: 5)
-            )
-            .overlay(
-                Capsule()
-                    .stroke(
-                        LinearGradient( // ✨ Shiny Pokémon Badge Effect
-                            gradient: Gradient(colors: [Color.yellow.opacity(0.7), Color.purple.opacity(0.6)]),
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        ),
-                        lineWidth: 2
-                    )
-            )
-            .shadow(color: Color.purple.opacity(0.6), radius: 6) // ✅ Legendary Glow
+            .shadow(color: Color.white.opacity(0.5), radius: 2)
+            .scaleEffect(animationAmount)
+            .onAppear {
+                withAnimation(Animation.easeInOut(duration: 2).repeatForever(autoreverses: true)) {
+                    animationAmount = 1.02
+                }
+            }
     }
 }
 
-#Preview {
-    TimerTextView()
-}
+//#Preview {
+//    @State var viewModel = ContentViewModel(
+//        pokemonManager: PokemonManager(),
+//        sessionManager: SessionManager(),
+//        persistenceManager: PersistenceManager.shared
+//    )
+//    return TimerTextView(viewModel: $viewModel).environment(PreviewData.pokemonManager)
+//        .environment(PreviewData.sessionManager)
+//        .environment(PreviewData.themeManager)
+//}

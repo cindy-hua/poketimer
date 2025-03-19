@@ -36,6 +36,8 @@ struct ContentView: View {
                 VStack(spacing: 40) {
                     NavigationButtonsView()
                     
+                    TimerTextView(viewModel: $viewModel)
+                    
                     PokemonInfoView(
                         selectedDuration: $viewModel.selectedDuration,
                         activeGesture: $gestureController.activeGesture,
@@ -43,12 +45,6 @@ struct ContentView: View {
                         accumulatedRotation: $accumulatedRotation,
                         navigateToTimerView: $navigateToTimerView
                     )
-                    
-                    Text("\(viewModel.selectedDuration) min")
-                        .font(.title)
-                        .bold()
-                        .padding(.top, 10)
-                        .foregroundColor(.black)
                 }
             }
             .navigationDestination(isPresented: $navigateToTimerView) {

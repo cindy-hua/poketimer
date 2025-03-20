@@ -94,6 +94,65 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E19B34A2D8C23E400F8AB58 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				1E6BA30B2D80886900CD3583 /* ContentView.swift */,
+				1E6BA30A2D80886900CD3583 /* TimerView.swift */,
+				1E6BA3082D80886800CD3583 /* PokemonDetailView.swift */,
+				1E6BA30C2D80886900CD3583 /* PokemonListView.swift */,
+				1E6BA3092D80886800CD3583 /* SessionsView.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		1E19B34B2D8C25C700F8AB58 /* Content */ = {
+			isa = PBXGroup;
+			children = (
+				1E19B34C2D8C261600F8AB58 /* Navigation */,
+				1E19B34D2D8C289000F8AB58 /* PokemonInfo */,
+				1E19B34F2D8C2BCD00F8AB58 /* TimerText */,
+			);
+			path = Content;
+			sourceTree = "<group>";
+		};
+		1E19B34C2D8C261600F8AB58 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				1EC1664D2D8324AB001AE4DB /* NavigationButtonsView.swift */,
+				1E19B3442D89BFA000F8AB58 /* GlassButtonView.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		1E19B34D2D8C289000F8AB58 /* PokemonInfo */ = {
+			isa = PBXGroup;
+			children = (
+				1EC166492D832448001AE4DB /* PokemonInfoView.swift */,
+				1E19B34E2D8C28AF00F8AB58 /* Pokeball */,
+				1E19B3462D8AF50400F8AB58 /* PokemonCardView.swift */,
+			);
+			path = PokemonInfo;
+			sourceTree = "<group>";
+		};
+		1E19B34E2D8C28AF00F8AB58 /* Pokeball */ = {
+			isa = PBXGroup;
+			children = (
+				1EC166502D832ED6001AE4DB /* PokeballView.swift */,
+				1E8792CE2D885CE800A0216F /* BottomPokeballView.swift */,
+				1E8792D02D885D1300A0216F /* TopPokeballView.swift */,
+			);
+			path = Pokeball;
+			sourceTree = "<group>";
+		};
+		1E19B34F2D8C2BCD00F8AB58 /* TimerText */ = {
+			isa = PBXGroup;
+			children = (
+				1E19B3482D8B060800F8AB58 /* TimerTextView.swift */,
+			);
+			path = TimerText;
+			sourceTree = "<group>";
+		};
 		1E1A2B762D79A8DA00E3549B /* Entity */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,12 +228,9 @@
 		1E81C4BF2D6F123800B73C2E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1E6BA30B2D80886900CD3583 /* ContentView.swift */,
+				1E19B34A2D8C23E400F8AB58 /* Screens */,
+				1E19B34B2D8C25C700F8AB58 /* Content */,
 				1EC1664F2D8324E5001AE4DB /* Components */,
-				1E6BA30A2D80886900CD3583 /* TimerView.swift */,
-				1E6BA3082D80886800CD3583 /* PokemonDetailView.swift */,
-				1E6BA30C2D80886900CD3583 /* PokemonListView.swift */,
-				1E6BA3092D80886800CD3583 /* SessionsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -211,15 +267,7 @@
 		1EC1664F2D8324E5001AE4DB /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				1E8792CE2D885CE800A0216F /* BottomPokeballView.swift */,
-				1E8792D02D885D1300A0216F /* TopPokeballView.swift */,
-				1EC166502D832ED6001AE4DB /* PokeballView.swift */,
-				1EC166492D832448001AE4DB /* PokemonInfoView.swift */,
-				1E19B3462D8AF50400F8AB58 /* PokemonCardView.swift */,
-				1EC1664D2D8324AB001AE4DB /* NavigationButtonsView.swift */,
 				1E8792D22D88607C00A0216F /* BackgroundView.swift */,
-				1E19B3442D89BFA000F8AB58 /* GlassButtonView.swift */,
-				1E19B3482D8B060800F8AB58 /* TimerTextView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";

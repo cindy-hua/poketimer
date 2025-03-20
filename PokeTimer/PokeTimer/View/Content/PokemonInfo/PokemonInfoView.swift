@@ -39,12 +39,14 @@ struct PokemonInfoView: View {
                     )
                     
                 // Glowing Overlay
-                Circle()
-                    .stroke(Color.blue.opacity(glowOpacity), lineWidth: 15)
-                    .frame(width: 180, height: 180)
-                    .blur(radius: 10)
+//                Circle()
+//                    .stroke(Color.yellow.opacity(glowOpacity), lineWidth: 15)
+//                    .frame(width: 180, height: 180)
+//                    .blur(radius: 10)
+                
+                GlowingOverlayView(animateGlow: $animateGlow)
             }
-            .scaleEffect(scaleEffect) // Unified scaling effect
+            .scaleEffect(scaleEffect)
 
             PokemonCardView().padding(30)
         }

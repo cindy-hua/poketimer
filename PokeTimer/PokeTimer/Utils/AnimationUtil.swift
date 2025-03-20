@@ -103,11 +103,11 @@ struct HoldAndReleaseGesture {
 
                 DispatchQueue.main.async {
                     isHolding = true
-                    glowOpacity = 1.0
+                    glowOpacity = 0.6
                     animateGlow = true
 
-                    withAnimation(.easeInOut(duration: 0.8).repeatForever(autoreverses: true)) {
-                        scaleEffect = 1.2
+                    withAnimation(.easeInOut(duration: 0.9).repeatForever(autoreverses: true)) {
+                        scaleEffect = 1.07
                     }
 
                     startHaptic()
@@ -121,7 +121,7 @@ struct HoldAndReleaseGesture {
                     stopHaptic()
                     withAnimation {
                         scaleEffect = 1.0
-                        glowOpacity = 0.0
+                        glowOpacity = 0.2
                         animateGlow = false
                     }
                     isHolding = false

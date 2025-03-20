@@ -35,7 +35,6 @@ struct ContentView: View {
                 VStack(spacing: 40) {
                     NavigationButtonsView()
                     
-//                    TimerTextView(viewModel: $viewModel)
                     AnimatedTimerTextView(
                         timeValue: $viewModel.selectedDuration,
                         formatter: TimeFormatterUtil.timeString

@@ -8,27 +8,41 @@
 import SwiftUI
 
 struct StopButtonView: View {
-    @Binding var viewModel: TimerViewModel
-    @Environment(\.dismiss) var dismiss
-    
+    var action: () -> Void
+
     var body: some View {
-        Button(action: {
-            viewModel.stopTimer()
-            dismiss()
-        }) {
+        Button(action: action) {
             Text("Stop")
-                .font(.title)
-                .frame(minWidth: 0, maxWidth: .infinity)
-                .padding()
-                .foregroundColor(.white)
-                .background(Color.red)
-                .cornerRadius(10)
+                .font(.system(size: 26, weight: .semibold))
+                .foregroundColor(Color.white.opacity(0.8))
+                .shadow(color: Color.purple.opacity(0.2), radius: 2, x: 0, y: 2)
+                .padding(.vertical, 14)
+                .padding(.horizontal, 60)
+                .background(
+                    RoundedRectangle(cornerRadius: 24)
+                        .fill(
+                            LinearGradient(
+                                gradient: Gradient(colors: [
+                                    Color.yellow.opacity(0.5),
+                                    Color.orange.opacity(0.9),
+                                    Color.red.opacity(0.6),
+                                ]),
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(Color.orange.opacity(0.4), lineWidth: 1)
+                        )
+                        .shadow(color: Color.orange.opacity(0.6), radius: 10)
+                        .shadow(color: Color.purple.opacity(0.6), radius: 15)
+                )
         }
         .padding(.horizontal)
     }
 }
 
 #Preview {
-    @State var viewModel = TimerViewModel(duration: 2500, pokemonManager: PreviewData.pokemonManager, sessionManager: PreviewData.sessionManager)
-    return StopButtonView(viewModel: $viewModel)
+    StopButtonView(action: {})
 }

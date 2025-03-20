@@ -28,7 +28,10 @@ struct TimerView: View {
                     formatter: TimeFormatterUtil.timeString
                 )
                 
-                StopButtonView(viewModel: $viewModel)
+                StopButtonView(action: {
+                    viewModel.stopTimer()
+                    dismiss()
+                })
             }
             .padding()
             .navigationTitle("Focus Timer")
@@ -52,8 +55,9 @@ struct TimerView: View {
                     viewModel.saveSession(completed: true)
                     showSessionSavedAlert = true
                 }
+            }
         }
-        }
+        .navigationBarHidden(true)
     }
 }
 

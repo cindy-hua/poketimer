@@ -58,9 +58,6 @@ struct ContentView: View {
                 )
             }
         }
-        .onChange(of: viewModel.selectedDuration) {
-            print("🔄 [DEBUG] selectedDuration changed: \(viewModel.selectedDuration)")
-        }
         .navigationTitle("Focus Session")
     }
 }

@@ -43,11 +43,8 @@ struct PokemonInfoView: View {
                     .stroke(Color.blue.opacity(glowOpacity), lineWidth: 15)
                     .frame(width: 180, height: 180)
                     .blur(radius: 10)
-                    .opacity(animateGlow ? 1.0 : 0.5)
-                    .animation(.easeInOut(duration: 0.8).repeatForever(autoreverses: true), value: animateGlow)
             }
             .scaleEffect(scaleEffect) // Unified scaling effect
-            .animation(.easeInOut(duration: 0.8).repeatForever(autoreverses: true), value: animateGlow)
 
             PokemonCardView().padding(30)
         }

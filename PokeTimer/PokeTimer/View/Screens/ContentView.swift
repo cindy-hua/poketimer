@@ -10,7 +10,6 @@ import SwiftUI
 struct ContentView: View {
     @Environment(PokemonManager.self) var pokemonManager
     @Environment(SessionManager.self) var sessionManager
-    @Environment(\.themeManager) var themeManager
 
     @StateObject private var gestureController = GestureController()
 
@@ -68,5 +67,4 @@ struct ContentView: View {
     )
     .environment(PreviewData.pokemonManager)
     .environment(PreviewData.sessionManager)
-    .environment(PreviewData.themeManager)
 }

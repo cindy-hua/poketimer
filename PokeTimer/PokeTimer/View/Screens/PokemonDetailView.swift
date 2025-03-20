@@ -64,27 +64,8 @@ struct PokemonDetailView: View {
     }
 }
 
-
-//#Preview {
-//    // Create instances of managers
-//    let pokemonManager = PokemonManager()
-//    let sessionManager = SessionManager()
-//
-//    // Add a Pokémon to the manager
-//    let testPokemon = Pokemon(name: "Pikachu", xp: 32)
-//    pokemonManager.addPokemon(testPokemon)
-//
-//    // Retrieve the added Pokémon's ID
-//    let testPokemonID = testPokemon.id
-//
-//    return PokemonDetailView(pokemonID: testPokemonID)
-//        .environment(pokemonManager) // Provide managers
-//        .environment(sessionManager)
-//}
-
 #Preview {
     PokemonDetailView(pokemonID: PreviewData.pokemonManager.pokemons[0].id)
     .environment(PreviewData.pokemonManager)
     .environment(PreviewData.sessionManager)
-    .environment(PreviewData.themeManager)
 }

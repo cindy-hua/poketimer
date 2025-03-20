@@ -11,7 +11,6 @@ import SwiftUI
 struct PokeTimerApp: App {
     @State var pokemonManager: PokemonManager
     @State var sessionManager: SessionManager
-    @State var themeManager = ThemeManager()
 
     init() {
 //        PersistenceManager.shared.resetAllData()
@@ -27,7 +26,6 @@ struct PokeTimerApp: App {
             ContentView(pokemonManager: pokemonManager, sessionManager: sessionManager)
                 .environment(pokemonManager)
                 .environment(sessionManager)
-                .environment(\.themeManager, themeManager)
                 .onChange(of: pokemonManager.pokemons) { oldValue, newValue in
                     if oldValue != newValue {
                         PersistenceManager.shared.savePokemonManager(pokemonManager)

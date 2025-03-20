@@ -60,5 +60,4 @@ struct SessionsView: View {
     SessionsView()
     .environment(PreviewData.pokemonManager)
     .environment(PreviewData.sessionManager)
-    .environment(PreviewData.themeManager)
 }

@@ -31,7 +31,4 @@ struct PreviewData {
         manager.restoreSessions(from: [session1, session2])
         return manager
     }()
-
-    // Theme Manager
-    static let themeManager = ThemeManager()
 }

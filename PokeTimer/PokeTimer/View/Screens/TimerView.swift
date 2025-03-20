@@ -33,31 +33,40 @@ struct TimerView: View {
                     dismiss()
                 })
             }
-            .padding()
-            .navigationTitle("Focus Timer")
-            .alert(isPresented: $showSessionSavedAlert) {
-                Alert(
-                    title: Text("Session Completed"),
-                    message: Text("Your focus session has been saved."),
-                    dismissButton: .default(Text("OK"), action: { dismiss() })
+            
+            // Custom Themed Alert Overlay
+            if showSessionSavedAlert {
+                CustomAlertView(
+                    title: "Session Completed",
+                    message: "Your focus session has been saved.",
+                    action: { dismiss() }
                 )
             }
-            .onAppear {
-                if viewModel.remainingSeconds != viewModel.duration {
-                    viewModel.remainingSeconds = viewModel.duration // Reset timer
-                }
-                viewModel.startTimer()
+        }
+//        .padding()
+        .navigationTitle("Focus Timer")
+//            .alert(isPresented: $showSessionSavedAlert) {
+//                Alert(
+//                    title: Text("Session Completed"),
+//                    message: Text("Your focus session has been saved."),
+//                    dismissButton: .default(Text("OK"), action: { dismiss() })
+//                )
+//            }
+        .onAppear {
+            if viewModel.remainingSeconds != viewModel.duration {
+                viewModel.remainingSeconds = viewModel.duration // Reset timer
             }
-            .onChange(of: viewModel.isSessionCompleted) {
-                print("🔄 [DEBUG] isSessionCompleted changed: \(viewModel.isSessionCompleted)")
-                if viewModel.isSessionCompleted {
-                    print("⚡️ [DEBUG] Triggering saveSession()")
-                    viewModel.saveSession(completed: true)
-                    showSessionSavedAlert = true
-                }
+            viewModel.startTimer()
+        }
+        .onChange(of: viewModel.isSessionCompleted) {
+            print("🔄 [DEBUG] isSessionCompleted changed: \(viewModel.isSessionCompleted)")
+            if viewModel.isSessionCompleted {
+                print("⚡️ [DEBUG] Triggering saveSession()")
+                viewModel.saveSession(completed: true)
+                showSessionSavedAlert = true
             }
         }
-        .navigationBarHidden(true)
+    .navigationBarHidden(true)
     }
 }
 

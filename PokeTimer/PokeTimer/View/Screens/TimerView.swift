@@ -23,7 +23,10 @@ struct TimerView: View {
             GlassBackgroundOverlay()
             
             VStack(spacing: 40) {
-                TimerCountdownView(viewModel: $viewModel)
+                AnimatedTimerTextView(
+                    timeValue: $viewModel.remainingSeconds,
+                    formatter: TimeFormatterUtil.timeString
+                )
                 
                 StopButtonView(viewModel: $viewModel)
             }

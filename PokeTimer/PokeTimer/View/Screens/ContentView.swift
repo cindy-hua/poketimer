@@ -35,7 +35,11 @@ struct ContentView: View {
                 VStack(spacing: 40) {
                     NavigationButtonsView()
                     
-                    TimerTextView(viewModel: $viewModel)
+//                    TimerTextView(viewModel: $viewModel)
+                    AnimatedTimerTextView(
+                        timeValue: $viewModel.selectedDuration,
+                        formatter: TimeFormatterUtil.timeString
+                    )
                     
                     PokemonInfoView(
                         selectedDuration: $viewModel.selectedDuration,
@@ -53,6 +57,9 @@ struct ContentView: View {
                     sessionManager: sessionManager
                 )
             }
+        }
+        .onChange(of: viewModel.selectedDuration) {
+            print("🔄 [DEBUG] selectedDuration changed: \(viewModel.selectedDuration)")
         }
         .navigationTitle("Focus Session")
     }

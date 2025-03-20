@@ -56,13 +56,15 @@ struct CircularGesture {
                     rotationAngle += adjustedAngleDiff
 
                     // Change duration when enough rotation is accumulated
-                    if abs(accumulatedRotation) > 30 {
-                        if accumulatedRotation > 0 {
-                            selectedDuration += 1
-                        } else {
-                            selectedDuration = max(1, selectedDuration - 1)
+                    if abs(accumulatedRotation) > 30 {  // ✅ Update every 30°
+                        withAnimation(.easeOut(duration: 0.2)) {  // ✅ Smooth transition
+                            if accumulatedRotation > 0 {
+                                selectedDuration += 1
+                            } else {
+                                selectedDuration = max(1, selectedDuration - 1)
+                            }
                         }
-                        accumulatedRotation = 0
+                        accumulatedRotation = 0  // ✅ Reset after update
                     }
                 }
 

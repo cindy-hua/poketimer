@@ -37,12 +37,6 @@ struct PokemonInfoView: View {
                             gestureController: gestureController
                         ).detect()
                     )
-                    
-                // Glowing Overlay
-//                Circle()
-//                    .stroke(Color.yellow.opacity(glowOpacity), lineWidth: 15)
-//                    .frame(width: 180, height: 180)
-//                    .blur(radius: 10)
                 
                 GlowingOverlayView(animateGlow: $animateGlow)
             }

@@ -10,7 +10,8 @@
 		1E19B3452D89BFA000F8AB58 /* GlassButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E19B3442D89BFA000F8AB58 /* GlassButtonView.swift */; };
 		1E19B3472D8AF50400F8AB58 /* PokemonCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E19B3462D8AF50400F8AB58 /* PokemonCardView.swift */; };
 		1E19B3492D8B060800F8AB58 /* TimerTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E19B3482D8B060800F8AB58 /* TimerTextView.swift */; };
-		1E19B3512D8C47DF00F8AB58 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E19B3502D8C47DF00F8AB58 /* AppColors.swift */; };
+		1E19B3532D8C509F00F8AB58 /* TimerCountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E19B3522D8C509F00F8AB58 /* TimerCountdownView.swift */; };
+		1E19B3572D8C52A500F8AB58 /* StopButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E19B3562D8C52A500F8AB58 /* StopButtonView.swift */; };
 		1E1A2B782D79A91600E3549B /* PokemonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1A2B772D79A91600E3549B /* PokemonManager.swift */; };
 		1E5E96672D7EF79C00CA0BEB /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5E96662D7EF79C00CA0BEB /* SessionManager.swift */; };
 		1E5E96692D7F2F7000CA0BEB /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5E96682D7F2F7000CA0BEB /* TimerViewModel.swift */; };
@@ -47,7 +48,8 @@
 		1E19B3442D89BFA000F8AB58 /* GlassButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassButtonView.swift; sourceTree = "<group>"; };
 		1E19B3462D8AF50400F8AB58 /* PokemonCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonCardView.swift; sourceTree = "<group>"; };
 		1E19B3482D8B060800F8AB58 /* TimerTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTextView.swift; sourceTree = "<group>"; };
-		1E19B3502D8C47DF00F8AB58 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
+		1E19B3522D8C509F00F8AB58 /* TimerCountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCountdownView.swift; sourceTree = "<group>"; };
+		1E19B3562D8C52A500F8AB58 /* StopButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopButtonView.swift; sourceTree = "<group>"; };
 		1E1A2B772D79A91600E3549B /* PokemonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonManager.swift; sourceTree = "<group>"; };
 		1E5E96662D7EF79C00CA0BEB /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		1E5E96682D7F2F7000CA0BEB /* TimerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
@@ -97,6 +99,8 @@
 			children = (
 				1E6BA30B2D80886900CD3583 /* ContentView.swift */,
 				1E6BA30A2D80886900CD3583 /* TimerView.swift */,
+				1E19B3562D8C52A500F8AB58 /* StopButtonView.swift */,
+				1E19B3522D8C509F00F8AB58 /* TimerCountdownView.swift */,
 				1E6BA3082D80886800CD3583 /* PokemonDetailView.swift */,
 				1E6BA30C2D80886900CD3583 /* PokemonListView.swift */,
 				1E6BA3092D80886800CD3583 /* SessionsView.swift */,
@@ -189,7 +193,6 @@
 				1EC166372D819547001AE4DB /* Utils */,
 				1E66EE1E2D6CC64B00C90339 /* Assets.xcassets */,
 				1E66EE202D6CC64B00C90339 /* Preview Content */,
-				1E19B3502D8C47DF00F8AB58 /* AppColors.swift */,
 			);
 			path = PokeTimer;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				1E6BA3132D80890F00CD3583 /* SessionsViewModel.swift in Sources */,
 				1E81C4B62D6DCE6800B73C2E /* ContentViewModel.swift in Sources */,
 				1E6BA30D2D80886900CD3583 /* PokemonDetailView.swift in Sources */,
+				1E19B3532D8C509F00F8AB58 /* TimerCountdownView.swift in Sources */,
 				1E66EE2B2D6CDB4000C90339 /* Pokemon.swift in Sources */,
 				1EC166362D819541001AE4DB /* DateFormatterUtil.swift in Sources */,
 				1E6BA30F2D80886900CD3583 /* TimerView.swift in Sources */,
@@ -360,9 +364,9 @@
 				1EC166532D845B8D001AE4DB /* GestureController.swift in Sources */,
 				1E6BA3112D80886900CD3583 /* PokemonListView.swift in Sources */,
 				1E66EE292D6CD40200C90339 /* Session.swift in Sources */,
-				1E19B3512D8C47DF00F8AB58 /* AppColors.swift in Sources */,
 				1E19B3472D8AF50400F8AB58 /* PokemonCardView.swift in Sources */,
 				1E8792D12D885D1300A0216F /* TopPokeballView.swift in Sources */,
+				1E19B3572D8C52A500F8AB58 /* StopButtonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

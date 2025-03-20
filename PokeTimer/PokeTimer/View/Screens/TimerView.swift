@@ -19,49 +19,37 @@ struct TimerView: View {
     }
     
     var body: some View {
-        VStack(spacing: 40) {
-            // Countdown Timer Display.
-            Text(TimeFormatterUtil.timeString(from: viewModel.remainingSeconds))
-                .font(.system(size: 50, weight: .bold, design: .monospaced))
-                .animation(.easeInOut, value: viewModel.remainingSeconds)
+        ZStack {
+            GlassBackgroundOverlay()
             
-            // Stop Button.
-            Button(action: {
-                viewModel.stopTimer()
-                dismiss()
-            }) {
-                Text("Stop")
-                    .font(.title)
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                    .padding()
-                    .foregroundColor(.white)
-                    .background(Color.red)
-                    .cornerRadius(10)
+            VStack(spacing: 40) {
+                TimerCountdownView(viewModel: $viewModel)
+                
+                StopButtonView(viewModel: $viewModel)
             }
-            .padding(.horizontal)
-        }
-        .padding()
-        .navigationTitle("Focus Timer")
-        .alert(isPresented: $showSessionSavedAlert) {
-            Alert(
-                title: Text("Session Completed"),
-                message: Text("Your focus session has been saved."),
-                dismissButton: .default(Text("OK"), action: { dismiss() })
-            )
-        }
-        .onAppear {
-            if viewModel.remainingSeconds != viewModel.duration {
-                viewModel.remainingSeconds = viewModel.duration // Reset timer
+            .padding()
+            .navigationTitle("Focus Timer")
+            .alert(isPresented: $showSessionSavedAlert) {
+                Alert(
+                    title: Text("Session Completed"),
+                    message: Text("Your focus session has been saved."),
+                    dismissButton: .default(Text("OK"), action: { dismiss() })
+                )
             }
-            viewModel.startTimer()
-        }
-        .onChange(of: viewModel.isSessionCompleted) {
-            print("🔄 [DEBUG] isSessionCompleted changed: \(viewModel.isSessionCompleted)")
-            if viewModel.isSessionCompleted {
-                print("⚡️ [DEBUG] Triggering saveSession()")
-                viewModel.saveSession(completed: true)
-                showSessionSavedAlert = true
+            .onAppear {
+                if viewModel.remainingSeconds != viewModel.duration {
+                    viewModel.remainingSeconds = viewModel.duration // Reset timer
+                }
+                viewModel.startTimer()
             }
+            .onChange(of: viewModel.isSessionCompleted) {
+                print("🔄 [DEBUG] isSessionCompleted changed: \(viewModel.isSessionCompleted)")
+                if viewModel.isSessionCompleted {
+                    print("⚡️ [DEBUG] Triggering saveSession()")
+                    viewModel.saveSession(completed: true)
+                    showSessionSavedAlert = true
+                }
+        }
         }
     }
 }

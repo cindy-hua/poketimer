@@ -7,50 +7,62 @@
 
 import SwiftUI
 
+import SwiftUI
+
 // MARK: - PokemonListView
-/// A view that displays a list of Pokémon and allows you to add new ones or set an active Pokémon.
+/// A view that displays the Pokémon the user owns.
 struct PokemonListView: View {
     @Environment(PokemonManager.self) var pokemonManager
     @State private var viewModel: PokemonListViewModel?
-    
+
     var body: some View {
-        List {
-//            ForEach(pokemonManager.pokemons, id: \.id) { pokemon in
-//                NavigationLink(destination: PokemonDetailView(pokemonID: pokemon.id)) {
-//                    HStack {
-//                        // Placeholder image.
-//                        Image(systemName: "bolt.fill")
-//                            .resizable()
-//                            .frame(width: 40, height: 40)
-//                            .foregroundColor(.yellow)
-//                        VStack(alignment: .leading) {
-//                            Text(pokemon.name)
-//                                .font(.headline)
-//                            Text("XP: \(pokemon.xp)  Level: \(pokemon.level)")
-//                                .font(.subheadline)
-//                        }
-//                    }
-//                }
-//            }
-        }
-        .navigationTitle("Pokémon List")
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                    viewModel?.addPokemon()
-                }) {
-                    Image(systemName: "plus")
+        NavigationStack {
+            List {
+                if let viewModel = viewModel {
+                    ForEach(viewModel.ownedPokemon, id: \.id) { pokemon in
+                        NavigationLink(destination: PokemonDetailView(pokemonID: pokemon.id)) {
+                            HStack {
+                                // Display the fetched Pokémon sprite
+                                if let species = viewModel.pokemonDetails[pokemon.id] {
+                                    AsyncImage(url: URL(string: species.spriteFront)) { image in
+                                        image.resizable().scaledToFit()
+                                    } placeholder: {
+                                        ProgressView()
+                                    }
+                                    .frame(width: 50, height: 50)
+                                } else {
+                                    ProgressView().frame(width: 50, height: 50)
+                                }
+
+                                VStack(alignment: .leading) {
+                                    Text(pokemon.species.rawValue.capitalized)
+                                        .font(.headline)
+                                    Text("XP: \(pokemon.xp)  Level: \(pokemon.level)")
+                                        .font(.subheadline)
+                                }
+                            }
+                        }
+                    }
                 }
             }
-        }
-        .onAppear {
-            if viewModel == nil { // ✅ Only initialize once
-                viewModel = PokemonListViewModel(pokemonManager: pokemonManager)
+            .navigationTitle("My Pokémon")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Menu {
+                        Button("Add Pikachu") { viewModel?.addPokemon(species: .pikachu) }
+                        Button("Add Charmander") { viewModel?.addPokemon(species: .charmander) }
+                        Button("Add Squirtle") { viewModel?.addPokemon(species: .squirtle) }
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }
             }
-            print("🐉 [DEBUG] PokemonListView appeared, updating UI")
-        }
-        .onChange(of: pokemonManager.pokemons) {
-            print("🔄 [DEBUG] manager.pokemons changed! UI should refresh.")
+            .onAppear {
+                if viewModel == nil {
+                    viewModel = PokemonListViewModel(pokemonManager: pokemonManager)
+                }
+                print("🐉 [DEBUG] PokemonListView appeared, updating UI")
+            }
         }
     }
 }

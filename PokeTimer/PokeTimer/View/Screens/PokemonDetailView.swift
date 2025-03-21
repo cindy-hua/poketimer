@@ -44,12 +44,14 @@ struct PokemonDetailView: View {
                 if let species = viewModel.pokemonSpecies {
                     HStack {
                         ForEach(species.types, id: \.self) { type in
-                            Text(type)
-                                .padding(5)
-                                .background(Color.blue.opacity(0.3))
+                            Text(type.capitalized)
+                                .padding(8)
+                                .background(PokemonTypeColor.color(for: type))
+                                .foregroundColor(.white)  // Ensures good contrast
                                 .clipShape(Capsule())
                         }
                     }
+                    .padding(.vertical, 5)
                 }
 
                 // List of sessions (activities)

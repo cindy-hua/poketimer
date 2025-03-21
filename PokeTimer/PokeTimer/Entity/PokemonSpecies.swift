@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum PokemonSpecies: String, Codable, CaseIterable {
+enum PokemonSpeciesLegacy: String, Codable, CaseIterable {
     case pikachu, bulbasaur, charmander, squirtle, unknown
     
     /// Returns a human-readable name (e.g., "Bulbasaur" instead of "bulbasaur").
@@ -24,5 +24,20 @@ enum PokemonSpecies: String, Codable, CaseIterable {
     /// Returns the corresponding image name for each Pokémon species.
     var imageName: String {
         return self.rawValue
+    }
+}
+
+// Introduce the new PokemonSpecies struct (but don’t use it yet)
+struct PokemonSpecies: Identifiable, Codable {
+    let id: Int
+    let name: String
+    let types: [String]
+    let spriteFront: String
+    let spriteBack: String?
+    let spriteShiny: String?
+    let evolutionChain: [String]
+
+    var displayName: String {
+        return name.capitalized
     }
 }

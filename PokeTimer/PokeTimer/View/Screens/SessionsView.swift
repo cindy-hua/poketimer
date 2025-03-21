@@ -18,8 +18,8 @@ struct SessionsView: View {
         VStack {
             if let viewModel = viewModel {
                 List {
-                    ForEach(viewModel.sessionsByPokemon, id: \.pokemonSpecies) { pokemonData in
-                        Section(header: Text(pokemonData.pokemonSpecies.displayName).font(.headline)) {
+                    ForEach(viewModel.sessionsByPokemon, id: \.PokemonSpeciesLegacy) { pokemonData in
+                        Section(header: Text(pokemonData.PokemonSpeciesLegacy.displayName).font(.headline)) {
                             ForEach(pokemonData.sessions) { session in
                                 let formattedDurationString = TimeFormatterUtil.formattedDuration(session.duration)
                                 VStack(alignment: .leading, spacing: 4) {

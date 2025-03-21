@@ -17,10 +17,10 @@ class SessionsViewModel: ObservableObject {
     }
 
     /// Dynamically computes sessions grouped by Pokémon species.
-    var sessionsByPokemon: [(pokemonSpecies: PokemonSpecies, sessions: [Session])] {
+    var sessionsByPokemon: [(PokemonSpeciesLegacy: PokemonSpeciesLegacy, sessions: [Session])] {
         pokemonManager.pokemons.map { pokemon in
             let sessions = sessionManager.getSessions(for: pokemon.id)
-            return (pokemonSpecies: pokemon.species, sessions: sessions)
+            return (PokemonSpeciesLegacy: pokemon.species, sessions: sessions)
         }
     }
 }

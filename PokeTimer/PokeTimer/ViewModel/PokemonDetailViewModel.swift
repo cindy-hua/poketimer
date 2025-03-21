@@ -25,7 +25,7 @@ class PokemonDetailViewModel {
     }
 
     /// Computed property for Pokémon species
-    var pokemonSpecies: PokemonSpecies {
+    var PokemonSpeciesLegacy: PokemonSpeciesLegacy {
         pokemon?.species ?? .unknown
     }
 

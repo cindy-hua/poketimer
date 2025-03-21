@@ -51,7 +51,7 @@ struct PokemonDetailView: View {
                     .font(.headline)
             }
         }
-        .navigationTitle(viewModel?.pokemonSpecies.displayName ?? "Pokémon Details")
+        .navigationTitle(viewModel?.PokemonSpeciesLegacy.displayName ?? "Pokémon Details")
         .onAppear {
             if viewModel == nil {
                 viewModel = PokemonDetailViewModel(

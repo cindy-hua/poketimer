@@ -16,12 +16,12 @@ struct NavigationButtonsView: View {
             NavigationLink(destination: SessionsView()
                 .environment(pokemonManager)
                 .environment(sessionManager)) {
-                    GlassButtonView(imageName: "calendar_icon"){}
+                    GlassButtonView(imageName: "calendar_icon")
             }
             
             NavigationLink(destination: PokemonListView()
                 .environment(pokemonManager)) {
-                    GlassButtonView(imageName: "pokemon_icon"){}
+                    GlassButtonView(imageName: "pokemon_icon")
             }
         }
         .padding(.top, 10)

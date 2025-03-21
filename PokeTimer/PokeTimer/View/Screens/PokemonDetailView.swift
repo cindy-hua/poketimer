@@ -20,18 +20,37 @@ struct PokemonDetailView: View {
             if let viewModel = viewModel, let pokemon = viewModel.pokemon {
                 // Basic Pokémon info
                 HStack(spacing: 20) {
-                    Image(systemName: "bolt.fill")
-                        .resizable()
-                        .frame(width: 80, height: 80)
-                        .foregroundColor(.yellow)
+                    if let species = viewModel.pokemonSpecies {
+                        AsyncImage(url: URL(string: species.spriteFront)) { image in
+                            image.resizable().scaledToFit()
+                        } placeholder: {
+                            ProgressView()
+                        }
+                        .frame(width: 100, height: 100)
+                    } else {
+                        ProgressView().frame(width: 100, height: 100)
+                    }
+
                     VStack(alignment: .leading) {
-                        Text(String(describing: pokemon.species))
+                        Text(pokemon.species.rawValue.capitalized)
                             .font(.largeTitle)
                         Text("XP: \(pokemon.xp)")
                         Text("Level: \(pokemon.level)")
                     }
                 }
                 .padding()
+                
+                // Pokémon Type Badges
+                if let species = viewModel.pokemonSpecies {
+                    HStack {
+                        ForEach(species.types, id: \.self) { type in
+                            Text(type)
+                                .padding(5)
+                                .background(Color.blue.opacity(0.3))
+                                .clipShape(Capsule())
+                        }
+                    }
+                }
 
                 // List of sessions (activities)
                 List(viewModel.sessions) { session in
@@ -51,7 +70,7 @@ struct PokemonDetailView: View {
                     .font(.headline)
             }
         }
-        .navigationTitle(viewModel?.PokemonSpeciesLegacy.displayName ?? "Pokémon Details")
+        .navigationTitle(viewModel?.pokemonSpecies?.displayName ?? "Pokémon Details")
         .onAppear {
             if viewModel == nil {
                 viewModel = PokemonDetailViewModel(

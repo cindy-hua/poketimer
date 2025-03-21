@@ -27,7 +27,7 @@ enum PokemonSpeciesLegacy: String, Codable, CaseIterable {
     }
 }
 
-// Introduce the new PokemonSpecies struct (but don’t use it yet)
+// Introduce the new PokemonSpecies struct
 struct PokemonSpecies: Identifiable, Codable {
     let id: Int
     let name: String

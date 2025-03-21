@@ -18,12 +18,24 @@ struct PokeballView: View {
                 .rotationEffect(.degrees(rotationAngle))
 
             // Pokémon (Inside Pokéball)
-            Image(pokemonManager.getCurrentPokemon()?.species.imageName ?? "pikachu")
-                .resizable()
-                .scaledToFit()
+            if let spriteURL = pokemonManager.getCurrentPokemon()?.species.spriteFront {
+                AsyncImage(url: URL(string: spriteURL)) { image in
+                    image.resizable()
+                        .scaledToFit()
+                } placeholder: {
+                    ProgressView()  // Shows a loading spinner while fetching the image
+                }
                 .frame(width: size * 1.3, height: size * 1.3)
                 .clipShape(Circle())
                 .opacity(0.95)
+            } else {
+                Image("unknown")  // ✅ Uses "unknown" image instead of Pikachu
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: size * 1.3, height: size * 1.3)
+                    .clipShape(Circle())
+                    .opacity(0.95)
+            }
 
             TopPokeballView(size: size)
                 .rotationEffect(.degrees(rotationAngle))

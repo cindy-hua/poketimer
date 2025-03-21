@@ -26,7 +26,7 @@ class PokemonListViewModel {
     func fetchOwnedPokemonDetails() async {
         for pokemon in ownedPokemon {
             do {
-                let details = try await PokemonAPI.shared.fetchCompletePokemonData(name: pokemon.species.rawValue)
+                let details = try await PokemonAPI.shared.fetchCompletePokemonData(name: pokemon.species.name)
                 await MainActor.run {
                     self.pokemonDetails[pokemon.id] = details
                 }
@@ -37,7 +37,7 @@ class PokemonListViewModel {
     }
 
     /// Adds a new Pokémon to the list.
-    func addPokemon(species: PokemonSpeciesLegacy) {
+    func addPokemon(species: PokemonSpecies) {
         let newPokemon = Pokemon(species: species)
         pokemonManager.addPokemon(newPokemon)
         print("➕ [DEBUG] Added Pokémon: \(newPokemon.species)")
@@ -45,7 +45,7 @@ class PokemonListViewModel {
         // Fetch its API details immediately
         Task {
             do {
-                let details = try await PokemonAPI.shared.fetchCompletePokemonData(name: species.rawValue)
+                let details = try await PokemonAPI.shared.fetchCompletePokemonData(name: species.name)
                 await MainActor.run {
                     self.pokemonDetails[newPokemon.id] = details
                 }

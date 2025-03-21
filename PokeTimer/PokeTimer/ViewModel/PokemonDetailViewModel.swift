@@ -31,7 +31,7 @@ class PokemonDetailViewModel {
     func fetchPokemonDetails() async {
         guard let pokemon = pokemon else { return }
         do {
-            let species = try await PokemonAPI.shared.fetchCompletePokemonData(name: pokemon.species.rawValue)
+            let species = try await PokemonAPI.shared.fetchCompletePokemonData(name: pokemon.species.name)
             await MainActor.run { self.pokemonSpecies = species }
         } catch {
             print("Failed to fetch Pokémon details: \(error)")

@@ -35,7 +35,7 @@ struct PokemonListView: View {
                                 }
 
                                 VStack(alignment: .leading) {
-                                    Text(pokemon.species.rawValue.capitalized)
+                                    Text(pokemon.species.name.capitalized)
                                         .font(.headline)
                                     Text("XP: \(pokemon.xp)  Level: \(pokemon.level)")
                                         .font(.subheadline)
@@ -49,9 +49,39 @@ struct PokemonListView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Menu {
-                        Button("Add Pikachu") { viewModel?.addPokemon(species: .pikachu) }
-                        Button("Add Charmander") { viewModel?.addPokemon(species: .charmander) }
-                        Button("Add Squirtle") { viewModel?.addPokemon(species: .squirtle) }
+                        Button("Add Pikachu") {
+                            viewModel?.addPokemon(species: PokemonSpecies(
+                                id: 25,
+                                name: "Pikachu",
+                                types: ["Electric"],
+                                spriteFront: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
+                                spriteBack: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/25.png",
+                                spriteShiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/25.png",
+                                evolutionChain: ["Pichu", "Pikachu", "Raichu"]
+                            ))
+                        }
+                        Button("Add Charmander") {
+                            viewModel?.addPokemon(species: PokemonSpecies(
+                                id: 4,
+                                name: "Charmander",
+                                types: ["Fire"],
+                                spriteFront: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
+                                spriteBack: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/4.png",
+                                spriteShiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/4.png",
+                                evolutionChain: ["Charmander", "Charmeleon", "Charizard"]
+                            ))
+                        }
+                        Button("Add Squirtle") {
+                            viewModel?.addPokemon(species: PokemonSpecies(
+                                id: 7,
+                                name: "Squirtle",
+                                types: ["Water"],
+                                spriteFront: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",
+                                spriteBack: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/7.png",
+                                spriteShiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/7.png",
+                                evolutionChain: ["Squirtle", "Wartortle", "Blastoise"]
+                            ))
+                        }
                     } label: {
                         Image(systemName: "plus")
                     }

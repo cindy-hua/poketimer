@@ -32,7 +32,7 @@ struct PokemonDetailView: View {
                     }
 
                     VStack(alignment: .leading) {
-                        Text(pokemon.species.rawValue.capitalized)
+                        Text(pokemon.species.name.capitalized)
                             .font(.largeTitle)
                         Text("XP: \(pokemon.xp)")
                         Text("Level: \(pokemon.level)")

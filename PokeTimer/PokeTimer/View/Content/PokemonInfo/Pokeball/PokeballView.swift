@@ -18,18 +18,18 @@ struct PokeballView: View {
                 .rotationEffect(.degrees(rotationAngle))
 
             // Pokémon (Inside Pokéball)
-            if let spriteURL = pokemonManager.getCurrentPokemon()?.species.spriteFront {
+            if let spriteURL = pokemonManager.getCurrentPokemon()?.species.home {
                 AsyncImage(url: URL(string: spriteURL)) { image in
                     image.resizable()
-                        .scaledToFit()
+                        .frame(width: size * 0.85, height: size * 0.85)
                 } placeholder: {
                     ProgressView()  // Shows a loading spinner while fetching the image
                 }
                 .frame(width: size * 1.3, height: size * 1.3)
                 .clipShape(Circle())
-                .opacity(0.95)
+                .opacity(0.75)
             } else {
-                Image("unknown")  // ✅ Uses "unknown" image instead of Pikachu
+                Image("unknown")
                     .resizable()
                     .scaledToFit()
                     .frame(width: size * 1.3, height: size * 1.3)

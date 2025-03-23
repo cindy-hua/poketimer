@@ -44,7 +44,7 @@ struct PokemonInfoView: View {
 
             PokemonCardView().padding(30)
         }
-        .gesture(
+        .simultaneousGesture(
             SwipeGesture(
                 offsetX: $offsetX,
                 activeGesture: $activeGesture,

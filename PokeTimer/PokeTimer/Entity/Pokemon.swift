@@ -41,6 +41,10 @@ struct Pokemon: Identifiable, Codable, Equatable, Hashable {
         return species.spriteFront
     }
     
+    var bigSprite: String {
+        return species.dreamWorld ?? ""
+    }
+    
     /// Returns a new Pokemon instance with updated XP and level.
     func gainingXP(_ minutes: Int) -> Pokemon {
         return Pokemon(id: self.id, species: self.species, xp: self.xp + minutes)

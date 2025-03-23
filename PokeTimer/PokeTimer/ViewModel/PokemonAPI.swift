@@ -21,8 +21,16 @@ class PokemonAPI {
 
         let id = pokemonDetails.id
         let types = pokemonDetails.types.map { $0.type.name.capitalized }
-        let spriteFront = pokemonDetails.sprites.front_default
-        let spriteShiny = pokemonDetails.sprites.front_shiny
+        
+        let sprites = pokemonDetails.sprites
+        let spriteFront = sprites.front_default ?? ""
+        let spriteBack = sprites.back_default ?? ""
+        let spriteShiny = sprites.front_shiny ?? ""
+        
+        let dreamWorld = sprites.other?.dream_world?.front_default ?? ""
+        let officialArtwork = sprites.other?.official_artwork?.front_default ?? ""
+        let showdown = sprites.other?.showdown?.front_default ?? ""
+        let home = sprites.other?.home?.front_default ?? ""
 
         // 🟢 2️⃣ Fetch Pokémon Species Info (to get Evolution URL)
         let speciesURL = "https://pokeapi.co/api/v2/pokemon-species/\(id)"
@@ -40,7 +48,19 @@ class PokemonAPI {
 
         let evolutionChainNames = extractEvolutionNames(from: evolutionChain.chain)
 
-        return PokemonSpecies(id: id, name: name.capitalized, types: types, spriteFront: spriteFront, spriteBack: nil, spriteShiny: spriteShiny, evolutionChain: evolutionChainNames)
+        return PokemonSpecies(
+            id: id,
+            name: name.capitalized,
+            types: types,
+            spriteFront: spriteFront,
+            spriteBack: spriteBack,
+            spriteShiny: spriteShiny,
+            dreamWorld: dreamWorld,
+            officialArtwork: officialArtwork,
+            showdown: showdown,
+            home: home,
+            evolutionChain: []
+        )
     }
     
     /// Recursively extract evolution names from the evolution chain

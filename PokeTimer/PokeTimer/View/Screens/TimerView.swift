@@ -43,15 +43,7 @@ struct TimerView: View {
                 )
             }
         }
-//        .padding()
         .navigationTitle("Focus Timer")
-//            .alert(isPresented: $showSessionSavedAlert) {
-//                Alert(
-//                    title: Text("Session Completed"),
-//                    message: Text("Your focus session has been saved."),
-//                    dismissButton: .default(Text("OK"), action: { dismiss() })
-//                )
-//            }
         .onAppear {
             if viewModel.remainingSeconds != viewModel.duration {
                 viewModel.remainingSeconds = viewModel.duration // Reset timer

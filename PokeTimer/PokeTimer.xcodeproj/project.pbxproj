@@ -48,6 +48,7 @@
 		1EC1664E2D8324AB001AE4DB /* NavigationButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC1664D2D8324AB001AE4DB /* NavigationButtonsView.swift */; };
 		1EC166512D832ED6001AE4DB /* PokeballView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC166502D832ED6001AE4DB /* PokeballView.swift */; };
 		1EC166532D845B8D001AE4DB /* GestureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC166522D845B8D001AE4DB /* GestureController.swift */; };
+		1EE311B42D92B2F300BE8803 /* PokemonRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE311B32D92B2F300BE8803 /* PokemonRowView.swift */; };
 		1EFE675C2D8CA08F0053CC13 /* GlowingOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFE675B2D8CA08F0053CC13 /* GlowingOverlayView.swift */; };
 /* End PBXBuildFile section */
 
@@ -94,6 +95,7 @@
 		1EC1664D2D8324AB001AE4DB /* NavigationButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationButtonsView.swift; sourceTree = "<group>"; };
 		1EC166502D832ED6001AE4DB /* PokeballView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeballView.swift; sourceTree = "<group>"; };
 		1EC166522D845B8D001AE4DB /* GestureController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureController.swift; sourceTree = "<group>"; };
+		1EE311B32D92B2F300BE8803 /* PokemonRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonRowView.swift; sourceTree = "<group>"; };
 		1EFE675B2D8CA08F0053CC13 /* GlowingOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlowingOverlayView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -116,6 +118,7 @@
 				1E19B3522D8C509F00F8AB58 /* TimerCountdownView.swift */,
 				1E6BA3082D80886800CD3583 /* PokemonDetailView.swift */,
 				1E6BA30C2D80886900CD3583 /* PokemonListView.swift */,
+				1EE311B32D92B2F300BE8803 /* PokemonRowView.swift */,
 				1E6BA3092D80886800CD3583 /* SessionsView.swift */,
 			);
 			path = Screens;
@@ -373,6 +376,7 @@
 				1E6BA3132D80890F00CD3583 /* SessionsViewModel.swift in Sources */,
 				1E70FB402D8D967C00676616 /* PokemonAPI.swift in Sources */,
 				1E81C4B62D6DCE6800B73C2E /* ContentViewModel.swift in Sources */,
+				1EE311B42D92B2F300BE8803 /* PokemonRowView.swift in Sources */,
 				1E70FB3E2D8CC15700676616 /* CustomAlertView.swift in Sources */,
 				1E6BA30D2D80886900CD3583 /* PokemonDetailView.swift in Sources */,
 				1E19B3532D8C509F00F8AB58 /* TimerCountdownView.swift in Sources */,

@@ -49,6 +49,7 @@
 		1EC166512D832ED6001AE4DB /* PokeballView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC166502D832ED6001AE4DB /* PokeballView.swift */; };
 		1EC166532D845B8D001AE4DB /* GestureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC166522D845B8D001AE4DB /* GestureController.swift */; };
 		1EE311B42D92B2F300BE8803 /* PokemonRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE311B32D92B2F300BE8803 /* PokemonRowView.swift */; };
+		1EE311B72D944E0700BE8803 /* SessionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE311B62D944E0700BE8803 /* SessionCardView.swift */; };
 		1EFE675C2D8CA08F0053CC13 /* GlowingOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFE675B2D8CA08F0053CC13 /* GlowingOverlayView.swift */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +97,7 @@
 		1EC166502D832ED6001AE4DB /* PokeballView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeballView.swift; sourceTree = "<group>"; };
 		1EC166522D845B8D001AE4DB /* GestureController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureController.swift; sourceTree = "<group>"; };
 		1EE311B32D92B2F300BE8803 /* PokemonRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonRowView.swift; sourceTree = "<group>"; };
+		1EE311B62D944E0700BE8803 /* SessionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionCardView.swift; sourceTree = "<group>"; };
 		1EFE675B2D8CA08F0053CC13 /* GlowingOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlowingOverlayView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,8 +119,8 @@
 				1E6BA30A2D80886900CD3583 /* TimerView.swift */,
 				1E19B3522D8C509F00F8AB58 /* TimerCountdownView.swift */,
 				1E6BA3082D80886800CD3583 /* PokemonDetailView.swift */,
+				1EE311B62D944E0700BE8803 /* SessionCardView.swift */,
 				1E6BA30C2D80886900CD3583 /* PokemonListView.swift */,
-				1EE311B32D92B2F300BE8803 /* PokemonRowView.swift */,
 				1E6BA3092D80886800CD3583 /* SessionsView.swift */,
 			);
 			path = Screens;
@@ -252,6 +254,7 @@
 			children = (
 				1E19B34A2D8C23E400F8AB58 /* Screens */,
 				1E19B34B2D8C25C700F8AB58 /* Content */,
+				1EE311B52D944B7300BE8803 /* PokemonList */,
 				1E70FB3C2D8CBE7600676616 /* Timer */,
 				1EC1664F2D8324E5001AE4DB /* Components */,
 			);
@@ -286,6 +289,14 @@
 				1E19B3582D8C57A100F8AB58 /* AnimatedTimerTextView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		1EE311B52D944B7300BE8803 /* PokemonList */ = {
+			isa = PBXGroup;
+			children = (
+				1EE311B32D92B2F300BE8803 /* PokemonRowView.swift */,
+			);
+			path = PokemonList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -359,6 +370,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E8792D32D88607C00A0216F /* BackgroundView.swift in Sources */,
+				1EE311B72D944E0700BE8803 /* SessionCardView.swift in Sources */,
 				1EC1664A2D832448001AE4DB /* PokemonInfoView.swift in Sources */,
 				1E5E96692D7F2F7000CA0BEB /* TimerViewModel.swift in Sources */,
 				1E66EE332D6D07EE00C90339 /* PersistenceManager.swift in Sources */,

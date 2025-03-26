@@ -56,10 +56,10 @@ struct PokemonRowView: View {
 }
 
 
-//#Preview {
-//    let pokemon = PreviewData.pokemonManager.pokemons[0]
-//    return PokemonRowView(
-//        pokemon: pokemon,
-//        species: pokemon.species
-//    )
-//}
+#Preview {
+    let pokemon = PreviewData.pokemonManager.pokemons[0]
+    return PokemonRowView(
+        pokemon: pokemon,
+        species: pokemon.species
+    )
+}

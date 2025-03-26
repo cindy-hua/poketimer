@@ -33,7 +33,25 @@ struct PokemonListView: View {
                     }
                 }
                 .navigationTitle("My Pokemon")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbarBackground(.ultraThinMaterial, for: .navigationBar)
                 .toolbar {
+                    ToolbarItem(placement: .principal) {
+                            Text("My Pokémon")
+                                .font(.system(size: 24, weight: .semibold, design: .rounded))
+                                .foregroundStyle(
+                                    LinearGradient(
+                                        gradient: Gradient(colors: [
+                                            Color.orange,
+                                            Color.purple.opacity(0.8)
+                                        ]),
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    )
+                                )
+                                .shadow(color: Color.white.opacity(0.3), radius: 1)
+                        }
+                    
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Menu {
                             Button("Add Pikachu") {
@@ -81,6 +99,7 @@ struct PokemonListView: View {
                             }
                         } label: {
                             Image(systemName: "plus")
+                                .foregroundColor(.purple)
                         }
                     }
                 }

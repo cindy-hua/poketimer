@@ -69,13 +69,13 @@ struct PokemonInfoView: View {
     private func startHapticFeedback() {
         print("📳 [DEBUG] Haptic feedback started!")
 
-        // ✅ Prevent multiple haptic timers running
+        // Prevent multiple haptic timers running
         stopHapticFeedback()
 
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
 
-        // ✅ Haptic feedback loop
+        // Haptic feedback loop
         hapticTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true) { _ in
             generator.impactOccurred()
             print("📳 [DEBUG] Haptic feedback ongoing...")

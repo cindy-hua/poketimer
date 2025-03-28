@@ -23,7 +23,7 @@ class PokemonManager: Codable, Equatable {
         // Automatically select first Pokémon if none is set
         if self.currentPokemonID == nil, let firstPokemon = pokemons.first {
             self.currentPokemonID = firstPokemon.id
-            print("🐉 [DEBUG] Auto-selected first Pokémon: \(firstPokemon.name)")
+            print("🐉 [DEBUG] Auto-selected first Pokémon: \(firstPokemon.species)")
         }
     }
 
@@ -50,7 +50,7 @@ class PokemonManager: Codable, Equatable {
         pokemons.append(pokemon)
         if currentPokemonID == nil {
             currentPokemonID = pokemon.id
-            print("✨ [DEBUG] Auto-selected new Pokémon: \(pokemon.name)")
+            print("✨ [DEBUG] Auto-selected new Pokémon: \(pokemon.species)")
         }
         savePokemonData()
     }
@@ -72,6 +72,11 @@ class PokemonManager: Codable, Equatable {
     func getCurrentPokemon() -> Pokemon? {
         return pokemons.first { $0.id == currentPokemonID }
     }
+    
+    /// Retrieve a Pokemon by its UUID
+    func getPokemon(by id: UUID) -> Pokemon? {
+        return pokemons.first { $0.id == id }
+    }
 
     /// Updates XP of the current Pokémon.
     func processCompletedSession(_ session: Session) {
@@ -80,12 +85,40 @@ class PokemonManager: Codable, Equatable {
         let xpGained = session.durationInMinutes
         pokemons[index] = pokemons[index].gainingXP(xpGained)
 
-        print("⚡️ [DEBUG] XP Updated: \(pokemons[index].xp) for \(pokemons[index].name)")
+        print("⚡️ [DEBUG] XP Updated: \(pokemons[index].xp) for \(pokemons[index].species)")
 
         savePokemonData()
     }
     
     static func == (lhs: PokemonManager, rhs: PokemonManager) -> Bool {
         return lhs.pokemons == rhs.pokemons && lhs.currentPokemonID == rhs.currentPokemonID
+    }
+    
+    /// Selects the next Pokémon in the list.
+    func selectNextPokemon() {
+        guard !pokemons.isEmpty else { return }
+        
+        if let currentID = currentPokemonID,
+           let currentIndex = pokemons.firstIndex(where: { $0.id == currentID }),
+           currentIndex < pokemons.count - 1 {
+            currentPokemonID = pokemons[currentIndex + 1].id
+        } else {
+            currentPokemonID = pokemons.first?.id // Loop back to first Pokémon
+        }
+        savePokemonData()
+    }
+
+    /// Selects the previous Pokémon in the list.
+    func selectPreviousPokemon() {
+        guard !pokemons.isEmpty else { return }
+        
+        if let currentID = currentPokemonID,
+           let currentIndex = pokemons.firstIndex(where: { $0.id == currentID }),
+           currentIndex > 0 {
+            currentPokemonID = pokemons[currentIndex - 1].id
+        } else {
+            currentPokemonID = pokemons.last?.id // Loop back to last Pokémon
+        }
+        savePokemonData()
     }
 }

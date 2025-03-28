@@ -19,36 +19,31 @@ struct TimerView: View {
     }
     
     var body: some View {
-        VStack(spacing: 40) {
-            // Countdown Timer Display.
-            Text(TimeFormatterUtil.timeString(from: viewModel.remainingSeconds))
-                .font(.system(size: 50, weight: .bold, design: .monospaced))
-                .animation(.easeInOut, value: viewModel.remainingSeconds)
+        ZStack {
+            GlassBackgroundOverlay()
             
-            // Stop Button.
-            Button(action: {
-                viewModel.stopTimer()
-                dismiss()
-            }) {
-                Text("Stop")
-                    .font(.title)
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                    .padding()
-                    .foregroundColor(.white)
-                    .background(Color.red)
-                    .cornerRadius(10)
+            VStack(spacing: 40) {
+                AnimatedTimerTextView(
+                    timeValue: $viewModel.remainingSeconds,
+                    formatter: TimeFormatterUtil.timeString
+                )
+                
+                StopButtonView(action: {
+                    viewModel.stopTimer()
+                    dismiss()
+                })
             }
-            .padding(.horizontal)
+            
+            // Custom Themed Alert Overlay
+            if showSessionSavedAlert {
+                CustomAlertView(
+                    title: "Session Completed",
+                    message: "Your focus session has been saved.",
+                    action: { dismiss() }
+                )
+            }
         }
-        .padding()
         .navigationTitle("Focus Timer")
-        .alert(isPresented: $showSessionSavedAlert) {
-            Alert(
-                title: Text("Session Completed"),
-                message: Text("Your focus session has been saved."),
-                dismissButton: .default(Text("OK"), action: { dismiss() })
-            )
-        }
         .onAppear {
             if viewModel.remainingSeconds != viewModel.duration {
                 viewModel.remainingSeconds = viewModel.duration // Reset timer
@@ -63,13 +58,17 @@ struct TimerView: View {
                 showSessionSavedAlert = true
             }
         }
+    .navigationBarHidden(true)
     }
 }
 
 #Preview {
-    let pokemonManager = PokemonManager()
-    let sessionManager = SessionManager()
-    return TimerView(duration: 5 * 60, pokemonManager: pokemonManager, sessionManager: sessionManager)
-        .environment(pokemonManager)
-        .environment(sessionManager)
+    TimerView(
+        duration: 1500, // 25 min
+        pokemonManager: PreviewData.pokemonManager,
+        sessionManager: PreviewData.sessionManager
+    )
+    .environment(PreviewData.pokemonManager)
+    .environment(PreviewData.sessionManager)
 }
+

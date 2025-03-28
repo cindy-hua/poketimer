@@ -13,20 +13,29 @@ class PokemonDetailViewModel {
     private let sessionManager: SessionManager
     private let pokemonID: UUID
 
+    var pokemonSpecies: PokemonSpecies?
+
     init(pokemonManager: PokemonManager, sessionManager: SessionManager, pokemonID: UUID) {
         self.pokemonManager = pokemonManager
         self.sessionManager = sessionManager
         self.pokemonID = pokemonID
+        Task { await fetchPokemonDetails() }
     }
-    
-    /// Computed property to get the Pokémon dynamically from `PokemonManager`
+
+    /// Computed property to get the Pokémon from `PokemonManager`
     var pokemon: Pokemon? {
         pokemonManager.pokemons.first(where: { $0.id == pokemonID })
     }
 
-    /// Computed property for Pokémon name
-    var pokemonName: String {
-        pokemon?.name ?? "Unknown"
+    /// Fetch Pokémon details from API
+    func fetchPokemonDetails() async {
+        guard let pokemon = pokemon else { return }
+        do {
+            let species = try await PokemonAPI.shared.fetchCompletePokemonData(name: pokemon.species.name)
+            await MainActor.run { self.pokemonSpecies = species }
+        } catch {
+            print("Failed to fetch Pokémon details: \(error)")
+        }
     }
 
     /// Computed property for XP

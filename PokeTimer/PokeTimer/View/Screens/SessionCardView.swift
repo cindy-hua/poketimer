@@ -30,7 +30,7 @@ struct SessionCardView: View {
 
             // 📜 Session Details
             VStack(alignment: .leading, spacing: 4) {
-                Text("⏳ Duration: \(TimeFormatterUtil.formattedDuration(session.duration)) min")
+                Text("⏳ Duration: \(TimeFormatterUtil.formattedDuration(session.duration))")
                     .font(.headline)
                     .foregroundColor(.primary)
 

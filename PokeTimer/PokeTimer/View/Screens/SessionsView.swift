@@ -16,24 +16,28 @@ struct SessionsView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: 16) {
-                    if groupedSessions.isEmpty {
-                        Text("No recorded sessions yet.")
-                            .font(.headline)
-                            .foregroundColor(.gray)
-                            .padding(.top, 50)
-                    } else {
-                        let sortedKeys = groupedSessions.keys.sorted(by: >)
+            ZStack {
+                GlassBackgroundOverlay()
+                
+                ScrollView {
+                    VStack(spacing: 16) {
+                        if groupedSessions.isEmpty {
+                            Text("No recorded sessions yet.")
+                                .font(.headline)
+                                .foregroundColor(.gray)
+                                .padding(.top, 50)
+                        } else {
+                            let sortedKeys = groupedSessions.keys.sorted(by: >)
 
-                        ForEach(sortedKeys, id: \.self) { dateKey in
-                            if let sessions = groupedSessions[dateKey] {
-                                sectionView(for: dateKey, sessions: sessions)
+                            ForEach(sortedKeys, id: \.self) { dateKey in
+                                if let sessions = groupedSessions[dateKey] {
+                                    sectionView(for: dateKey, sessions: sessions)
+                                }
                             }
                         }
                     }
+                    .padding()
                 }
-                .padding()
             }
             .navigationTitle("Focus Sessions")
             .navigationBarTitleDisplayMode(.inline)

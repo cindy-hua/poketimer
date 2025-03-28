@@ -144,11 +144,35 @@ struct PreviewData {
     // Session Manager with mock sessions
     static let sessionManager: SessionManager = {
         let manager = SessionManager()
-        let session1 = Session(duration: 25 * 60, startTime: Date().addingTimeInterval(-3600), endTime: Date().addingTimeInterval(-3300), completed: true, pokemonID: pokemonManager.pokemons[0].id)
-        let session2 = Session(duration: 15 * 60, startTime: Date().addingTimeInterval(-1800), endTime: Date().addingTimeInterval(-900), completed: false, pokemonID: pokemonManager.pokemons[0].id)
-        let session3 = Session(duration: 30 * 60, startTime: Date().addingTimeInterval(-7200), endTime: Date().addingTimeInterval(-6900), completed: true, pokemonID: pokemonManager.pokemons[0].id)
 
-        manager.restoreSessions(from: [session1, session2, session3])
+        // Reference time = now
+        let now = Date()
+
+        // Today
+        let todaySession1 = Session(duration: 25 * 60, startTime: now.addingTimeInterval(-3600), endTime: now.addingTimeInterval(-3300), completed: true, pokemonID: pokemonManager.pokemons[0].id)
+        let todaySession2 = Session(duration: 15 * 60, startTime: now.addingTimeInterval(-1800), endTime: now.addingTimeInterval(-900), completed: false, pokemonID: pokemonManager.pokemons[0].id)
+
+        // Yesterday
+        let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: now)!
+        let yesterdaySession1 = Session(duration: 30 * 60, startTime: yesterday.addingTimeInterval(10 * 60), endTime: yesterday.addingTimeInterval(40 * 60), completed: true, pokemonID: pokemonManager.pokemons[1].id)
+
+        // 2 days ago
+        let twoDaysAgo = Calendar.current.date(byAdding: .day, value: -2, to: now)!
+        let twoDaysAgoSession1 = Session(duration: 20 * 60, startTime: twoDaysAgo.addingTimeInterval(9 * 60), endTime: twoDaysAgo.addingTimeInterval(29 * 60), completed: true, pokemonID: pokemonManager.pokemons[2].id)
+        let twoDaysAgoSession2 = Session(duration: 10 * 60, startTime: twoDaysAgo.addingTimeInterval(31 * 60), endTime: twoDaysAgo.addingTimeInterval(41 * 60), completed: false, pokemonID: pokemonManager.pokemons[1].id)
+
+        // 5 days ago
+        let fiveDaysAgo = Calendar.current.date(byAdding: .day, value: -5, to: now)!
+        let fiveDaysAgoSession = Session(duration: 50 * 60, startTime: fiveDaysAgo.addingTimeInterval(60 * 60), endTime: fiveDaysAgo.addingTimeInterval(110 * 60), completed: true, pokemonID: pokemonManager.pokemons[0].id)
+
+        // Add sessions to manager
+        manager.restoreSessions(from: [
+            todaySession1, todaySession2,
+            yesterdaySession1,
+            twoDaysAgoSession1, twoDaysAgoSession2,
+            fiveDaysAgoSession
+        ])
+
         return manager
     }()
 }

@@ -40,6 +40,7 @@
 		1E8792CF2D885CE900A0216F /* BottomPokeballView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8792CE2D885CE800A0216F /* BottomPokeballView.swift */; };
 		1E8792D12D885D1300A0216F /* TopPokeballView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8792D02D885D1300A0216F /* TopPokeballView.swift */; };
 		1E8792D32D88607C00A0216F /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8792D22D88607C00A0216F /* BackgroundView.swift */; };
+		1E98F0FA2D9737FF00B7A0DF /* PokeTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98F0F92D9737FF00B7A0DF /* PokeTimerTests.swift */; };
 		1EC166362D819541001AE4DB /* DateFormatterUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC166352D819541001AE4DB /* DateFormatterUtil.swift */; };
 		1EC166392D81978B001AE4DB /* TimeFormatterUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC166382D81978B001AE4DB /* TimeFormatterUtil.swift */; };
 		1EC1663F2D82E6C1001AE4DB /* AnimationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC1663E2D82E6C1001AE4DB /* AnimationUtil.swift */; };
@@ -52,6 +53,16 @@
 		1EE311B72D944E0700BE8803 /* SessionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE311B62D944E0700BE8803 /* SessionCardView.swift */; };
 		1EFE675C2D8CA08F0053CC13 /* GlowingOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFE675B2D8CA08F0053CC13 /* GlowingOverlayView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1E98F0FB2D9737FF00B7A0DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1E66EE0F2D6CC64600C90339 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1E66EE162D6CC64600C90339;
+			remoteInfo = PokeTimer;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1E19B3442D89BFA000F8AB58 /* GlassButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassButtonView.swift; sourceTree = "<group>"; };
@@ -88,6 +99,8 @@
 		1E8792CE2D885CE800A0216F /* BottomPokeballView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomPokeballView.swift; sourceTree = "<group>"; };
 		1E8792D02D885D1300A0216F /* TopPokeballView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPokeballView.swift; sourceTree = "<group>"; };
 		1E8792D22D88607C00A0216F /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		1E98F0F72D9737FF00B7A0DF /* PokeTimerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PokeTimerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E98F0F92D9737FF00B7A0DF /* PokeTimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeTimerTests.swift; sourceTree = "<group>"; };
 		1EC166352D819541001AE4DB /* DateFormatterUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterUtil.swift; sourceTree = "<group>"; };
 		1EC166382D81978B001AE4DB /* TimeFormatterUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFormatterUtil.swift; sourceTree = "<group>"; };
 		1EC1663E2D82E6C1001AE4DB /* AnimationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationUtil.swift; sourceTree = "<group>"; };
@@ -103,6 +116,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		1E66EE142D6CC64600C90339 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E98F0F42D9737FF00B7A0DF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -182,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				1E66EE192D6CC64600C90339 /* PokeTimer */,
+				1E98F0F82D9737FF00B7A0DF /* PokeTimerTests */,
 				1E66EE182D6CC64600C90339 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -190,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				1E66EE172D6CC64600C90339 /* PokeTimer.app */,
+				1E98F0F72D9737FF00B7A0DF /* PokeTimerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -269,6 +291,14 @@
 			path = Persistence;
 			sourceTree = "<group>";
 		};
+		1E98F0F82D9737FF00B7A0DF /* PokeTimerTests */ = {
+			isa = PBXGroup;
+			children = (
+				1E98F0F92D9737FF00B7A0DF /* PokeTimerTests.swift */,
+			);
+			path = PokeTimerTests;
+			sourceTree = "<group>";
+		};
 		1EC166372D819547001AE4DB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -319,6 +349,24 @@
 			productReference = 1E66EE172D6CC64600C90339 /* PokeTimer.app */;
 			productType = "com.apple.product-type.application";
 		};
+		1E98F0F62D9737FF00B7A0DF /* PokeTimerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1E98F0FF2D9737FF00B7A0DF /* Build configuration list for PBXNativeTarget "PokeTimerTests" */;
+			buildPhases = (
+				1E98F0F32D9737FF00B7A0DF /* Sources */,
+				1E98F0F42D9737FF00B7A0DF /* Frameworks */,
+				1E98F0F52D9737FF00B7A0DF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1E98F0FC2D9737FF00B7A0DF /* PBXTargetDependency */,
+			);
+			name = PokeTimerTests;
+			productName = PokeTimerTests;
+			productReference = 1E98F0F72D9737FF00B7A0DF /* PokeTimerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -331,6 +379,10 @@
 				TargetAttributes = {
 					1E66EE162D6CC64600C90339 = {
 						CreatedOnToolsVersion = 15.2;
+					};
+					1E98F0F62D9737FF00B7A0DF = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = 1E66EE162D6CC64600C90339;
 					};
 				};
 			};
@@ -348,6 +400,7 @@
 			projectRoot = "";
 			targets = (
 				1E66EE162D6CC64600C90339 /* PokeTimer */,
+				1E98F0F62D9737FF00B7A0DF /* PokeTimerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -359,6 +412,13 @@
 			files = (
 				1E66EE222D6CC64B00C90339 /* Preview Assets.xcassets in Resources */,
 				1E66EE1F2D6CC64B00C90339 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E98F0F52D9737FF00B7A0DF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,7 +474,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1E98F0F32D9737FF00B7A0DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E98F0FA2D9737FF00B7A0DF /* PokeTimerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1E98F0FC2D9737FF00B7A0DF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1E66EE162D6CC64600C90339 /* PokeTimer */;
+			targetProxy = 1E98F0FB2D9737FF00B7A0DF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1E66EE232D6CC64B00C90339 /* Debug */ = {
@@ -594,6 +670,42 @@
 			};
 			name = Release;
 		};
+		1E98F0FD2D9737FF00B7A0DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JG8KZK844U;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.studyduude.PokeTimerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PokeTimer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PokeTimer";
+			};
+			name = Debug;
+		};
+		1E98F0FE2D9737FF00B7A0DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JG8KZK844U;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.studyduude.PokeTimerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PokeTimer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PokeTimer";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -611,6 +723,15 @@
 			buildConfigurations = (
 				1E66EE262D6CC64B00C90339 /* Debug */,
 				1E66EE272D6CC64B00C90339 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1E98F0FF2D9737FF00B7A0DF /* Build configuration list for PBXNativeTarget "PokeTimerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E98F0FD2D9737FF00B7A0DF /* Debug */,
+				1E98F0FE2D9737FF00B7A0DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

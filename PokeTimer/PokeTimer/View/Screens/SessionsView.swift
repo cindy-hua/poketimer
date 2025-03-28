@@ -10,51 +10,65 @@ import SwiftUI
 // MARK: - SessionsView
 /// A view that displays a list of saved focus sessions from our Pokémon.
 struct SessionsView: View {
-    @Environment(PokemonManager.self) var pokemonManager
     @Environment(SessionManager.self) var sessionManager
-    @State private var viewModel: SessionsViewModel?
+    @Environment(PokemonManager.self) var pokemonManager
+    @State private var groupedSessions: [String: [Session]] = [:] // Sessions grouped by date
 
     var body: some View {
-        VStack {
-            if let viewModel = viewModel {
-                List {
-                    ForEach(viewModel.sessionsByPokemon, id: \.PokemonSpecies.id) { pokemonData in
-                        Section(header: Text(pokemonData.PokemonSpecies.displayName).font(.headline)) {
-                            ForEach(pokemonData.sessions) { session in
-                                let formattedDurationString = TimeFormatterUtil.formattedDuration(session.duration)
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text("Duration: \(formattedDurationString) minutes")
-                                        .font(.subheadline)
-                                    Text("Started: \(DateFormatterUtil.formattedDate(session.startTime))")
-                                        .font(.subheadline)
-                                    Text("Ended: \(DateFormatterUtil.formattedDate(session.endTime))")
-                                        .font(.subheadline)
-                                    Text("Status: \(session.completed ? "Completed" : "Incomplete")")
-                                        .font(.subheadline)
-                                        .foregroundColor(session.completed ? .green : .red)
-                                }
-                                .padding(.vertical, 5)
+        NavigationStack {
+            ScrollView {
+                VStack(spacing: 16) {
+                    if groupedSessions.isEmpty {
+                        Text("No recorded sessions yet.")
+                            .font(.headline)
+                            .foregroundColor(.gray)
+                            .padding(.top, 50)
+                    } else {
+                        let sortedKeys = groupedSessions.keys.sorted(by: >)
+
+                        ForEach(sortedKeys, id: \.self) { dateKey in
+                            if let sessions = groupedSessions[dateKey] {
+                                sectionView(for: dateKey, sessions: sessions)
                             }
                         }
                     }
                 }
-                .navigationTitle("Sessions")
-            } else {
-                Text("Loading sessions...")
-                    .font(.headline)
+                .padding()
+            }
+            .navigationTitle("Focus Sessions")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(.ultraThinMaterial, for: .navigationBar)
+            .onAppear {
+                groupSessionsByDate()
             }
         }
-        .onAppear {
-            if viewModel == nil {
-                viewModel = SessionsViewModel(
-                    pokemonManager: pokemonManager,
-                    sessionManager: sessionManager
+    }
+
+    private func sectionView(for dateKey: String, sessions: [Session]) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text(dateKey)
+                .font(.title3)
+                .bold()
+                .padding(.top, 8)
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+            ForEach(sessions, id: \.id) { session in
+                SessionCardView(
+                    session: session,
+                    pokemon: pokemonManager.getPokemon(by: session.pokemonID),
+                    showPokemonImage: true
                 )
             }
         }
     }
-}
 
+    private func groupSessionsByDate() {
+        let sessions = sessionManager.sessions.sorted(by: { $0.startTime > $1.startTime })
+        groupedSessions = Dictionary(grouping: sessions) { session in
+            DateFormatterUtil.formattedDate(session.startTime, format: "MMM d, yyyy")
+        }
+    }
+}
 
 #Preview {
     SessionsView()

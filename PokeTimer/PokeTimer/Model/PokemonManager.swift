@@ -72,6 +72,11 @@ class PokemonManager: Codable, Equatable {
     func getCurrentPokemon() -> Pokemon? {
         return pokemons.first { $0.id == currentPokemonID }
     }
+    
+    /// Retrieve a Pokemon by its UUID
+    func getPokemon(by id: UUID) -> Pokemon? {
+        return pokemons.first { $0.id == id }
+    }
 
     /// Updates XP of the current Pokémon.
     func processCompletedSession(_ session: Session) {

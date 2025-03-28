@@ -51,6 +51,24 @@ final class PokeTimerTests: XCTestCase {
         manager.selectPreviousPokemon()
         XCTAssertEqual(manager.currentPokemonID, bulbasaur.id)
     }
+    
+    func testSaveAndLoadPokemonManager() {
+        let species = dummySpecies(id: 1, name: "testmon")
+        let pokemon = Pokemon(species: species, xp: 42)
+        let manager = PokemonManager(pokemons: [pokemon], currentPokemonID: pokemon.id)
+
+        let tempDir = FileManager.default.temporaryDirectory
+        let persistence = PersistenceManager(
+            pokemonFileURL: tempDir.appendingPathComponent("test_pokemon.json"),
+            sessionFileURL: tempDir.appendingPathComponent("test_session.json")
+        )
+
+        persistence.savePokemonManager(manager)
+        let loaded = persistence.loadPokemonManager()
+
+        XCTAssertEqual(loaded.pokemons, manager.pokemons)
+        XCTAssertEqual(loaded.currentPokemonID, manager.currentPokemonID)
+    }
 
     // MARK: - Helpers
 

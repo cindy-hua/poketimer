@@ -15,10 +15,17 @@ class PersistenceManager {
     private let pokemonFileURL: URL
     private let sessionFileURL: URL
 
+    // Default init (used by the app)
     init() {
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         pokemonFileURL = documentsDirectory.appendingPathComponent("pokemonManager.json")
         sessionFileURL = documentsDirectory.appendingPathComponent("sessionManager.json")
+    }
+    
+    // Custom init (used by test code)
+    init(pokemonFileURL: URL, sessionFileURL: URL) {
+        self.pokemonFileURL = pokemonFileURL
+        self.sessionFileURL = sessionFileURL
     }
 
     // MARK: - Save Functions

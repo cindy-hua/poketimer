@@ -121,6 +121,25 @@ A few screenshots and animations showcasing the current user experience:
 - Tap the **"End" button** to manually stop the session.
 
 ---
+### ⏱️ Timer Running
+<p align="center">
+<img src="./Images/SessionStart.png" alt="Timer Started" width="200"/>
+</p>
+
+- Once started, the session shows the elapsed time and the selected Pokémon.
+- Minimal distraction — just you and your focus.
+
+---
+
+### ✅ Timer Completed
+<p align="center">
+<img src="./Images/SessionEnd.png" alt="Timer Ended" width="200"/>
+</p>
+
+- When the session ends, XP is granted to the current Pokémon.
+- A subtle animation marks the session completion.
+
+---
 
 ### 📅 Session History
 <p align="center">

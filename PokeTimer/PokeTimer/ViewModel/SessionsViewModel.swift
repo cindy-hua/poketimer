@@ -16,11 +16,11 @@ class SessionsViewModel: ObservableObject {
         self.sessionManager = sessionManager
     }
 
-    /// Dynamically computes sessions grouped by Pokémon name.
-    var sessionsByPokemon: [(pokemonName: String, sessions: [Session])] {
+    /// Dynamically computes sessions grouped by Pokémon species.
+    var sessionsByPokemon: [(PokemonSpecies: PokemonSpecies, sessions: [Session])] {
         pokemonManager.pokemons.map { pokemon in
             let sessions = sessionManager.getSessions(for: pokemon.id)
-            return (pokemonName: pokemon.name, sessions: sessions)
+            return (PokemonSpecies: pokemon.species, sessions: sessions)
         }
     }
 }
